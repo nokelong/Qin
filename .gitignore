@@ -1,6 +1,4 @@
 .DS_Store
-src/assets/**
-static/**
 node_modules/**
 dist/
 npm-debug.log*

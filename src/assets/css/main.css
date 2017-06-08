@@ -1,0 +1,826 @@
+﻿@charset "utf-8";
+/*================================================
+Version:1.0 Date:2016/11/02
+Compatible Kernel:WebKit
+Author:maxiaoyan QQ:412776803
+================================================*/
+/* 使用注意事项  */
+/*
+    1、z-index层级使用
+    a.z-index:2（）
+    b.z-index:30（一般fixed定位，如头部导航、底部工具栏,返回顶部）
+    c.z-index:80（蒙层指定用80）
+    d.z-index:89(一般用于弹窗和搜索框fixed定位)
+*/
+/* reset */
+code{text-decoration:none;}/* 针对压缩特殊处理 */
+html,body{width:100%;height:100%;
+    -webkit-text-size-adjust:none;
+    text-size-adjust:none;
+}
+a,img, *{
+    -webkit-touch-callout: none; /* 禁止长按链接与图片弹出菜单 */
+    -webkit-tap-highlight-color:transparent;    /* 禁止默认高亮背景 */
+    tap-highlight-color:transparent;
+}
+html,body,h1,h2,h3,h4,h5,h6,p,br,form,input,button,textarea,select,fieldset,legend,blockquote,ul,ol,li,dl,dt,dd,pre,table,caption,tr,td,th,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,audio,video{display:block;}
+body{font:14px Arial,'Microsoft YaHei';background-color:white;}
+body{padding-top:44px;/*头部固定预留位置*/
+    -webkit-box-sizing:border-box;
+    -ms-box-sizing:border-box;
+    box-sizing:border-box;
+    overflow-x:hidden;
+}
+/* 控制头部不固定样式 */
+.noFixed{padding-top:0;}
+.noFixed .headBar{position:static;}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
+a,a:visited{color:#585858;text-decoration:none;}
+textarea,select,input,button{vertical-align:middle;font-size:100%;}
+address,cite,code,em,var,abbr,acronym,i,dfn{font-style:normal;}
+input[type=text],input[type=password],input[type=email],input[type=search],input[type=submit],input[type=button],button,textarea{font:12px Arial,'Microsoft YaHei';-webkit-appearance:none;appearance:none;}
+input[type=text]:focus,input[type=password]:focus,input[type=email]:focus,input[type=search]:focus,textarea:focus{color:#353535;}
+textarea{resize:none;box-sizing: border-box;}
+i{display:inline-block;}/*用于修饰性小图标*/
+table{border-collapse:collapse;}
+ol,ul,li{list-style:none outside none;}
+img,fieldset{border:none;}
+legend{display:none;}
+input[type="text"],input[type="time"],input[type="date"],input[type="datetime"],input[type="email"],input[type="password"],input[type=search],input[type=tel],textarea{border:none;background:none;padding:5px;}
+input[type="text"]:focus,input[type="time"]:focus,input[type="date"]:focus,input[type="datetime"]:focus,input[type="email"]:focus,input[type="password"]:focus,input[type=search]:focus,input[type=tel]:focus,textarea:focus{outline:none;}
+mark{background:#FFE324;padding:2px;} /* 高亮显示 */
+/*input placeholder默认颜色设置*/
+::-webkit-input-placeholder { 
+    color:#b7b7b7; text-overflow: ellipsis; 
+}
+a,span{ display:inline-block; _zoom:1;_display:inline;}
+/* ======================================== public布局 ====================================== */
+/* 显示隐藏 */
+.dShow{display:block!important;}
+.dHide{display:none!important;}
+.show{display:block!important;}
+.hide{display:none!important;} 
+.vShow{visibility:visible!important;}
+.vHide{visibility:hidden!important;}
+/* 浮动 */
+.fl{float:left;}
+.fr{float:right;}
+/* clear float */
+.clearfix{overflow:hidden;}
+/* 盒子布局 */
+.d-box{
+    display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;}
+.b-flex{
+    -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -webkit-flex: 1;          /* Chrome */
+    -ms-flex:1;               /* IE10 */
+    flex: 1;                  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+/* 定位 */
+.p_fixed{position:fixed;}
+.p_relative{position:relative;}
+.p_static{position:static;}
+.d_block{display: block;}
+
+/* ============================================== 对齐方式 ========================================== */
+/* 方式 */
+.ta_c{text-align:center !important;}
+.ta_r{text-align:right;}
+.ta_l{text-align:left!important;}
+.ta_j{text-align:justify;text-justify:inter-ideograph;-webkit-text-align-last:justify;/*chrome 20+*/}
+/* 水平垂直居中 */
+.ta_av{
+    display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;
+    -webkit-box-pack: center; 
+    -ms-flex-pack:center;/* IE 10 */  
+    -webkit-justify-content:center; 
+    justify-content:center;/* IE 11+,Firefox 22+,Chrome 29+,Opera 12.1*/
+    -webkit-box-align:center;
+    -ms-flex-align:center;/* IE 10 */   
+    -webkit-align-items: center;
+    align-items: center;
+}
+/* 垂直居中*/
+.ta_avC{
+    display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;
+    -webkit-box-align:center;/* Android */
+    -ms-flex-align:center;/* IE 10 */
+    -webkit-align-items:center;/* IOS */
+    align-items:center; 
+}
+.dialogCenter{position:absolute;position:fixed;left:50%;top:50%;z-index:9999;-webkit-transform:translate(-50%, -50%);transform:translate(-50%, -50%);}
+
+/* ============================================ 间距和边框 ============================================= */
+/* 外间距 */
+.ml_0{margin-left:0;}.mt_0{margin-top:0;}.mr_0{margin-right:0;}.mb_0{margin-bottom:0;}
+.ml_3{margin-left:3px;}.ml_5{margin-left:5px;}.mt_3{margin-top:3px ;}.mt_5{margin-top: 5px ;}.mr_5{margin-right: 5px;}.mb_5{margin-bottom:5px;}
+.ml_8{margin-left:8px;}.mt_8{margin-top:8px;}.mr_8{margin-right:8px;}.mb_8{margin-bottom:8px;}.mt_30{margin-top:30px ;}
+.ml_10{margin-left:10px;}.mt_10{margin-top:10px;}.mt_13{margin-top:13px;}.mr_10{margin-right:10px;}.mb_10{margin-bottom:10px;}
+.ml_15{margin-left:15px;}.mt_15{margin-top:15px;}.mr_15{margin-right:15px;}.mb_15{margin-bottom:15px;}
+.ml_20{margin-left:20px;}.mt_20{margin-top:20px;}.mr_20{margin-right:20px;}.mb_20{margin-bottom:20px;}
+.mr_48{ margin-right: 48px;}.mb_50{margin-bottom: 50px;}.mt_45{margin-top:45px;}.mb_35{margin-bottom:35px;}
+/* 内边距 */
+.pl_0{padding-left:0;}.pt_0{padding-top:0;}.pr_0{padding-right:0;}.pb_0{padding-bottom:0 ;}
+.pl_5{padding-left:5px;}.pt_5{padding-top:5px;}.pr_5{padding-right:5px;}.pb_3{padding-bottom:3px;}.pb_5{padding-bottom:5px;}
+.pl_10{padding-left:10px;}.pt_8{padding-top:8px;}.pr_10{padding-right:10px;}.pb_10{padding-bottom:10px;}
+.pl_15{padding-left:15px;}.pt_10{padding-top:10px;}.pr_15{padding-right:15px;}.pb_15{padding-bottom:15px;}
+.pl_20{padding-left:20px;}.pt_15{padding-top:15px;}.pr_20{padding-right:20px;}.pb_20{padding-bottom:20px;}
+.pt_68{padding-top:68px;}.pt_20{padding-top:20px;}.pl_30{padding-left:30px;}
+.pb_47{padding-bottom:47px;}.pb_50{padding-bottom: 50px;}.mb_130{margin-bottom:130px;}
+.pall_5{padding:5px;display:inline-block;}/*放大点击焦点区域*/
+.cloudPall10{padding:10px;}/*公用内间距10*/
+.cloudPall15{padding:15px;}/*公用内间距15*/
+.cloudPLR15{padding:0px 15px;}/*公用内间距15*/
+/*高度*/
+.h_40{ min-height: 40px;}
+.h_45{ height:45px;line-height:45px;}
+.h_30{ height:30px;line-height:30px;}
+/* 宽度 */
+.w_0{width: 0;}
+
+/*无边框*/
+.bt_none{border-top:none!important;background-image:none;}
+.bm_none{border-bottom:none!important;background-image:none;}
+
+/* 边框 */
+.bt_d9{border-top: 1px solid #d9d9d9;}/*灰色上边框*/
+.bm_d9{border-bottom: 1px solid #d9d9d9;}/*灰色下边框*/
+.bm_f0{border-bottom: 10px solid #f0f1f5;}/*灰色下边框*/
+.bm_blue{border: 1px solid #218eed;}/*蓝色边框*/
+.bAll_red{border: 1px solid #e63951 !important;}/*红色边框*/
+/*删除线*/
+.textThrough{text-decoration:line-through}
+/* ================================================ 颜色 ================================================ */
+/* 文本颜色 */
+.linkColor{color:#2592f8;} /*全局连接色*/
+.lightBlack{color:#383f49;} /*全局淡黑色*/
+.lightBlue{color:#218eed !important;}/*全局浅蓝色*/
+.c_d9d9d9{color:#d9d9d9;}/*全局淡灰色*/
+.c_999{color:#999;}
+.c_666{color:#666;}/*浅灰色*/
+.c_636363{color:#636363 !important;}
+.c_444{color:#444;}
+.c_333{color:#333333;}/*浅浅灰色*/
+.c_red{color:#e63951 !important;}/*红色*/
+.c_fff{color:#fff;}/*白色*/
+.c_skyBlue{color:#386692;}    /*天蓝色*/
+.c_green {color:#3eb94d !important;}       /*绿色*/
+.c_lightgray{color:#bbc2cb !important;}/*浅灰色*/
+.c_darkGray {color:#858c96 !important;}   /*深灰色*/
+.c_lightblack1{color:#353c46;}/*浅黑色*/
+.c_darkblack{color:#1d232c;}/*深黑色*/
+.c_titleblack{color:#1d242e}/*标题黑色*/
+.c_d9d9d9{color:#d9d9d9;}
+/* 背景颜色 */
+.blueblock{width:2px;height:14px;display:block;background-color:#218eed;}/*蓝色背景块*/
+.bg_lightgray{background-color:#858c96 ;}/*灰色*/
+.bg_blue{background-color:#218eed !important;}/*蓝色*/
+.bg_red{background-color:#e63951  !important;}/*红色*/
+.bg_fdb62d{background-color:#fdb62d  !important;}/*橙色*/
+.bg_gray{background-color:#f4f5f7;}/*浅灰*/
+.bg_eee{background-color:#eee;}/*浅灰*/
+.bg_white{background-color:#ffffff;}/*白色*/
+.bg_land{background-color:#ffc947;}/*土黄*/
+.bg_purpleG{background-color:#7b78be;}/*紫灰*/
+.bg_pink{background-color:#fd79a1 !important;}/*粉红*/
+.bg_Ash{background-color:#928a75;}/*烟灰*/
+.bg_NovelShelf1{background-color:#e63951 !important;}/*大红*/
+.bg_NovelShelf2{background-color:#ff9e47 !important;}/*橘色*/
+.bg_NovelShelf3{background-color:#7cd451 !important;}/*芥末绿*/
+.bg_NovelShelf4{background-color:#b55dec !important;}/*茄紫*/
+.bg_NovelShelf5{background-color:#4ea0ff !important;}/*湖蓝*/
+/* ================================================ 字体 ================================================ */
+/*字体大小*/
+.fw{font-weight:bold;}
+.fz_12{font-size:12px !important;}
+.fz_14{font-size:14px !important;}
+.fz_15{font-size:15px !important;}
+.fz_16{font-size:16px !important;}
+.fz_18{font-size:18px !important;}
+.fz_20{font-size:20px !important;}
+/*自动截断文本*/
+.text-overflow,.ellipsis {
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/*删除线*/
+.text-line{text-decoration: line-through;}
+/*字体图标*/
+@font-face {font-family:'iconfont';
+            src:url(../webfont/iconfont.eot); /* IE9*/
+            src:url(../webfont/iconfont.eot?#iefix) format('embedded-opentype'), /* IE6-IE8 */
+                url(../webfont/iconfont.woff) format('woff'), /* chrome、firefox */
+                url(../webfont/iconfont.ttf) format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+                url(../webfont/iconfont.svg#iconfont) format('svg'); /* iOS 4.1- */
+}
+.iconfont{font-family:"iconfont";font-style:normal;
+    -webkit-font-smoothing:antialiased;
+    font-smoothing:antialiased;
+    content:'';
+    font-style:normal;
+    font-weight:normal;
+    speak:none;
+    display:inline-block;
+    text-decoration:inherit;
+    font-variant:normal;
+    text-transform:none;
+    font-size:14px; 
+    color:#a5aab1;
+    vertical-align:middle;
+}
+.wf-change:before {content:'\e681';}/*换一换*/
+.wf-home:before {content:'\e68f';}/*首页*/
+.wf-arrowR:before {content:'\e685';}/*向右箭头*/
+.wf-arrowB:before {content:'\e68c';}/*向下箭头*/
+.wf-eye:before {content:'\e688';}/*眼睛*/
+/*.wf-bookshelf:before {content:'\e696';}书架*/
+.wf-bookshelf:before {content:'\e6a5';}/*书架*/
+.wf-bookadd:before{content:'\e699';}/*加入书架*/
+.wf-home:before{content:'\e695';}/*首页*/
+.wf-arrowL:before{content:'\e697';}/*返回*/
+.wf-point:before{content:'\e68e';}/*选中点*/
+.wf-flame:before{content:'\e689';}/*火焰*/
+.wf-Password:before{content:'\e694';}/*密码*/
+.wf-novel:before{content:'\e68a';}/*小说*/
+.wf-inf:before{content:'\e691';}/*资讯*/
+.wf-enter:before{content:'\e685';}/*进入*/
+.wf-user:before{content:'\e698';}/*账号*/
+.wf-error:before{content:'\e67e';}/*警示*/
+.wf-backTop:before{content:'\e692';}/*返回顶部*/
+.wf-iphone:before{content:'\e68b';}/*手机*/
+.wf-envelope:before{content:'\e690';}/*短信*/
+.wf-right:before{content:'\e67d';}/*正确*/
+.wf-selected:before{content:'\e687';}/*选中*/
+.wf-Bcircle:before{content:'\e6a1';}/*未选中*/
+.wf-lock:before{content:'\e693';}/*锁*/
+.wf-fontA:before{content:'\e69a';}/*字体加*/
+.wf-fontM:before{content:'\e69b';}/*字体减*/
+.wf-mynovel:before{content:'\e69c';}/*我的小说*/
+.wf-myinf:before{content:'\e69d';}/*我的资讯*/
+.wf-pageP:before{content:'\e69e';}/*上一章*/
+.wf-pageN:before{content:'\e6a4';}/*下一章*/
+.wf-catalog:before{content:'\e69f';}/*目录*/
+.wf-goodH:before{content:'\e6a2';}/*点赞*/
+.wf-good:before{content:'\e6a0';}/*点赞实心*/
+.wf-collectionH:before{content:'\e686';}/*收藏*/
+.wf-collection:before{content:'\e6a3';}/*收藏实心*/
+.wf-set:before{content:'\e6a6';}/*设置*/
+.wf-Comment:before{content:'\e6aa';}/*评论*/
+.wf-Close:before{content:'\e6a9';}/*关闭*/
+.wf-search:before{content:'\e6a7';}/*搜索*/
+.wf-MyMonth:before{content:'\e6a8';}/*我的包月*/
+/* ================================================ 图片icon ================================================ */
+
+.icon{display:inline-block;background:url(../images/wap_cloudmail24.png) no-repeat 0 0;background-size:300px 550px;}
+
+
+.i-user{width:26px;height:26px;background-position:-70px 0px;} /*用户未登录头像*/
+.i-userSign{width:26px;height:26px;background-position:-70px -26px;}/*用户已登录头像*/
+.i-myhome{width:40px;height:40px;background-position:-130px 0px;}/*个人中心头像*/
+.i-point{width:7px;height:7px;background-position:-120px -5px;}/*蓝色点*/
+.i-newTip{width:15px;height:33px;background-position:-256px 0px;}/*更新角标*/
+.i-buyTip{width:16px;height:33px;background-position:-273px 0px;}/*已购角标*/
+.i-bookListNone{width:122px;height:121px;background-position:-178px -151px;}/*书架无记录*/
+.i-deleteBlue{width:18px;height:18px;background-position:-98px -3px;}/*蓝色删除按钮*/
+.i-deleteRed{width:18px;height:18px;background-position:-98px -41px;}/*红色删除按钮*/
+.i-LoginP{width:140px;height:121px;background-position:0px -141px;}/*登录提醒*/
+.i-rightBlue{width:18px;height:18px;background-position:-99px -21px;}/*蓝色勾*/
+.i-rightGreen{width:41px;height:41px;background-position:-214px 0px;}/*绿色勾*/
+.i-errorRed{width:41px;height:41px;background-position:-172px 0px;}/*红色警示*/
+.i-404{width:124px;height:119px;background-position:0px -278px;}/*404*/
+.i-loadfail{width:163px;height:119px;background-position:-136px -278px;}/*加载失败*/
+.i-novelNone{width:126px;height:126px;background-position:0px -398px;}/*小说无章节记录*/
+.i-FreeLimit{width:80px;height:61px;background-position:-220px -45px;}/*限免图标*/
+.i-logo{width:40px;height:40px;background-position:-1px -1px;}/*底部logo*/
+.i-deleteG{width:18px;height:16px;background-position:-47px -29px;}/*灰色删除*/
+.i-triangle{width:15px;height:10px;background-position:-73px -59px;}/*透明三角*/
+.i-deleteHome{width:27px;height:26px;background-position:-42px 0px;}/*引导删除*/
+.i-deleteW{width:15px;height:15px;background-position:-48px -51px;}/*白色删除*/
+.i-Browser{width:15px;height:18px;background-position:-100px -60px;}/*浏览器图标*/
+.i-catalog{width:17px;height:15px;background-position:0px -46px;}/*目录*/
+.i-set{width:17px;height:15px;background-position:-17px -46px;}/*设置*/
+.i-wArrow{width:12px;height:7px;background-position:-73px -72px;}/*白色箭头*/
+.i-bRight{width:7px;height:7px;background-position:-120px -14px;}/*蓝色角勾*/
+.i-bCircular{width:17px;height:15px;background-position:0px -62px;}/*蓝色圆*/
+.i-bCircularC{width:17px;height:15px;background-position:-17px -62px;}/*蓝色圆*/
+.i-FatBArrowU{width:8px;height:4px;background-position:-41px -72px;}/*蓝色向上粗箭头*/
+.i-FatBArrowD{width:8px;height:4px;background-position:-41px -77px;}/*蓝色向下粗箭头*/
+.i-ThinBArrowD{width:6px;height:8px;background-position:-58px -72px;}/*蓝色向上细箭头*/
+.i-ThinGArrowU{width:6px;height:8px;background-position:-50px -72px;}/*灰色向上细箭头*/
+.i-ThinBArrowU{width:6px;height:8px;background-position:-65px -72px;}/*蓝色向下细箭头*/
+.i-TimeFree{width:54px;height:15px;background-position:-125px -42px;}/*限时免费角标*/
+.i-CommentNone{width:150px;height:110px;background-position:-141px -402px;}/*评论无记录*/
+
+/* ================================================ 按钮 ================================================ */
+
+.btn{text-align:center;-webkit-border-radius:3px;border-radius:3px;}/*圆角按钮*/
+.btnBlueH{border:1px solid #218eed;color:#218eed;padding:5px 15px;}/*蓝色空心按钮*/
+.btnBlue{background:#218eed;color:#ffffff;} /*蓝色按钮*/
+.btnBlueG{background:#c7dcef;color:#ffffff;} /*蓝灰色按钮*/
+.btnGaryH{border:1px solid #858c96;color:#858c96;padding:5px 15px;} /*蓝灰色按钮*/
+.btn_login{display:block;height:40px;line-height:40px;}
+
+/* ============================================public模块==================================================== */
+/*弹出层水平垂直居中*/
+.layout_av{position:absolute;top:50%;left:50%;color:#ffffff;-webkit-border-radius:4px;border-radius:4px;}
+/*遮罩层*/
+.layer_mask,.layer_black{position:absolute;position:fixed;top:0;left:0;z-index:80;width:100%;height:200%;background-color:rgba(38, 26, 17, .6);}
+.layer_black{background-color:rgba(29, 35, 44, .6)}
+.layer_transparent{background-color:transparent;}
+/*弹出层*/
+.blackTip{background-color:rgba(0, 0, 0, .6);}
+/*三角形*/
+.triangle {overflow: hidden;display: inline-block;width: 0;height: 0;font-size: 0; border-width: 6px;border-color: #636363 transparent transparent transparent;
+    border-style: solid dashed dashed dashed;}
+.tag {display:inline-block;padding:4px 6px 4px 10px;font-size:12px;color:#46719a;line-height:15px;-webkit-border-radius:15px;
+    border-radius:15px;background-color:#dcebf9;vertical-align:middle;-webkit-box-shadow:0 0 2px #287AC8;box-shadow:0 0 2px #287AC8}
+.tag .wf-vip {color:#e9971f;vertical-align:middle;}
+.tag .wf-arrow {font-size:12px;color:#8aa9c6;-webkit-transform:rotate(-90deg);transform:rotate(-90deg);}
+.color-linear {background-color: #f5f5f5;background-image: -webkit-linear-gradient(to top, #cccccc, #cdcdcd, #cfcfcf, #d5d5d5, #dddddd, #e0e0e0, #e3e3e3, #e2e2e2);
+    background-image: linear-gradient(to top, #cccccc, #cdcdcd, #cfcfcf, #d5d5d5, #dddddd, #e0e0e0, #e3e3e3, #e2e2e2);background-repeat: repeat-x;
+}
+
+/*旋转动画*/
+@-webkit-keyframes rotation{
+from {-webkit-transform: rotate(0deg);}
+to {-webkit-transform: rotate(180deg);}
+}
+.Rotation{
+-webkit-transform: rotate(180deg);
+animation: rotation 1s linear infinite;
+-moz-animation: rotation 1s linear infinite;
+-webkit-animation: rotation 1s linear infinite;
+-o-animation: rotation 1s linear infinite;
+animation-iteration-count:1;
+-webkit-animation-iteration-count:1; /* Safari 和 Chrome */
+}
+/*media*/
+@media screen and (max-width:340px) {
+    .tabMenuList span{font-size: 12px;}
+}
+@media screen and (min-width:340px) {
+    .tabMenuList span{font-size: 14px;}
+}
+@media screen and (max-width:320px) {
+    .listImgBox .listImg img{width: 75px;}
+    .TimeFree .ImgN li{width: 80px;}
+    .MonthNovelList .FirtImg img{width:100px;}
+}
+@media screen and (min-width:360px) {
+    .listImgBox .listImg img{width: 88px;}
+    .TimeFree .ImgN li{width: 92px;}
+    .MonthNovelList .FirtImg img{width:100px;}
+}
+@media screen and (min-width:375px) {
+    .listImgBox .listImg img{width: 90px;}
+    .TimeFree .ImgN li{width: 97px;}
+    .MonthNovelList .FirtImg img{width:125px;}
+}
+@media screen and (min-width:414px) {
+    .listImgBox .listImg img{width:100%;}
+    .TimeFree .ImgN li{width: 108px;}
+    .MonthNovelList .FirtImg img{width:150px;}
+}
+/*===头部导航===*/
+
+.headBar {width:100%;height:44px;position: absolute;position:fixed;top:0;left:0;font-size: 0;background-color:#ffffff;z-index:20;border-bottom: 1px solid #d9d9d9;}
+@media screen and (max-width: 320px) {
+    .headBar-title .userAccount {
+        max-width: 68px;
+    }
+}
+.headBar-title {height:100%;font-size:16px;line-height:44px;text-align:center;}
+.headBar .wf-home{font-size:16px;}
+.headBar_NoRight aside{width:43px;}
+.headBar .wf-arrowL,.headBar .wf-bookadd,.headBar .wf-bookshelf,.headBar .wf-search{font-size:20px;}
+.headBar .wf-home{font-size:22px;}
+.headBar section .headBar-title{color: #1d232c;}
+.headBarLogo{padding-top:6px;}
+.headBarLogo img{height:26px;}
+.headBar .TxtBtn{display: inline-block;width:29px;height: 28px;font-size: 14px;text-align:center;padding-top: 7px;color: #218eed;}
+.HomeheadBar{border-bottom:none;}
+.HomeheadBar .wf-bookshelf,.headBar .wf-search{color:#ffffff}
+.HomeheadBar .pr_15 .btnBox{width:40px;height:44px;line-height:44px;text-align:center;display:block;}
+.headBar .NovelNav .btnBox{width: 40px;height: 44px;line-height: 44px;text-align: center;display:block;}
+.headBar .NovelNavD .btnBox{width: 32px;height: 44px;line-height: 44px;text-align: center;display:block;}
+.personCenter .userImg{padding-top:8px;}
+.personCenter .userImg img{width:26px;height:26px;border-radius:50%;}
+/*===列表块===*/
+/*小说列表块*/
+.titleBox{height:40px;line-height:40px;}
+.titleBox .wf-change{font-size:14px !important;}
+.ImgList ul{margin-left:-31px;margin-bottom: 15px;}
+.ImgList li{margin-left:30px;width:33.33%}
+.listImgBox .listImg{margin-bottom:5px;}
+.listImgBox .listImg .Corner .i-newTip{position:absolute;top:0px;left:5px;}
+.listImgBox .listImg .Corner .i-buyTip{position:absolute;top:0px;right:5px;}
+.listImgBox .listImg .Corner .i-deleteRedBox{position: absolute;top: 5px;right: 3px;padding: 15px;z-index: 10;}
+.listImgBox .listImg .Corner .i-deleteRed{margin: -11px -11px 0px 0px;}
+.listImgBox .listImg .Corner .i-TimeFree{position:absolute;top:5px;left:0;}
+.listImgBox .listImg img{width:100%;min-width: 75px;border-radius:4px;border:1px solid #d9d9d9;box-shadow: 0px 2px 4px #c9cdcf;;-webkit-box-shadow: 0px 2px 4px #c9cdcf;}
+
+.layer_BlackFloat{width:100%;height:98%;background:#000;position: absolute;bottom:3px;left:1px;opacity: .4;filter: alpha(opacity=40);border-radius:4px;}
+.listImgBox .Firtitle{font-size: 14px;color: #383f49;text-align: left;}
+.listImgBox .Subtitle{font-size: 12px;color: #858c96;text-align: left;}
+
+.ImgFList3{clear:both;overflow:hidden;}/*百分比浮动布局*/
+.ImgFList3 ul{margin-left:-30px;}
+.ImgFList3 li{float:left;width:33.333%;margin-left:0px;margin-bottom:15px;}
+.ImgFList3 li a{margin-left:30px;display:block;}
+.ImgFList3 li a h3{height:38px;}
+.ImgN ul{margin-left:-21px;}
+.ImgN li{width:80px;float:left;margin-bottom:15px;margin-left:20px;}/*固定布局*/
+.ImgN li img{width:80px;}
+/*最新资讯列表块*/
+.WordList {padding:0px 15px;}
+.WordList a{border-bottom: 1px solid #e4e4e4;padding: 10px 0px;}
+.WordList-title {height: 47px;font-size: 14px;color: #383f49;}
+.WordList-img {width: 90px;height: 65px;border-radius:4px;}
+.from {font-size:12px;color:#636363;}
+.from span {color:#858c96;}
+.magazineTitle{color: #383f49;margin-bottom:5px;}
+.magazineCount{color: #858c96;font-size:12px;}
+.noImg .WordList-title {height:auto;margin-bottom:12px;word-break: break-all;}
+/*资讯专区列表块*/
+.cloudMailList {}
+.cloudMailList a{margin:10px 15px;}
+.nameList{margin:0px 15px;padding: 10px 0px;}
+.infAreaBox .WordListBox{margin-top:-10px;}
+.information_area .top_columnNameImg .cloudMailList-img {width: 60px;height: 60px;border: 1px solid #ffffff;border-radius: 5px;margin-top:3px;}
+.Information_areaBox{background: #f0f1f5;}
+.information_area{margin-bottom:10px;background-color:#fff;}
+.information_area .nameList{padding:0;margin:0;}
+.information_area .nameList .ListCenter{padding: 10px 0px 8px 0px;border-bottom:1px solid #d9d9d9;margin:0px 15px 0px 15px;}
+.information_area .bt_Subscribe{padding-top:19px;}
+.information_area .bt_Subscribe a{width:56px;height:28px;display: block;box-sizing: border-box;}
+.information_area .bt_Subscribe .wf-add,.information_area .bt_Subscribe .wf-details{font-size:26px;color:#327ab1;}
+.information_area .top_columnNameImg .cloudMailList-img{width:60px;height:60px;border: 1px solid #ffffff;border-radius:5px;}
+/*小说书架列表块*/
+.NovelShelf_List li{margin-bottom:15px;position:relative;}
+.NovelShelfImg{position: relative;}
+.NovelShelfImg img{width: 78px;height: 101px;border-radius: 4px;border:1px solid #d9d9d9;box-shadow: 0px 2px 4px #c9cdcf;-webkit-box-shadow: 0px 2px 4px #c9cdcf;}
+.NovelShelfImg .i-newTip,.NovelShelfImg .i-buyTip{position:absolute;top:0;left:3px;}
+.NovelShelfImg .i-TimeFree{position:absolute;top:5px;left:0px;}
+.NovelShelfTime {height:20px;line-height:20px;position:absolute;bottom:2px;left:0px;width:100%;background-color:#fdb62d;text-align:center;color:#ffffff;font-size:12px;}
+.NovelList-title{color:#383f49;;font-size:14px;}
+.NovelShelf_List .from{color:#858c96;}
+.NovelShelf_List .btn_order{position:absolute;top:0px;right:0px;text-align:right;height: 38px;}
+.NovelShelf_List .btn_order a{width:56px;font-size:14px;}
+.bookListNone{padding:40px 0px 45px 0px;}
+/*评论列表块*/
+.CommentList li{padding:15px 0px;border-bottom:1px solid #d9d9d9;}
+.CommentList li h4{font-size:12px;color:#bbc2cb;}
+.CommentList li p{margin-top:15px;word-break: break-word;}
+/*包月列表块*/
+.MonthNovelList{}
+.MonthNovelList .FirtInfo{width:170px;}
+.MonthNovelList .FirtInfo h4{margin-top:3px;}
+.MonthNovel ul{padding-top:7px;}
+.MonthNovel li{width:50%;height:23px;line-height:23px;float:left;color:#383f49;margin-top:0px;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;}
+.MonthNovel li span{font-size:20px;}
+/*===分类条===*/
+.SortsTopbar{height:45px;border-bottom:1px solid #d9d9d9;background-color:#ffffff;z-index:19;}
+.SortsTopbar li{position:relative;text-align:center;}
+.SortsTopbar li span{line-height:45px;}
+.SortsTopbar li .i-point{position:absolute;top:34px;}
+.SortsTopbar a span{display: block;width:43%;text-align: center;position: absolute;top:0px}
+.SortsTopbar .bar_l span{left:0px;}
+.SortsTopbar .bar_r span{right:0px;}
+.SortsTopbar .bar_l .i-point{left:19%;}
+.SortsTopbar .bar_r .i-point{right:19%;}
+.SortsTopbar h4{text-align:center;line-height:45px;color:#858c96;}
+.SortsTopbar .SortsLi .i-point{left:50%;margin-left:-3px;}
+.loginNav .bar_r .i-point{right:25%;}
+.loginNav .bar_l .i-point{left:25%;}
+.loginNav a span{width:53%;}
+.SortsTopbar li .iconP{position:absolute;top:20px;right:15%;}
+
+/*搜索框*/
+.searchContainer{padding:10px 15px;}
+.searchFormBox{height:33px;padding:0 10px;background-color:#fff;-webkit-border-radius:25px;border-radius:25px;border:1px solid #d9d9d9;}
+.searchFormBox .wf-search,.searchFormBox .wf-empty{color:#b7b7b7;}
+.searchFormBox input{width:100%;padding:6px 5px 5px;outline-style:none;border:none;display:block;}
+.searchClose,.editModeSwicth{width:33px;height:33px;line-height:33px;text-align:right;}
+/*搜索结果*/
+.searchCenter{}
+.searchCatList{overflow:hidden;}
+.searchCatList ul li{float:left;}
+.searchCatList ul li a{color:#218eed;border:1px solid #218eed;text-align:center;border-radius:4px;-webkit-border-radius:4px;display:block;margin:7px;padding:5px 10px;font-size:12px;}
+.searchResult .information_area .ListCenter{margin:0px;width:100%;}
+.searchCatBox .top_columnNameImg img{width: 60px;height: 60px; border: 1px solid #ffffff;border-radius: 5px;}
+/*===轮播图===*/
+.carousel {position:relative;overflow:hidden;}
+.carouselList {overflow:hidden;position:relative;top:0;left:0;width:400%;}
+.carousel-listItem {float:left;}
+.carousel-listItem a {display:block;}
+.carousel-listItem img {width:100%;height:auto;vertical-align:top;}
+.carouselNavList {overflow:hidden;position:absolute;left:10px;bottom:5px;}
+.carouselNavList-item {float:left;width:8px;height:8px;margin-right:5px;background-color:rgba(255,255,255,.5);
+    -webkit-border-radius:50%;border-radius:50%;cursor:pointer;}
+.carouselNavList .current {background-color:#ffffff;}
+
+/*===查看更多===*/
+.viewMoreBox {padding:0px 15px 15px 15px;}
+.viewMoreBox a,.viewMoreBox .viewMore{border:1px solid #218eed;background: #fff;font-size:12px;color:#218eed;text-align:center;-webkit-border-radius:3px;border-radius:3px;padding:7px 10px;margin: auto;
+}
+.viewMoreBox a:active{}
+.viewMoreBox a .iconfont ,.viewMoreBox .viewMore .iconfont{color:#218eed;}
+.viewMoreBox a{width:70px;}
+.viewMoreBox .viewMore{width:98px !important;}
+
+/*===返回顶部===*/
+.backToTop {width: 32px;height: 32px;line-height: 32px;position:fixed;z-index:30;text-align: center;background-color: rgba(33,142,237,.5);border-radius: 3px;}
+.backToTop .iconfont {font-size: 18px;color: #fff;}
+
+/* 冻结区域 */
+.localMask{position:absolute;position:fixed;z-index:9;left:0;right:0;top:0;bottom:0;background:rgba(0,0,0,.6);}
+
+/*加载更多*/
+.loadMore{height:40px;line-height:40px;text-align: center;}
+.loadMore span{}
+/* 正在加载 */
+.loadingIco{width:48px;height:48px;background:url(../images/loading.gif) no-repeat;background-size:contain;}
+.LoadingBox{width:170px;height:44px;position: absolute;top:50%;left:50%;margin-left:-85px;margin-top:-22px;line-height:44px;}
+.LoadingBox img{width:44px;height:44px;}
+/*===底部工具栏===*/
+.toolBar {
+    position: absolute;
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:47px;
+    z-index:991;
+}
+.toolBar-list {
+    height:47px;
+    border-top:1px solid #e6e6e6;
+}
+
+/*===弹窗===*/
+.popBox{width: 260px;position:absolute;top:50%;left:50%;margin-left:-130px;background-color:#ffffff;padding:10px;border-radius:4px;-webkit-border-radius:4px;z-index:89;box-sizing: border-box;}
+.popWarp{border:1px solid #d9d9d9;border-radius:4px;-webkit-border-radius:4px;padding:18px;box-sizing: border-box;}
+.popTitle {text-align:center;padding-bottom:30px;border-bottom:1px solid #d9d9d9;margin-top:5px;}
+.popTitle h3{font-size:16px;height:30px;line-height:30px;}
+.popTitle h4{color:#353c46;font-size:16px;}
+.popcenter h4{color:#858c96;text-align:center;}
+.popfooter .btnBlueH,.popfooter .btnBlue{height:40px;line-height:40px;box-sizing: border-box;padding:0px;}
+/*底部版本号*/
+.versionFooter{width: 100%;color: #858c96;font-size: 12px;text-align: center;margin-top:11em;}
+/* ============================================私有样式================================================== */
+/*登录*/
+.loginForm{padding:0px 22px;}
+.switchLoginBox .LoginList{background:#eff3f7;height:40px;line-height:40px;padding:0px 10px;border: 1px solid #eff3f7;}
+.smailUl h3 a{color:#858c96;font-size:12px;}
+.errorLine{color:#e63951;font-size:12px;margin:5px 0px 10px 0px;}
+.switchLoginBox input{font-size:14px;width:100%;}
+.errorLine i{color:#e63951;margin-right:5px;}
+.VCode{line-height:40px;margin-left:10px;color:#ffffff;text-align:center;}
+.LoginPrompt{text-align:center;padding-top:40px;}
+.smailUl h3 div{color: #858c96;font-size: 12px;}
+.loginFormDiv{padding-bottom:40px;}
+/*===首页===*/
+.tabMenuList{clear:both;margin-left:-10px;}
+.tabMenuList li{margin-left:10px;width:25%;}
+.tabMenuList li a{display:block;position:relative;margin-top:3px;}
+.tabMenuList li img{width:100%;}
+.tabMenuList .icon{position:absolute;top:50%;left:50%;margin-left:-35px;}
+.tabMenuList span{position:absolute;bottom:14px;left:13%;display:block;color:#ffffff;}
+.NewinfBox .WordListBox{margin-top:-10px;}
+.homeGuideBox{position:absolute;top:50%;left:0px;z-index:90;width: 100%;}
+.homeGuide{width:80%;margin:auto;overflow:hidden;}
+.homeGuideBtn{padding-top:10px;width:50px;height:30px;margin:auto;text-align: center;}
+.TimeTop .CountDown *{float:left;}
+.TimeTop .CountDown div{padding:0px 2px;height:15px;background-color:#fdb62d;color:#ffffff;font-size:12px;
+                         margin:12px 2px 0px 2px;line-height: 15px;text-align:center;}
+.TimeTop .CountDown span{color:#858c96}
+/*===分类===*/
+.TypeTb table{width:100%;background:#ffffff;border-top:1px solid #e3e3e3;border-left:1px solid #e3e3e3;}
+.TypeTb td{color:#383f49;border-bottom:1px solid #e3e3e3;border-right:1px solid #e3e3e3;padding:10px 0px;text-align:center;font-size:14px;}
+.TypeTb .firstTr3 td{width:33.33%;}
+.TypeTb .firstTr4 td{width:25%;}
+
+/*===我的资讯===*/
+.MyinfList_top{height:28px;line-height:28px;font-size:12px;margin-bottom:5px;}
+.MyinfList_top img{width:20px;height:20px;border-radius:50px;margin-top:5px;}
+.Infnewly_Box .WordListBox{margin-top:-10px;}
+.NoMore{padding:12px;}
+.infoCatBox{position:absolute;top:46px;left:0px;background-color:#ffffff;z-index:81;width:100%;}
+.infoCatBox ul {overflow:hidden;padding:7px 30px;}
+.infoCatBox ul li{float:left;width:25%;}
+.infoCatBox ul li a{text-align:center;color:#858c96;border:1px solid #d9d9d9;border-radius:4px;-webkit-border-radius:4px;display:block;margin:7px auto;padding:5px 0px;font-size:12px;width:80%;}
+.infoCatBox ul .blue a{color:#218eed;border:1px solid #218eed;}
+/*===个人中心===*/
+.PersonalCenter_top{height: 70px;line-height: 70px;background-color: #ffffff;}
+.PersonalList{background-color:#ffffff;}
+.PersonalCenter_top img{width: 36px;height: 36px;border-radius: 50px;-webkit-border-radius: 50px;margin-top: 17px;margin-right:10px;}
+.PersonalCenter_area li{padding:0px 15px;background-color: #ffffff;}
+.PersonalCenter_area .top_columnNameImg .iconfont{margin-left:4px;color:#ffffff;line-height: 23px;margin-top:0px;}
+.PersonalCenter_area li a{width: 100%;}
+.PersonalCenter_area li .wf-novelBox,.PersonalCenter_area li .wf-infBox,.PersonalCenter_area li .wf-PasswordBox{width:22px;height:22px;border-radius:50px;display:block;margin-top: 12px;margin-right:10px;}
+.PersonalCenter_area li .wf-novelBox{background-color:#f7b941;}
+.PersonalCenter_area li .wf-infBox{background-color:#b55dec;}
+.PersonalCenter_area li .wf-PasswordBox{background-color:#50c93c;}
+.PersonalCenter_area .wf-enter{font-size:12px;color:#d9d9d9;}
+.SignOut{padding:50px 0px 50px;}
+.SignOut a{background-color:#ffffff;height:40px;line-height:40px;display:block;}
+.PersonalMenu .tabMenuList span{bottom: 11px !important;}
+/*===男生小说===*/
+.novelM_Imglist,.RecentNew,.Novel_exclusive,.Novel_Selling,.LookBox,.novelDetails_buy,.novelCatalogBox,.CommentArea{background-color:#ffffff;margin-bottom:10px;}
+.novelDetails_buy,.novelCatalogBox{padding-top:15px;}
+.Novel_exclusive{padding-bottom:5px;}
+.Novel_exclusive .listImgBox{padding-top:0px;}
+.tabMenu_Novel{border-bottom: 1px solid #d9d9d9;}
+.tabMenu_Novel,.Referralbox{background-color:#ffffff;}
+.Referralbox .NovelList-title{width:70%;}
+.tempWrap .ImgList ul{margin-bottom: 15px;float: left;padding-right: 15px;box-sizing:border-box;margin-left:0px;}
+.tempWrap .ImgList li{margin-left:15px;}
+.focusRecom .ImgList ul li img{width:100%;}
+.novelM_Imglist,.NovelShelf_List{border-bottom: 1px solid #d9d9d9;}
+.tabMenu_Novel{overflow:hidden;padding-left:15px;height:65px;}
+.tabMenu_Novel ul{clear:both;margin-left:-10px;}
+.tabMenu_Novel li{width: 88px;height:35px;float:left;border-radius:4px;-webkit-border-radius:4px;margin-left:10px;position:relative;padding: 15px 0px 17px 0px;}
+.tabMenu_Novel li span{width: 80px;line-height: 36px;font-size: 12px;color: #ffffff;display: block;
+    position: absolute;top:15px;left: 0px;padding-left: 10px;box-sizing: border-box;z-index: 3;}
+.tabMenu_Novel li span:active{font-weight:bold;}
+.tabMenu_Novel li img{width: 88px;position:absolute;top:15px;left: 0px;}
+.RecentNew .RecentList li{padding:15px 0px;border-bottom: 1px solid #d9d9d9;}
+.RecentNew .RecentList h3{color:#383f49;font-size:14px;margin-bottom:7px;}
+.RecentNew .RecentList h4{color:#858c96;font-size:12px;}
+.exclusive_title{line-height:20px;}
+.hotList_other li{line-height:22px;border-bottom: 1px solid #d9d9d9;padding: 6px 0px;}
+.hotList_other li i{background-color: #858c96;}
+.hotList_other span{color:#383f49;}
+.hotList_other h4{font-size:12px;padding-bottom:3px;margin-left:20px;color:#858c96;}
+.Novel_Selling .hotList_other i,.Novel_Selling .NovelShelf_List .NovelShelfImg .firstI{width:15px;height:15px;line-height:15px;border-radius:50px;-webkit-border-radius:50px;
+                color:#ffffff;text-align:center;margin:10px 5px 0px 0px;}
+.Novel_Selling .NovelShelfImg .firstI{position:absolute;top:0px;left:0px;margin:0px !important;}
+.LookBox .toReader{padding:5px 0px 15px 0px;}
+/*===小说详情===*/
+.novelCatalogBox p{text-indent:2em;font-size:12px;line-height:22px;color:#858c96;margin-top:10px;margin-bottom:10px;}
+.catalogList_first{height:40px;line-height:40px;}
+.catalogList_other li{padding:10px 0px;font-size:14px;color:#383f49;}
+.catalogList_other li span{font-size:14px;}
+.NovelShelfAdd{padding:10px;margin-top:-20px;font-size:12px;position:fixed;top:90px;z-index:5;}
+.FreeCorner .i-FreeLimit{position:absolute;top:30px;right:15px;}
+.CommentArea .CommentBoxTop{padding:10px 0px;margin:10px 15px;}
+.CommentNone{padding:35px 0px 75px 0px;}
+/*===目录===*/
+.novelRecom_Warp dt{height:35px;line-height:35px;} 
+.novelRecom_Warp .catalogList_other li{border-bottom: 1px solid #d9d9d9;}
+.novelRecom_Warp .catalogList_other li div.b-flex{font-size:16px;}
+.FwBlue div.b-flex{font-weight:bold;color:#218eed;}
+.novelRecom_Warp .catalogList_other li:active{background-color:#eee;}
+/*===阅读器===*/
+/*框架*/
+.readerBox header{line-height:28px;margin-top:10px;}
+.readerBox_title{font-weight:bold;}
+.readerBox article{margin-top:5px;position:relative;}
+.readerBox article #articleDiv{padding-bottom: 100px;}
+.readerBox article p {text-indent: 2em;}
+.articleFoot{width: 100%;margin-top:30px;padding-bottom:40px;font-size:14px !important;
+    position: absolute;bottom: 0;left: 0;z-index: 52;}
+.articleFoot li i{color:#ffffff;}
+.articleFoot ul{margin-left:-10px;}
+.articleFoot li{margin-left:10px;}
+.Font_Adjustment{width:100%;height:40px;line-height:40px;background-color:#ffffff;position:fixed;bottom:0;left:0;z-index:70;font-size:14px;}
+.Font_Adjustment ul{padding:0px 15px;}
+.Font_Adjustment ul li{padding-top: 6px;}
+.Font_Adjustment ul .ta_c{padding-top:0px;}
+.Font_Adjustment .wf-catalog,.Font_Adjustment .wf-set{color:#383f49;font-size:18px;}
+.Font_Adjustment .ta_l a i,.Font_Adjustment .ta_r a{color:#55493b;}
+.Novelguide{background-color: rgba(38, 26, 17, .4);}
+.Novelguide img{width:100%;margin:auto;}
+/*.Novelguide1{margin-top:18%;}
+.Novelguide2,.Novelguide3{margin-top:24%;}*/
+.readerBox .operatBtn .btnBlue{height:28px;line-height:28px;/*margin-top:6px;*/}
+.FontBstyleBox{width:100%;position: absolute;top:-103px;left:0px;}
+.FontBstyle{height:95px;background-color:#ffffff;border-radius:4px;-webkit-border-radius:4px;margin:0px 10px;padding:10px;box-sizing:border-box;}
+.FontBstyleIcon{position:absolute;top: 76px;left: 57.3%;}
+.FontBstyle .Font .btnBlueH .iconfont{color:#218eed;font-size:16px;}
+.FontBstyleBox .Font .btnBlueH{width:55px;height:26px;line-height:26px;box-sizing:border-box;padding:0px;}
+.FontBstyle h3{margin-right:58px;}
+.FontBstyle .Background,.FontBstyle .Font{height:37px;line-height:28px;box-sizing:border-box;}
+.FontBstyle .Background .btn{width:50px;height:28px;line-height:28px;color:#ffffff;position: relative;}
+.FontBstyle .Background .i-bRight{position: absolute;top:0px;right:0px;}
+.FontBstyle .Background .bm_blue{box-sizing:border-box;}
+.FontBstyle .BgWf{background:#218eed;}
+.FontBstyle .BgWf i{color:#ffffff !important;}
+.popBox .AddBook{width: 94px;margin-left: 5px;position:relative;}
+.popBox .AddBook i{position: absolute;top:-2px;left: 0px;}
+.popBox .AddBook div{margin-left: 15px;}
+.assistantBox{width:100%;height:568px;position:fixed;top:0;left:0;z-index:50;}
+.assistant1{height:30%;}
+.assistant2{height:40%;}
+.assistant3{height:30%;}
+.RetractBox{width:100%;position:fixed;top:0;left:0;z-index:10;}
+/*字号*/
+.readerPf_16 header{font-size:20px;}
+.readerPf_16 article{line-height:28px;font-size:16px;}
+.readerPf_16 article p{padding-bottom:14px;}
+.readerPf_18 header{font-size:22px;}
+.readerPf_18 article{line-height:30px;font-size:18px;}
+.readerPf_18 article p{padding-bottom:18px;}
+.readerPf_20 header{font-size:24px;}
+.readerPf_20 article{line-height:32px;font-size:20px;}
+.readerPf_20 article p{padding-bottom:20px;}
+.readerPf_22 header{font-size:26px;}
+.readerPf_22 article{line-height:34px;font-size:22px;}
+.readerPf_22 article p{padding-bottom:22px;}
+.readerPf_24 header{font-size:28px;}
+.readerPf_24 article{line-height:36px;font-size:24px;}
+.readerPf_24 article p{padding-bottom:24px;}
+/*日间样式*/
+.patternDay{background-color:#edeee6;overflow:hidden;}
+.patternDay .readerBox_title,.patternDay article{color:#55493b;}
+/*护眼*/
+.patternEye{background-color:#7b967f;overflow:hidden;}
+.patternEye .readerBox_title{color:#fdf5ec;}
+.patternEye article{color:#c7d5c9;}
+/*夜间样式*/
+.patternNight{background-color:#3f3f3f;overflow:hidden;}
+.patternNight .readerBox_title{color:#cccccc;}
+.patternNight article{color:#b8bcb9;}
+/*小说购买*/
+.buyAll{padding-top:35px;}
+.buyAllBox a{width:70%;height:40px;line-height:40px;padding:0;display:block;margin:15px auto;box-sizing: border-box;}
+.buyAllList li{margin:5px 0px;font-size:12px;}
+/*支付状态*/
+.payState{padding-top:20%;}
+.payState h3{width:130px;margin:auto;margin-bottom:15px;}
+.payState h3 span{height:40px;line-height:40px;}
+/*===404和提示页面===*/
+.PromptBox{padding-top:20%;}
+/*===文章详情===*/
+.article-header{margin: 0px 15px 10px 15px;padding: 15px 0px 10px 0px;}
+.article-title{color:#1d242e;}
+.article-content{line-height:22px;}
+.article-content a{ display:inline !important;}
+.article-content p{text-indent:2em;}
+.article-content img{width:100%;-webkit-border-radius:4px;border-radius:4px;}
+.LikedC{height:44px;line-height:44px;}
+.LikedC .LikedCList{color:#858c96;}
+.seedingImg{display:block;margin-top:5px;margin-bottom:30px;}
+.seedingImg img{width:100%;}
+/*===限免专区===*/
+.TimeLimitBox{}
+.TimeLimitTab a span{width: 66%;}
+
+/*===  发表评论  ===*/
+.PublishComment{}
+.CommentInput{width:100%;height:148px;margin:auto;background-color:#f0f1f5;border-radius:6px;}
+.CommentInput textarea{width:100%;height:100%;color:#858c96;font-size:14px;padding:10px;}
+.CommentBtn .btnBlue{width:80px;height:30px;line-height:30px;}
+.CommentBoxTop{padding:10px 15px;}
+
+/*===  包月详情  ===*/
+.MonthNovelDetail .OrderBtn{width:70%;height:40px;line-height:40px;margin:auto;margin-top:15px;}
+.MonthDetailList .title{padding:8px 15px;}
+.MonthDetailList .hotList_other h4{margin-left:0px}
+
+/*===  我的包月  ===*/
+.MyMonth li{width:50%;border-bottom:1px solid #d9d9d9;padding:10px;box-sizing: border-box;float:left;}
+.MyMonth li img{width:100%;border:1px solid #ffffff;border-radius:4px;margin-bottom:10px;}
+.MyMonth li .i-deleteRed{position:absolute;top:15%;right:15%;}
+.ReminderTxt h4{line-height:20px;margin-top:6px;font-size:12px}
+
+
+
+/*处理display兼容性问题*/
+/*首页,个人中心页*/
+.titleBox,.PersonalCenter_top{position:relative;}
+.HomeheadBar .TwoL{position:absolute;top:11px;right: 53px;}
+.titleBox .c_lightgray{position: absolute;top: 0px;right:0px;}
+.titleBox a,.PersonalCenter_top .lightBlue,.novelM_Imglist .titleBox .c_lightgray,.titleBox #sexRecomMore
+{position: absolute;top: 0px;right: 15px;}
+/*首页收藏提示*/
+.AndroidR{position:fixed;bottom:0px;left:0;height:50px;background-color:#218eed;padding:5px 0px 5px 10px;box-sizing: border-box;}
+.AndroidR .txt{color:#ffffff;margin:1px 5px;font-size:12px;}
+.AndroidR .close{padding:10px;}
+
+.iPhoneR{position:fixed;bottom:-5px;left:50%;width:180px;height:87px;margin-left: -90px;padding:0px 10px;}
+.iPhoneR .txt,.iPhoneR .blackTip{position: absolute;width:180px;height:75px;border-radius:4px;}
+.iPhoneR .blackTip{top:0;left:0;}
+.iPhoneR .txt{top:50%;left:50%;margin-top:-35px;margin-left:-90px;z-index:3;box-sizing: border-box;font-size:12px;}
+.iPhoneR .txt .word{color:#ffffff;padding:5px;line-height:16px;padding:0px 10px;position: absolute;top: -1px;left: 37px;width: 100px;}
+.iPhoneR .triangle{position: absolute;bottom:0;left:42%;}
+.iPhoneR .close{position: absolute;top: -1px;right: 16px;}
+/*屏保*/
+.FullImg{
+position:absolute;
+top:0;
+left:0;
+height:100%;
+width:100%;
+background-position: center 0;
+background-repeat: no-repeat;
+background-attachment:fixed;
+background-size: cover;
+-webkit-background-size: cover;/* 兼容Webkit内核浏览器如Chrome和Safari */
+-o-background-size: cover;/* 兼容Opera */
+zoom: 1;
+} 
+.ScreenBtnGo{position:fixed;bottom:10%;left:50%;margin-left:-70px;z-index:3;}
+.ScreenBtnGo img{width:140px;height:35px;}
