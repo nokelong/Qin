@@ -12,6 +12,7 @@
     "test": "npm run unit"
   },
   "dependencies": {
+    "es6-shim": "^0.35.3",
     "vue": "^2.3.3",
     "vue-router": "^2.3.1"
   },
