@@ -1,27 +1,61 @@
 <template>
- 	<header class="d-box headBar p_fixed bg_blue HomeheadBar">
-		<aside class="pl_15 ta_avC b-flex">
-			<a class="btnBox headBarLogo" href="javascript:;">
-				<span class="fz_16 c_fff">
-					<img src="../assets/images/logo.png" alt="">
-				</span>
+   <div>
+	<top-header></top-header>
+	<Carousel></Carousel>
+	<section class="tabMenu cloudPall15">
+		<ul class="tabMenuList d-box">
+			<li class="b-flex ta_c">
+				<a class="" href="javascript:;">
+					<img src="../assets/images/i-tabBoy.png" alt="">
+					<span>男生小说</span>
+				</a>
+			</li>
+			<li class="b-flex ta_c">
+				<a class="" href="javascript:;">
+					<img src="../assets/images/i-tabGril.png" alt="">
+					<span>女生小说</span>
+				</a>
+			</li>
+			<li class="b-flex ta_c">
+				<a class="" href="javascript:;">
+					<img src="../assets/images/i-tabMess.png" alt="">
+					<span>最新资讯</span>
+				</a>
+			</li>
+			<li class="b-flex ta_c">
+				<a class="" href="javascript:;">
+					<img src="../assets/images/i-tabAll.png" alt="">
+					<span>全部分类</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<section class="RecommendBox bt_d9 listImgBox">
+		<div class="titleBox d-box cloudPLR15">
+			<span class="blueblock mr_5 mt_13"></span>
+			<span class="b-flex fz_14 lightBlack">重磅推荐</span>
+			<a href="javascript:;">
+				<i class="iconfont wf-change mr_3 fz_12"></i>
+				<span class="c_darkGray fz_12">换一换</span>
 			</a>
-		</aside>
-		<aside class="pr_15 ta_avC">
-			<a class="btnBox" href="javascript:;">
-				<i class="iconfont wf-bookshelf fz_18"></i>
-			</a>
-			<a class="btnBox" href="javascript:;">
-				<i class="iconfont wf-search fz_18"></i>
-			</a>
-			<a class="btnBox" href="javascript:;">
-				<i class="icon i-user hide mt_10"></i><!-- 未登录状态 -->
-				<i class="icon i-userSign  mt_10"></i><!-- 已登录状态 -->
-			</a>
-		</aside>
-	</header>
+		</div>
+		<div class="ImgList cloudPLR15 mb_15">
+			<ul class="d-box" v-for="item in items">
+				<novel></novel>
+			</ul>
+		</div>
+	</section>
+   </div>
 </template>
+<script>
+  import TopHeader from '../components/TopHeader.vue'
+  import Carousel from '../components/Carousel.vue'
+  import Novel from '../components/Novel.vue'
+
+  export default{
+    components:{TopHeader, Carousel,Novel},
+    data :()=>({items:[1,2,3]})
+  }
+</script>
 <style>
 </style>
-<script>
-</script>
