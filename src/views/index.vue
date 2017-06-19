@@ -137,11 +137,11 @@
    </div>   	
 </template>
 <script>
-  import TopHeader from '../components/TopHeader.vue'
-  import Carousel from '../components/Carousel.vue'
-  import Novel from '../components/Novel.vue'
-  import WordList from '../components/WordList.vue'
-  import rebuildData from  '../utils/utils'
+  import TopHeader from '../components/TopHeader.vue';
+  import Carousel from '../components/Carousel.vue';
+  import Novel from '../components/Novel.vue';
+  import WordList from '../components/WordList.vue';
+  import * as utils from '../utils/utils';
 
   export default{
     components:{TopHeader, Carousel,Novel,WordList},
@@ -152,16 +152,16 @@
     }),
     computed:{
     	limitColumn:function(){
-    	   let data = rebuildData(this.limitFree,3)
+    	   let data = utils.rebuildData(this.limitFree,3)
     	   console.log(data);
     	   return data;
     	},
     	boyLists: function() {
-           let data = rebuildData(this.novellists,3)    	   
+           let data = utils.rebuildData(this.novellists,3)    	   
     	   return data;
     	},
     	girlLists: function() {
-           return rebuildData(this.novellists,3);
+           return utils.rebuildData(this.novellists,3);
     	}
     }
   }

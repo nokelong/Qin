@@ -5,7 +5,7 @@
       * @param  {Function} callback 回调方法
       * @return {[type]}            [description]
       */
-export default function rebuildData(data,size,callback){
+export const rebuildData = (data,size,callback) =>{
       
     var fData = [];
     if(typeof size == "string"){

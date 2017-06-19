@@ -1,4 +1,5 @@
-import {getCGUID} from './util'
+import * as util from './util'
+import * as tips from './tips'
 
 class xhr {
     const AJAXTIMEOUT =  60000;
@@ -7,6 +8,17 @@ class xhr {
 	 * @return {[type]} [description]
 	 */
     getXHR (){
+        if(window.XMLHttpRequest){
+            return new XMLHttpRequest();
+        } else {
+            let MSXML = ['MSXML2.XMLHTTP.5.0', 'MSXML2.XMLHTTP.4.0', 'MSXML2.XMLHTTP.3.0', 'Microsoft.XMLHTTP'];
+            for(let i = 0;i<MSXML.length; i++){
+                try {
+                    return new ActiveXObject(MSXML[i]);
+                    break;                  
+                } catch {}
+            }
+        }
    	   return new XMLHttpRequest();
     }
     /**
@@ -15,9 +27,9 @@ class xhr {
      * @param {[type]} haders [description]
      */
     setHeaders (xhr,haders){
-      for(p in haders){
-     	xhr.setRequestHeader(p,haders[p])
-      }
+        for(p in headers){
+            xhr.setRequestHeader(p, headers[p]);
+        }      
     }
     send (conf){
 
@@ -34,11 +46,7 @@ class xhr {
         }
 
         if(conf.dataType == 'xml' && typeof cData == 'object') {
-            if (true) {
-                sendData = JSON.stringify(cData); //cm2rm
-            } else {
-                sendData = T.json2xml(cData);
-            }
+            sendData = JSON.stringify(cData); //cm2rm
             reqHeaders['Content-Type'] = 'application/xml';
         }else if(typeof cData == 'object') {
             let temArr = [];
@@ -67,7 +75,7 @@ class xhr {
         let sid = T.cookie.get('Os_SSo_Sid');
         let timeout = conf.timeout || AJAXTimeout;
 
-        url += '&cguid=' +getCGUID;
+        url += '&cguid=' +util.getCGUID;
 
         if(sid) {
             if(!url.match('/sid=([^$#]+)/')){
@@ -85,13 +93,13 @@ class xhr {
             if (xhr.readyState == 3 && xhr.status == 200)
                 return;
             xhr.abort();
-            T.utils.hideLoading();
+            tips.hideLoading();
             if (conf.showMark)
-                T.utils.hideMark();
+                tips.hideMark();
             if (navigator.onLine) {
-                T.Tip.showTips(GlobalMessage.Timeout);
+                tips.showTips(GlobalMessage.Timeout);
             } else {
-                T.Tip.showTips(GlobalMessage.OffLine);
+                tips.showTips(GlobalMessage.OffLine);
             }
             if (conf.fail) {
                 conf.fail({ isTimeout: true });
@@ -105,28 +113,23 @@ class xhr {
             if (xhr.readyState == 4 && xhr.status != 0) {
                 clearTimeout(timer);
                 if (conf.showMark)
-                    T.utils.hideMark();
+                    tips.hideMark();
                 if (xhr.status == 304 || (xhr.status >= 200 && xhr.status < 300)) {
                     if (conf.showLoading !== false) {
-                        T.utils.hideLoading();
+                        tips.hideLoading();
                     }
                     let para = {
                         xhr: xhr,                  
                         isJSON: conf.isJSON
                     };
-                    let info = T.ajax.utils.getResponseInfo(para);
+                    let info = utils.getResponseInfo(para);
 
                     //提示服务器公告
                     T.serviceTips(info.json);
                     if (conf.success)
-                        conf.success(info.responseText, info.json, info.isMDACache);
-                    if (conf.cache && conf.cache.callback)
-                        conf.cache.callback(info);
+                        conf.success(info.responseText, info.json, info.isMDACache);                   
                 } else {
-                    T.utils.hideLoading();
-                    if (!conf.hideDefaultTip) {
-                        T.Tip.showTips(GlobalMessage.ServerError);
-                    }
+                    T.utils.hideLoading();                  
                     if (conf.fail) {
                         conf.fail(xhr.responseText, xhr.status);
                     }
@@ -146,20 +149,19 @@ class xhr {
             }
         };
         xhr.onabort = function () {
-            T.utils.hideLoading();
+            tips.hideLoading();
         };
 
         if (conf.showLoading !== false){
-            T.utils.showLoading(); //默认显示loading
+            tips.showLoading(); //默认显示loading
         }
             
         if (conf.showMark){
-            T.utils.showMark();
+            tips.showMark();
         }
             
         xhr.send(sendData);
         return xhr;        
     }
-
 }
 export default xhr
