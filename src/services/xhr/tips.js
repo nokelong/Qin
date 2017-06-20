@@ -99,3 +99,17 @@ export const hideLoading = () =>{
 export const showTips = (options) =>{
     T.Tip.tip(options, "wf-shortErrow");
 }
+
+export const getResponseInfo = (conf) =>{
+    let xhr = conf.xhr;
+    let json;
+    let responseText = xhr.responseText;
+    let resHeaders = T.ajax.utils.getHeaders(xhr);
+
+    //序列化json
+    let isJSON = conf.isJSON || /json|javascript/i.test(resHeaders["Content-Type"]) || xhr.responseText.indexOf("{") == 0;
+    if (isJSON) {
+        json = T.tryEval(responseText);
+    }
+    return { responseText,json};
+}

@@ -1,5 +1,6 @@
 import * as util from './util'
 import * as tips from './tips'
+import * as cookie from '../utils/cookie'
 
 class xhr {
     const AJAXTIMEOUT =  60000;
@@ -72,7 +73,7 @@ class xhr {
         
         let protocol = location.href.protocol;
         let url = protocol + '\/\/' + location.host +conf.url ;
-        let sid = T.cookie.get('Os_SSo_Sid');
+        let sid = cookie.get('Os_SSo_Sid');
         let timeout = conf.timeout || AJAXTimeout;
 
         url += '&cguid=' +util.getCGUID;

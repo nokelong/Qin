@@ -1,10 +1,10 @@
  /**
-      * 格式化数据
-      * @param  {[type]}   data     数据集
-      * @param  {[type]}   size     分割大小
-      * @param  {Function} callback 回调方法
-      * @return {[type]}            [description]
-      */
+  * 格式化数据
+  * @param  {[type]}   data     数据集
+  * @param  {[type]}   size     分割大小
+  * @param  {Function} callback 回调方法
+  * @return {[type]}            [description]
+  */
 export const rebuildData = (data,size,callback) =>{
       
     var fData = [];
@@ -39,3 +39,19 @@ export const rebuildData = (data,size,callback) =>{
         callback(fData);
     } else return fData;
 }
+/**
+ * [生成CGUID]
+ * @return {[type]} [description]
+ */
+export const getCGUID = () =>{
+    const padding = (n, m) =>{
+        let len = (m || 2) - (1 + Math.floor(Math.log(n | 1) / Math.LN10 + 10e-16));
+        return new Array(len + 1).join("0") + n;
+    }
+    let now = new Date();
+    return '' + padding(now.getHours()) + padding(now.getMinutes()) + padding(now.getSeconds()) + padding(now.getMilliseconds(), 3) + padding(Math.ceil(Math.random() * 9999), 4);
+}
+
+
+
+
