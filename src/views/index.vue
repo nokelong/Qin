@@ -141,7 +141,7 @@
   import Carousel from '../components/Carousel.vue';
   import Novel from '../components/Novel.vue';
   import WordList from '../components/WordList.vue';
-  import * as utils from '../utils/utils';
+  import utils from '../utils/utils';
 
   export default{
     components:{TopHeader, Carousel,Novel,WordList},
@@ -151,7 +151,7 @@
     	wordlists:[1]
     }),
     computed:{
-    	limitColumn:function(){
+    	limitColumn:function(){    	
     	   let data = utils.rebuildData(this.limitFree,3)
     	   console.log(data);
     	   return data;

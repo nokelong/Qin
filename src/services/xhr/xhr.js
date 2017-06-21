@@ -1,6 +1,6 @@
-import * as util from './util'
-import * as tips from './tips'
-import * as cookie from '../utils/cookie'
+import cookie from '../utils/cookie'
+import utils from '../utils/utils'
+import tips from './tips'
 
 class xhr {
     const AJAXTIMEOUT =  60000;
@@ -130,7 +130,7 @@ class xhr {
                     if (conf.success)
                         conf.success(info.responseText, info.json, info.isMDACache);                   
                 } else {
-                    T.utils.hideLoading();                  
+                    tips.hideLoading();                  
                     if (conf.fail) {
                         conf.fail(xhr.responseText, xhr.status);
                     }
@@ -165,4 +165,4 @@ class xhr {
         return xhr;        
     }
 }
-export default xhr
+export default new xhr();

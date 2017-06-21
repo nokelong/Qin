@@ -1,4 +1,4 @@
-class cookie {
+class Cookie {
   /**
     * 设置 cookie
     * @param {String} name 名称
@@ -58,3 +58,4 @@ class cookie {
 		this.set(name, '', new Date(0), path, domain, secure)
 	}
 }
+export default new Cookie();
