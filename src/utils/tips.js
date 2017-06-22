@@ -100,8 +100,60 @@ class Tips {
     }
 
     showTips (options) {
-        T.Tip.tip(options, "wf-shortErrow");
+        this.tip(options, "wf-shortErrow");
+    }
+
+    tip (options, iClass) {
+        if (!options)
+            return;
+        if (typeof options === "string") {
+            options = { msg: options };
+        } else {
+            if (!options.msg)
+                return;
+        }
+        var html = ['<div class="NovelShelfAdd blackTip layout_av" style="">',
+                     '<span>',
+                        '<i class="{iClass}"></i><span class="tip_msg">{msg}</span>',
+                     '</span>',
+                    '</div>'].join("");
+
+        var tips = T.dom.query("#someTips");
+        if (!tips) {
+            tips = document.createElement("article");
+            tips.id = "someTips";
+            tips.className = "shortPop ";
+            tips.style.zIndex = "99";
+            tips.innerHTML = T.text.format(html, { iClass: iClass ? ('iconfont mr_5 '+iClass): "", msg: options.isHtml ? options.msg : T.text.htmlEncode(options.msg) });
+            document.body.appendChild(tips);
+            tips.querySelector("div").style.top = "50%"; 
+            tips.querySelector("div").style.left = "50%"; 
+            tips.querySelector("div").style.width = options.width||"";
+           
+            if(options.msg.length<17){   //一行
+                 tips.querySelector("div").style.marginLeft = -(options.msg.length*12+20)/2+"px";
+            }else{
+                 tips.querySelector("div").style.marginLeft = -tips.querySelector("div").offsetWidth/2+"px";
+            }
+        } else {
+            
+            tips.querySelector("i").className = iClass ? ('iconfont mr_5 '+iClass):" "
+            tips.querySelector(".tip_msg").innerHTML = options.isHtml ? options.msg : T.text.htmlEncode(options.msg);
+            T.dom.removeClass(tips, "dHide");
+            if(options.msg.length<17){
+                 tips.querySelector("div").style.marginLeft = -(options.msg.length*12+20)/2+"px";
+            }else{
+                 tips.querySelector("div").style.marginLeft = -tips.querySelector("div").offsetWidth/2+"px";
+            }
+            tips.querySelector("div").style.top = "50%"; 
+            tips.querySelector("div").style.left = "50%"; 
+            tips.querySelector("div").style.width = options.width||"";
+        }
+        setTimeout(function () {
+            $(tips).addClass('dHide');           
+        }, options.showTime || 1000);
     }
 }
+
 export default new Tips();
 
