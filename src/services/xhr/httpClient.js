@@ -1,4 +1,6 @@
 import xhr from './xhr'
+const rootPath = '/../../assets/db/'
+const AJAXTIMEOUT =  60000;
 /**
  * [description]
  * @param  {String} options.method   [description]
@@ -10,24 +12,24 @@ import xhr from './xhr'
  * @return {[type]}                  [description]
  */
 const call = ({ 
-	headers= {"Content-Type" : 'text/plain','Mpost-bizId':'2001'},
-	method = 'post', 
+	headers= {"Content-Type" : 'text/json'},
+	method = 'get', 
 	url, 
-	data = null ,
+	data,
 	success, 
 	fail, 
 	complete,
-	...
+	timeout = AJAXTIMEOUT
 	}) =>{
-
+    
+    debugger
     xhr.send({
     	method:method,
-    	url:url,
+    	url:rootPath + url,
     	data:data,
         success:success,
         fail:fail,
-        complete:complete,
-        ...
+        complete:complete
     });
 }
 

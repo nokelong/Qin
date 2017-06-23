@@ -42,7 +42,7 @@
 		</div>
 		<div class="ImgList cloudPLR15 mb_15">
 		  <ul class='d-box'>	
-			<novel v-for="novel in novellists" :novel="novel"></novel>
+			<novel v-for="novel in recommendColumn" :novel="novel"></novel>
 		  </ul>
 		</div>
 	</section>
@@ -137,11 +137,12 @@
    </div>   	
 </template>
 <script>
-  import TopHeader from '../components/TopHeader.vue';
-  import Carousel from '../components/Carousel.vue';
-  import Novel from '../components/Novel.vue';
-  import WordList from '../components/WordList.vue';
-  import utils from '../utils/utils';
+  import TopHeader from '../components/TopHeader.vue'
+  import Carousel from '../components/Carousel.vue'
+  import Novel from '../components/Novel.vue'
+  import WordList from '../components/WordList.vue'
+  import utils from '../utils/utils'
+  import novelServices from '../services/novelServices'
 
   export default{
     components:{TopHeader, Carousel,Novel,WordList},
@@ -151,6 +152,10 @@
     	wordlists:[1]
     }),
     computed:{
+    	recommendColumn :function(){    	   
+    	   
+           novelServices.getRecommendColumn();
+    	},
     	limitColumn:function(){    	
     	   let data = utils.rebuildData(this.limitFree,3)
     	   console.log(data);

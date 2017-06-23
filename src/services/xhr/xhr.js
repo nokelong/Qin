@@ -1,9 +1,10 @@
-import cookie from '../utils/cookie'
-import utils from '../utils/utils'
-import tips from './tips'
+import cookie from '../../utils/cookie'
+import utils from '../../utils/utils'
+import tips from '../../utils/tips'
+
 
 class xhr {
-    const AJAXTIMEOUT =  60000;
+
 	/**
 	 * [getXHR 获取XHR对象]
 	 * @return {[type]} [description]
@@ -17,7 +18,7 @@ class xhr {
                 try {
                     return new ActiveXObject(MSXML[i]);
                     break;                  
-                } catch {}
+                } catch(e) {}
             }
         }
    	   return new XMLHttpRequest();
@@ -27,14 +28,14 @@ class xhr {
      * @param {[type]} xhr    [description]
      * @param {[type]} haders [description]
      */
-    setHeaders (xhr,haders){
+    setHeaders (xhr,headers){
         for(p in headers){
             xhr.setRequestHeader(p, headers[p]);
         }      
     }
     send (conf){
 
-    	let requestHeaders = conf.headers || {};
+    	let reqHeaders = conf.headers || {};
     	let xhr = this.getXHR();
         let sendData = null;
         let method = conf.method.toLowerCase;
@@ -71,12 +72,12 @@ class xhr {
             conf.url += '?';
         }
         
-        let protocol = location.href.protocol;
+        let protocol = window.location.protocol;
         let url = protocol + '\/\/' + location.host +conf.url ;
         let sid = cookie.get('Os_SSo_Sid');
-        let timeout = conf.timeout || AJAXTimeout;
+        let timeout = conf.timeout ;
 
-        url += '&cguid=' +util.getCGUID;
+        url += '&cguid=' +utils.getCGUID();
 
         if(sid) {
             if(!url.match('/sid=([^$#]+)/')){
@@ -89,7 +90,7 @@ class xhr {
         }
         xhr.open(conf.method, url, true);
         this.setHeaders(xhr, reqHeaders);
-        
+        debugger;
         let timer = setTimeout(function () {
             if (xhr.readyState == 3 && xhr.status == 200)
                 return;
@@ -98,9 +99,9 @@ class xhr {
             if (conf.showMark)
                 tips.hideMark();
             if (navigator.onLine) {
-                tips.showTips(GlobalMessage.Timeout);
+                tips.showTips('请求超时');
             } else {
-                tips.showTips(GlobalMessage.OffLine);
+                tips.showTips('请求超时，网络中断');
             }
             if (conf.fail) {
                 conf.fail({ isTimeout: true });
@@ -111,7 +112,7 @@ class xhr {
             }
         }, timeout);
          xhr.onreadystatechange = function (data) {                
-            if (xhr.readyState == 4 && xhr.status != 0) {
+            if (xhr.readyState == 4) {
                 clearTimeout(timer);
                 if (conf.showMark)
                     tips.hideMark();
@@ -124,11 +125,9 @@ class xhr {
                         isJSON: conf.isJSON
                     };
                     let info = utils.getResponseInfo(para);
-
-                    //提示服务器公告
-                    T.serviceTips(info.json);
+                   
                     if (conf.success)
-                        conf.success(info.responseText, info.json, info.isMDACache);                   
+                        conf.success(info.responseText, info.json);                   
                 } else {
                     tips.hideLoading();                  
                     if (conf.fail) {

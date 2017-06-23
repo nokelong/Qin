@@ -23,8 +23,9 @@ class Tips {
                 bgCss = "background:" + options.background + ";";
             }
             window['__markDiv'].innerHTML = '<div class="localMask" style="z-index:' + zIndex + ';' + bgCss + 'height:' + document.body.scrollHeight + 'px;width:' + document.body.scrollWidth + 'px;"></div>';
-            $(window['__markDiv']).addClass('iMark');
-            $(window['__markDiv']).css('zIndex',zIndex);        
+            window['__markDiv'].className += ' iMark';
+            window['__markDiv'].style.zIndex = zIndex;
+                 
             document.body.appendChild(window['__markDiv']);
         } else {
             if (options.background) {
@@ -36,7 +37,7 @@ class Tips {
 
         //绑定事件
         window['__markDiv'].onclick = options.click || null;
-        $(window['__markDiv').css('display','');
+        window['__markDiv'].style.display = '';       
       
         // if (options.__selfMark) {
         //     let markNode = window[options.markName || "__selfMark"] = window['__markDiv'];
@@ -118,7 +119,7 @@ class Tips {
                      '</span>',
                     '</div>'].join("");
 
-        var tips = T.dom.query("#someTips");
+        var tips = document.querySelector("#someTips");
         if (!tips) {
             tips = document.createElement("article");
             tips.id = "someTips";
