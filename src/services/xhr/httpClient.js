@@ -21,8 +21,7 @@ const call = ({
 	complete,
 	timeout = AJAXTIMEOUT
 	}) =>{
-    
-    debugger
+        
     xhr.send({
     	method:method,
     	url:rootPath + url,

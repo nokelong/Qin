@@ -70,6 +70,18 @@
         }
         return { responseText,json};
     }
+    /**
+    *格式化文本，将字符串中包含{关键字}的地方替换成map中的属性值
+    */
+    format(str, map) {
+      let tmp;
+      for (let k in map) {
+          let re = new RegExp('\\{' + k + '\\}', 'gm');
+          tmp = String(map[k]).replace(/\$/g, "$$$$");
+          str = str.replace(re, tmp);
+      }
+      return str;
+    }
 }
 export default new Utils();
  

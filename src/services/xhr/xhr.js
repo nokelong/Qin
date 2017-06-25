@@ -90,7 +90,7 @@ class xhr {
         }
         xhr.open(conf.method, url, true);
         this.setHeaders(xhr, reqHeaders);
-        debugger;
+       
         let timer = setTimeout(function () {
             if (xhr.readyState == 3 && xhr.status == 200)
                 return;

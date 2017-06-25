@@ -147,15 +147,22 @@
   export default{
     components:{TopHeader, Carousel,Novel,WordList},
     data :()=>({
+
+    	recommendColumn:[],
     	novellists:[1,2,3],
     	limitFree:[1,2,3,4,5],
     	wordlists:[1]
     }),
+    mounted (){
+       this.getRecommendColumn()
+    },
+    methods:{
+       getRecommendColumn:function(){
+       	  this.recommendColumn = novelServices.getRecommendColumn()
+       }
+    },
     computed:{
-    	recommendColumn :function(){    	   
-    	   
-           novelServices.getRecommendColumn();
-    	},
+   
     	limitColumn:function(){    	
     	   let data = utils.rebuildData(this.limitFree,3)
     	   console.log(data);

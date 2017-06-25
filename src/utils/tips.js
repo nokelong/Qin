@@ -1,3 +1,5 @@
+import utils from './utils'
+
 class Tips {
     showMark (options) {
 
@@ -125,7 +127,7 @@ class Tips {
             tips.id = "someTips";
             tips.className = "shortPop ";
             tips.style.zIndex = "99";
-            tips.innerHTML = T.text.format(html, { iClass: iClass ? ('iconfont mr_5 '+iClass): "", msg: options.isHtml ? options.msg : T.text.htmlEncode(options.msg) });
+            tips.innerHTML = utils.format(html, { iClass: iClass ? ('iconfont mr_5 '+iClass): "", msg: options.isHtml ? options.msg : utils.htmlEncode(options.msg) });
             document.body.appendChild(tips);
             tips.querySelector("div").style.top = "50%"; 
             tips.querySelector("div").style.left = "50%"; 

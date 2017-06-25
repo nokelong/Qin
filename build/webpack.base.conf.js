@@ -56,8 +56,11 @@ module.exports = {
       },
       {
         test: /\.json$/,
-        loader: 'url-loader',
-        include: [resolve('src'), resolve('test')]
+        loader: 'json-loader',
+        options: {
+          limit: 10000,
+          name: utils.assetsPath('db/[name].[hash:7].[ext]')
+        }
       }
     ]
   }
