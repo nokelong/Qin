@@ -154,11 +154,13 @@
     	wordlists:[1]
     }),
     mounted (){
-       this.getRecommendColumn()
+       this.getRecommendColumn()       
     },
     methods:{
        getRecommendColumn:function(){
-       	  this.recommendColumn = novelServices.getRecommendColumn()
+       	debugger
+       	  // this.recommendColumn = novelServices.getRecommendColumn()
+       	  this.recommendColumn = this.$http.get('assets/db/RecommendColumn.json');
        }
     },
     computed:{
