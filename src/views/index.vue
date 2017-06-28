@@ -158,9 +158,21 @@
     },
     methods:{
        getRecommendColumn:function(){
-       	debugger
-       	  // this.recommendColumn = novelServices.getRecommendColumn()
-       	  this.recommendColumn = this.$http.get('assets/db/RecommendColumn.json');
+       	    debugger
+       	    // this.recommendColumn = novelServices.getRecommendColumn()
+       	    this.$http.get('/static/db/RecommendColumn.json')
+       	    .then((response) =>{
+       	    	var result = (response.data);
+       	    	var resultCode = result.resultCode;
+
+       	    	if(resultCode == 0 ){
+                    this.recommendColumn = result.body.list;
+       	    	}
+       	   	    console.log("result:"+result)
+       	    })
+       	    .catch((error)=> {
+       	   	  console.log(error)
+       	    });
        }
     },
     computed:{
