@@ -21,13 +21,7 @@
 					<img src="../assets/images/i-tabMess.png" alt="">
 					<span>最新资讯</span>
 				</a>
-			</li>
-			<li class="b-flex ta_c">
-				<a class="" href="javascript:;">
-					<img src="../assets/images/i-tabAll.png" alt="">
-					<span>全部分类</span>
-				</a>
-			</li>
+			</li>			
 		</ul>
 	</section>
 	<!--重磅推荐-->
@@ -45,31 +39,7 @@
 			<novel v-for="(novel,index) in recommendColumn" :novel="novel" :key="index"></novel>
 		  </ul>
 		</div>
-	</section>
-	<!-- 限免免费 -->
-	<section class="TimeFree bt_d9  listImgBox">
-		<div class="TimeTop titleBox d-box cloudPLR15">
-			<span class="blueblock mr_5 mt_13 bg_red"></span>
-			<span class="fz_14 c_red">限时畅读</span>
-			<div class="CountDown b-flex clearfix ml_10">
-				<div>102</div><span>天</span>
-				<div>12</div><span>小时</span>
-				<div>25</div><span>分</span>
-				<div>36</div>
-			</div>
-			<a href="javascript:;">
-				<span class="c_darkGray fz_12">全部>></span>
-			</a>
-		</div>
-		<div class="ImgList cloudPLR15 ImgN clearfix">
-		  <ul class="d-box">
-		  	<novel v-for='novel in limitColumn' :novel="novel"></novel>
-		  </ul>			
-		</div>
-		<div class="pl_15 pr_15">
-            <h3 class="c_darkGray fz_12 pb_10">限时免费，畅所悦读~</h3>
-        </div>
-	</section>
+	</section>	
 	<!-- 男生小说 -->
 	<section class="novelBoy bt_d9 listImgBox">
 		<div class="titleBox d-box cloudPLR15">
@@ -156,7 +126,8 @@
     }),
     mounted (){
         this.getRecommendColumn();  
-        this.getBoysColumn();   
+        this.getBoysColumn();
+        this.getGirlsColumn();
     },
     methods:{
     	
@@ -179,6 +150,16 @@
         		self.boysColumn = result;
         	}
         	novelServices.getBoysColumn(opions);
+        },
+        getGirlsColumn(){
+            let self = this;
+        	let opions = {};
+        	
+        	opions.callback = (result)=>{   
+        	    // debugger     		
+        		self.girlsColumn = result;
+        	}
+        	novelServices.getGirlsColumn(opions);
         }
     },
     computed:{
