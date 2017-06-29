@@ -8,8 +8,8 @@
         </div>        
         <div class="layer_BlackFloat hide"></div>
       </div>
-      <h3 class="Firtitle">圣魂秘爱权少迫妻</h3>
-      <p class="Subtitle">心雨</p>
+      <h3 class="Firtitle">{{novel.columnName}}</h3>
+      <p class="Subtitle">{{novel.author}}</p>
     </a>
   </li>
 </template>

@@ -1,18 +1,61 @@
-import call from './xhr/httpClient'
+import xhr from './xhr/httpClient'
+import utils from '../utils/utils'
 
 class NovelServices {
-	getRecommendColumn (){
-		let options = {
+	/**
+	 * [getRecommendColumn ]
+	 * @param  {[type]} options [description]
+	 * @return {[type]}         [description]
+	 */
+	getRecommendColumn (options) {
+		let param = {
 			url:'RecommendColumn.json'
 		};
-		options.success = (result) =>{
-            console.log(JSON.stringify(result));
+		param.success = (result) =>{
+            let body = {};
+            
+			if(result && result.body){
+				body = result.body;
+			}
+			if(options.callback && typeof options.callback == 'function' ){
+				options.callback(body);
+			}            
 		};
-		options.fail = (result)=>{
+		param.fail = (result)=>{
             console.log('getRecommendColumn fail');
 		};
 		
-		call(options);
+		xhr.get(param);
+	}
+	/**
+	 * [getBoysColumn ]
+	 * @param  {[type]} options [description]
+	 * @return {[type]}         [description]
+	 */
+	getBoysColumn (options){
+		let param = {
+			url:'boysColumn.json'
+		};
+		param.success = (result) =>{
+            let body = {};
+            let list = [];
+
+			if(result && result.body){
+				body = result.body;
+			}
+			if(options.callback && typeof options.callback == 'function' ){
+				// debugger
+				if(body && body.list){
+					list = utils.rebuildData(body.list,3);
+				}
+				options.callback(list);
+			}            
+		};
+		param.fail = (result)=>{
+            console.log('boysColumn fail');
+		};
+		
+		xhr.get(param);
 	}
 }
 

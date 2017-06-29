@@ -1,35 +1,41 @@
-import xhr from './xhr'
-const rootPath = '/../../assets/db/'
-const AJAXTIMEOUT =  60000;
-/**
- * [description]
- * @param  {String} options.method   [description]
- * @param  {[type]} options.url      [description]
- * @param  {[type]} options.data     [description]
- * @param  {[type]} options.success  [description]
- * @param  {[type]} options.fail     [description]
- * @param  {[type]} options.complete [description]
- * @return {[type]}                  [description]
- */
-const call = ({ 
-	headers= {"Content-Type" : 'text/json'},
-	method = 'get', 
-	url, 
-	data,
-	success, 
-	fail, 
-	complete,
-	timeout = AJAXTIMEOUT
-	}) =>{
-        
-    xhr.send({
-    	method:method,
-    	url:rootPath + url,
-    	data:data,
-        success:success,
-        fail:fail,
-        complete:complete
-    });
+import config from './config'
+import axios from 'axios'
+
+class xhr {
+	get(param){        
+        axios.get(param.url,config)
+        .then((response)=>{
+        	let result = (response.data);
+       	    let resultCode = result.resultCode;
+
+       	    if(resultCode == 0 ){
+               param.success(result);
+       	    }else{
+               param.fail(result);
+               console.log('请求失败');
+       	    }
+        })
+        .catch((error)=>{
+            param.fail(error);
+        })
+	}
+	post(param){
+        axios.post(param.url,param.data, config)
+        .then((response) =>{
+        	let result = (response.data);
+       	    let resultCode = result.resultCode;
+
+       	    if(resultCode == 0 ){
+               param.success(result);
+       	    }else{
+               param.fail(result);
+               console.log('请求失败');
+       	    }
+        })
+        .catch((error)=>{
+            param.fail(error);
+        });
+	}
 }
 
-export default call;
+export default new xhr();

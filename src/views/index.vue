@@ -42,7 +42,7 @@
 		</div>
 		<div class="ImgList cloudPLR15 mb_15">
 		  <ul class='d-box'>	
-			<novel v-for="novel in recommendColumn" :novel="novel"></novel>
+			<novel v-for="(novel,index) in recommendColumn" :novel="novel" :key="index"></novel>
 		  </ul>
 		</div>
 	</section>
@@ -81,8 +81,9 @@
 			</a>
 		</div>
 		<div class="ImgList cloudPLR15">
-		  <ul class="d-box" v-for='list in boyLists'>
-		  	<novel  v-for="novel in list" :novel="novel"></novel>
+		  <ul class="d-box" v-for='boylist in boysColumn'>
+		  	<novel  v-for="(novel,index) in boylist" :novel="novel" :key="index">
+		  	</novel>
 		  </ul>
 		</div>
 		<div class="d-box viewMoreBox">
@@ -103,7 +104,7 @@
 			</a>
 		</div>
 		<div class="ImgList cloudPLR15">
-		  <ul class="d-box" v-for='list in girlLists'>
+		  <ul class="d-box" v-for='list in girlsColumn'>
 		  	<novel v-for="novel in list" :novel="novel"></novel>
 		  </ul>		 	
 		</div>
@@ -140,55 +141,47 @@
   import TopHeader from '../components/TopHeader.vue'
   import Carousel from '../components/Carousel.vue'
   import Novel from '../components/Novel.vue'
-  import WordList from '../components/WordList.vue'
-  import utils from '../utils/utils'
+  import WordList from '../components/WordList.vue' 
   import novelServices from '../services/novelServices'
 
   export default{
     components:{TopHeader, Carousel,Novel,WordList},
     data :()=>({
-
     	recommendColumn:[],
-    	novellists:[1,2,3],
+    	boysColumn:[],
+    	limitColumn:[],
+    	girlsColumn:[],    
     	limitFree:[1,2,3,4,5],
     	wordlists:[1]
     }),
     mounted (){
-       this.getRecommendColumn()       
+        this.getRecommendColumn();  
+        this.getBoysColumn();   
     },
     methods:{
-       getRecommendColumn:function(){
-       	    debugger
-       	    // this.recommendColumn = novelServices.getRecommendColumn()
-       	    this.$http.get('/static/db/RecommendColumn.json')
-       	    .then((response) =>{
-       	    	var result = (response.data);
-       	    	var resultCode = result.resultCode;
-
-       	    	if(resultCode == 0 ){
-                    this.recommendColumn = result.body.list;
-       	    	}
-       	   	    console.log("result:"+result)
-       	    })
-       	    .catch((error)=> {
-       	   	  console.log(error)
-       	    });
-       }
+    	
+        getRecommendColumn(){
+        	let self = this;
+        	let opions = {};
+        	
+        	opions.callback = (result)=>{
+        		// debugger 
+        		self.recommendColumn = result.list;
+        	} 
+       	    novelServices.getRecommendColumn(opions);       	   
+        },
+        getBoysColumn(){
+            let self = this;
+        	let opions = {};
+        	
+        	opions.callback = (result)=>{   
+        	    // debugger     		
+        		self.boysColumn = result;
+        	}
+        	novelServices.getBoysColumn(opions);
+        }
     },
     computed:{
-   
-    	limitColumn:function(){    	
-    	   let data = utils.rebuildData(this.limitFree,3)
-    	   console.log(data);
-    	   return data;
-    	},
-    	boyLists: function() {
-           let data = utils.rebuildData(this.novellists,3)    	   
-    	   return data;
-    	},
-    	girlLists: function() {
-           return utils.rebuildData(this.novellists,3);
-    	}
     }
   }
 </script>
