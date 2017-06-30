@@ -18,8 +18,13 @@
 </template>
 <script>
 export default {
-  name: 'WordList',
-  props:['wordList'],
+  name: 'Info',
+  props:{
+    item:{
+      type:Object,
+      required:true
+    }
+  },
   data:()=>({
     hasImg:false
   }),

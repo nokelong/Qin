@@ -1,3 +1,5 @@
+import utils from '../../utils/utils'
+
 export default {
   //请求的接口，在请求的时候，如axios.get(url,config);这里的url会覆盖掉config中的url
   url: '/',
@@ -22,7 +24,8 @@ export default {
   headers: {"Content-Type" : 'text/plain'},
 
   //parameter参数
-  params: {   
+  params: {
+    cguid:utils.getCGUID()
   },
 
   //post参数，使用axios.post(url,{},config);如果没有额外的也必须要用一个空对象，否则会报错

@@ -2,13 +2,13 @@
   <article class="carousel">
      <ul class="carouselList">        
         <li class="carousel-listItem" style="width: 320px;">
-          <a href="javascript:;"><img src="../assets/images/banner01.jpg" alt="" /></a>
+          <a href="javascript:;"><img src="../../../assets/images/banner01.jpg" alt="" /></a>
         </li>
       <li class="carousel-listItem" style="width: 320px;">
-        <a href="javascript:;"><img src="../assets/images/banner01.jpg" alt="" /></a>
+        <a href="javascript:;"><img src="../../../assets/images/banner01.jpg" alt="" /></a>
       </li>
       <li class="carousel-listItem" style="width: 320px;">
-        <a href="javascript:;"><img src="../assets/images/banner01.jpg" alt="" /></a>
+        <a href="javascript:;"><img src="../../../assets/images/banner01.jpg" alt="" /></a>
       </li>
     </ul>
     <!-- 轮播导航 .current当前项 -->

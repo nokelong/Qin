@@ -9,7 +9,7 @@ class NovelServices {
 	 */
 	getRecommendColumn (options) {
 		let param = {
-			url:'RecommendColumn.json'
+			url:'recommendColumn.json'
 		};
 		param.success = (result) =>{
             let body = {};
