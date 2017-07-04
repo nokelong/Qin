@@ -22,10 +22,7 @@ class InfoServices {
 				// debugger
 				if(body && body.list){
 					list = body.list;
-				}
-				if(list.length > 4){
-                    list = list.splice(0,4);
-				}
+				}			
 				options.callback(list);
 			}            
 		};

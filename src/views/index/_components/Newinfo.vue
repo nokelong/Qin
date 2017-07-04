@@ -6,7 +6,7 @@
 		</div>
 		<div class="WordListBox mb_10">
 			<ul>
-			 <Info v-for="(item,index) in wordlists"  :item="item" :key="index">
+			 <Info v-for="(item,index) in filterNews(wordlists)"  :item="item" :key="index">
 			 </Info>
 			</ul>
 		</div>
@@ -27,7 +27,19 @@ export default{
 		wordlists:{
 			type:Array
 		}
-	},
+	},	
+    methods:{
+        filterNews:(list)=>{
+            if(!list) return;
+            debugger
+            // let list = value.list
+            if(list.length > 4){
+                list = list.slice(0,4);
+            }
+            return list
+        }
+    },
 	components:{Info}
+	
 }
 </script>

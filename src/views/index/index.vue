@@ -4,7 +4,7 @@
 	<Carousel></Carousel>
 	<TabMenu></TabMenu>
 	<!-- 重磅推荐 -->
-	<Layout :novelColumn="recommendColumn" :showMore="false">		
+	<Layout :novelColumn="filterRecoColumn" :showMore="false">		
 		<span class="b-flex fz_14 lightBlack" slot="novletype">重磅推荐</span>		
 	</Layout>
 	<!-- 男生小说 -->
@@ -16,7 +16,7 @@
 		<span class="b-flex fz_14 lightBlack" slot="novletype">女生小说</span>		
 	</Layout>
 	<!-- 最新资讯 -->
-	<Newinfo :wordlists="newsColumn"></Newinfo>
+	<Newinfo :wordlists="newsColumn "></Newinfo>
    </div>   	
 </template>
 <script>
@@ -33,13 +33,15 @@
     name:'IndexRouter',
     components:{TopHeader, Carousel,Layout,TabMenu,Newinfo},
     data :()=>({
+        limitNum:3,
     	recommendColumn:[],
+        filterRecoColumn:[],
     	boysColumn:[],
     	limitColumn:[],
     	girlsColumn:[],
     	newsColumn:[]
     }),
-    mounted (){
+    mounted (){      
         this.getRecommendColumn();  
         this.getBoysColumn();
         this.getGirlsColumn();
@@ -53,6 +55,7 @@
         	opions.callback = (result)=>{
         		// debugger 
         		self.recommendColumn = result;
+                self.filterRecoColumn = [result.list.slice(0,this.limitNum)]
         	} 
        	    novelServices.getRecommendColumn(opions);       	   
         },
@@ -86,8 +89,6 @@
             }
             InfoServices.getNewInfoColumn(opions);
         }
-    },
-    computed:{
     }
   }
 </script>
