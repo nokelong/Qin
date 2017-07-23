@@ -6,7 +6,7 @@
 		</div>
 		<div class="WordListBox mb_10">
 			<ul>
-			 <Info v-for="(item,index) in filterNews(wordlists)"  :item="item" :key="index">
+			 <Info v-for="(item,index) in (wordlists)"  :item="item" :key="index">
 			 </Info>
 			</ul>
 		</div>
@@ -19,7 +19,7 @@
 	</section>
 </template>
 <script >
-import Info from '../../../components/Info.vue'
+import Info from 'COMPONENTS/Info.vue'
 
 export default{
 	name:'Newinfo',
@@ -29,15 +29,7 @@ export default{
 		}
 	},	
     methods:{
-        filterNews:(list)=>{
-            if(!list) return;
-            debugger
-            // let list = value.list
-            if(list.length > 4){
-                list = list.slice(0,4);
-            }
-            return list
-        }
+       
     },
 	components:{Info}
 	

@@ -16,46 +16,53 @@
 		<span class="b-flex fz_14 lightBlack" slot="novletype">女生小说</span>		
 	</Layout>
 	<!-- 最新资讯 -->
-	<Newinfo :wordlists="newsColumn "></Newinfo>
+	<Newinfo :wordlists="filterNewsColumn"></Newinfo>
    </div>   	
 </template>
 <script>
-  import TopHeader   from   '../../components/TopHeader.vue'  
+  import TopHeader   from   'COMPONENTS/TopHeader.vue'  
   import Carousel    from   './_components/Carousel.vue'
   import Layout      from   './_components/Layout.vue'
   import TabMenu     from   './_components/TabMenu.vue'  
   import Newinfo     from   './_components/Newinfo.vue' 
 
-  import novelServices from '../../services/novelServices' 
-  import InfoServices from '../../services/InfoServices'
+  import novelServices from 'SERVICES/novelServices' 
+  import InfoServices from 'SERVICES/InfoServices'
 
   export default{
     name:'IndexRouter',
     components:{TopHeader, Carousel,Layout,TabMenu,Newinfo},
     data :()=>({
         limitNum:3,
-    	recommendColumn:[],
-        filterRecoColumn:[],
+    	recommendColumn:[],        
     	boysColumn:[],
     	limitColumn:[],
     	girlsColumn:[],
     	newsColumn:[]
     }),
-    mounted (){      
-        this.getRecommendColumn();  
-        this.getBoysColumn();
-        this.getGirlsColumn();
-        this.getNewInfoColumn();
+    mounted (){
+        this.$nextTick(function(){
+            this.getRecommendColumn();  
+            this.getBoysColumn();
+            this.getGirlsColumn();
+            this.getNewInfoColumn();
+        })
+    },
+    computed:{
+        filterRecoColumn:function(){         
+            return [this.recommendColumn.slice(0,this.limitNum)]
+        },
+        filterNewsColumn:function(){
+            return this.newsColumn.slice(0,5)
+        }
     },
     methods:{    	
         getRecommendColumn(){
         	let self = this;
         	let opions = {};
         	
-        	opions.callback = (result)=>{
-        		// debugger 
-        		self.recommendColumn = result;
-                self.filterRecoColumn = [result.list.slice(0,this.limitNum)]
+        	opions.callback = (result)=>{        		
+        		self.recommendColumn = result;              
         	} 
        	    novelServices.getRecommendColumn(opions);       	   
         },

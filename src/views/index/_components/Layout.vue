@@ -23,9 +23,12 @@
 	</section>
 </template>
 <script>
-import Novel from '../../../components/Novel.vue'
+import Novel from 'COMPONENTS/Novel.vue'
 export default{
 	name: 'Layout',
+	data:()=>({
+        startIndex:0
+	}),
 	props:{
 		novelColumn:{
             type:[Object,Array],
@@ -34,7 +37,16 @@ export default{
 	    showMore:{
 	    	type: Boolean,
             default: true
+	    },
+	    limitNum:{
+	    	Number,
+	    	default:6
 	    }
+	},
+	computed:{
+        filterColumn:function(){
+        	return [this.novelColumn.slice(this.startIndex,this.limitNum)]
+        }
 	},
 	components:{Novel}
 }

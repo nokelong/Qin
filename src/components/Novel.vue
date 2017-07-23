@@ -1,6 +1,6 @@
 <template>
   <li class="b-flex">
-    <a href="javascript:;">
+    <a href="javascript:;" @click=goNovelDetail(novel.columnId)>
       <div class="listImg p_relative">
         <img src="../assets/images/img01.jpg" v-bind:src="novel.columnImageUrl"/>
         <div class="Corner hide"><!-- 角标 -->
@@ -17,7 +17,13 @@
 <script>
 export default {
   name: 'Novel',
-  props:['novel']
+  props:['novel'],
+  methods:{
+    goNovelDetail (cid){
+      // console.log(cid)
+      this.$router.push({ name: 'noveldetail', query: { columnId: cid }})
+    }
+  }
 }
 </script>
 

@@ -1,7 +1,7 @@
 <template>    
     <!-- 有图模式 -->
     <li v-bind:class="classObject" class="WordList">
-      <a href="javascript:;" class="d-box ">
+      <a href="javascript:;" class="d-box" @click="goDetail">
         <div class="b-flex mr_10">
           <h3 class="WordList-title">PC游戏《消失的地平线》今夏将推移动版 再探神秘高原</h3>
           <p class="from">
@@ -35,6 +35,11 @@ export default {
         noImg :!this.hasImg,
         'd-box':!this.hasImg
       }
+    }
+  },
+  methods:{
+    goDetail:function(nid){
+      this.$router.push({ name: 'user', params: { nid: nid }})
     }
   }
 }

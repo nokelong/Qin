@@ -1,5 +1,5 @@
 import xhr from './xhr/httpClient'
-import utils from '../utils/utils'
+import utils from 'UTILS/utils'
 
 class NovelServices {
 	/**
@@ -13,12 +13,16 @@ class NovelServices {
 		};
 		param.success = (result) =>{
             let body = {};
-            
+            let list = [];
 			if(result && result.body){
 				body = result.body;
 			}
 			if(options.callback && typeof options.callback == 'function' ){
-				options.callback(body);
+				
+				if(body && body.list){
+					list = (body.list);
+				}
+				options.callback(list);
 			}            
 		};
 		param.fail = (result)=>{
