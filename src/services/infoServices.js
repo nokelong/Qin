@@ -31,30 +31,35 @@ class InfoServices {
 		};
 		
 		xhr.get(param);
-	},
-	getColumnDetail(){
+	}
+	getColumnDetail(options){
 		let param = {
-           
+           url:'columnDetail.json'
+           // data:{
+           //    columnId:opions.cid,
+           //    contentType:opions.ctype
+           // }
 		};
+
 		param.success = (result) =>{
             let body = {};
             let list = [];
-
+            
 			if(result && result.body){
 				body = result.body;
 			}
-			if(options.callback && typeof options.callback == 'function' ){
-				// debugger
-				if(body && body.list){
-					list = body.list;
-				}			
-				options.callback(list);
+			if(options.callback && typeof options.callback == 'function' ){				
+				// if(body && body.list){
+				// 	list = body.list;
+				// }			
+				options.callback(body);
 			}            
 		};
 		param.fail = (result)=>{
-            console.log('getNewInfoColumn fail');
+            console.log('getColumnDetail fail');
 		};
-		xhr.post(param);
+		
+		xhr.get(param);
 	}
 }
 
