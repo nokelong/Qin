@@ -1,12 +1,12 @@
 <template>
-<div>
+<div style="background:#f4f5f7;">
    <top-header></top-header>
    <section class="novelDetails_buy p_relative">
 		<div class="NovelShelf_List cloudPLR15 bm_none p_relative">
 			<ul>
 				<li class="d-box">
 					<aside class="NovelShelfImg">
-						<img class="" src="">						
+						<img class="" v-bind:src="column.columnImageUrl">						
 					</aside>
 					<div class="b-flex ml_10">
 						<h3 class="NovelList-title">{{column.columnName}}</h3>
@@ -14,8 +14,11 @@
 							<h4>作者：{{column.author}}</h4>
 							<h4 class="mt_3">{{column.categoryName}}</h4>
 							<!-- textThrough为删除线样式 -->
-							<h4 class="mt_3 textThrough">价格：2元</h4>
-							<h4 class="mt_3">章节：共{{column.totalChapter}}章 |<span class="c_green ml_5">连载中</span></h4>
+							<h4 class="mt_3 ">价格：{{column.subPrice}}元</h4>
+							<h4 class="mt_3">章节：共{{column.totalChapter}}章 |
+                <span class="c_red ml_5" v-if="column.isEnd ==1">已完结</span>
+                <span class="c_green ml_5" v-else>连载中</span>
+              </h4>
 						</div>
 					</div>
 				</li>
@@ -25,8 +28,15 @@
 			<a href="javascript:;" class="b-flex ta_c">购买全书</a>
 			<span class="c_d9d9d9">|</span>
 			<a href="javascript:;" class="lightBlue b-flex ta_c">立即阅读</a>
-		</div>
-	</section>	
+		</div>   
+	</section>
+   <div class="cloudPLR15 novelCatalogBox" style="margin-bottom: 0px;">
+      <h3>内容简介</h3>
+      <p class="" style="margin-bottom:0px">{{filterDes}}</p>
+      <h4 class="ta_c h_30" v-if="column.longDescription.length > max_length" @click=showMoreDes>
+        <i class="iconfont wf-arrowB c_lightgray"></i>
+      </h4>
+    </div>	
 	<catalog></catalog>
 	<comment></comment>
 </div>
@@ -42,34 +52,44 @@
         data:function(){
            return {
            	  columnId:0,
-           	  column:''
+           	  column:{
+                longDescription:""
+              },
+              max_length:116
            }
         },
         mounted () {
-           this.columnId = (this.$route.query.columnId)
-           console.log(this.columnId);
-           this.getNovelDetail()
+          this.$nextTick(function(){
+            this.columnId = (this.$route.query.columnId)
+            console.log(this.columnId);
+            this.getNovelDetail()
+          });
         },
         methods:{
             getNovelDetail() {
-                let self = this;
+              let self = this;
         	    let opions = {
-        	    	cid:this.columnId,
-        	    	ctype:4
+        	        cid:this.columnId,
+        	    	  ctype:4
         	    };
         	  
         	    opions.callback = (result)=>{        		
-        		   self.column = result;              
+        		    self.column = result;              
         	    } 
-       	        InfoServices.getColumnDetail(opions); 
+       	      InfoServices.getColumnDetail(opions); 
+            },
+            showMoreDes() {
+              this.max_length = this.column.longDescription.length;
             }
         },
-        computed:{
-            filterStats:function() {
-               
-            },
-            filterPrice:function() {
+        computed:{           
+            filterDes:function() {
 
+              let longDescription = this.column.longDescription;
+              let des = longDescription.substring(0,this.max_length)
+            
+              if(this.max_length < longDescription.length) des += '...'
+              return des;
             }
         },
         components:{topHeader,catalog,comment}

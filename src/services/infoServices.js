@@ -43,15 +43,11 @@ class InfoServices {
 
 		param.success = (result) =>{
             let body = {};
-            let list = [];
             
 			if(result && result.body){
 				body = result.body;
 			}
-			if(options.callback && typeof options.callback == 'function' ){				
-				// if(body && body.list){
-				// 	list = body.list;
-				// }			
+			if(options.callback && typeof options.callback == 'function' ){
 				options.callback(body);
 			}            
 		};

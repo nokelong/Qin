@@ -1,12 +1,5 @@
 <template>
-	<section class="novelCatalogBox">
-		<div class="cloudPLR15 mt_15">
-			<h3>内容简介</h3>
-			<p class="">在重新寻找存在意义的过程中，不安的情绪始终困扰着这群艾泽拉斯古老的守护者。作为前任守护巨龙中最年轻的一员，这种感触对卡雷苟斯来说尤为强烈。在失去了守护巨龙之力以后，他——以及他的族群——是否仍然还能影响这个世界？</p>
-			<h4 class="ta_c h_30">
-				<i class="iconfont wf-arrowB c_lightgray"></i>
-			</h4>
-		</div>
+	<section class="novelCatalogBox" >	
 		<div class="novelCatalog bt_d9 ">
 			<dl class="catalogListBox cloudPLR15">
 				<dt class="titleBox">目录<span class="c_darkGray">（共380章）</span></dt>
