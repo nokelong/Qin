@@ -91,6 +91,19 @@
 </template>
 <script type="text/javascript">
    export default{
-   	  name: 'Catalog'
+   	  name: 'Catalog',
+   	  props:{
+   	  	catalog:{
+   	  		Object
+   	  	},
+   	  	isShowNew:{
+	    	type: Boolean,
+            default: false
+	    }
+   	  },
+   	  data:()=>({
+        items:[],
+        limitNum:10
+   	  })
    }
 </script>

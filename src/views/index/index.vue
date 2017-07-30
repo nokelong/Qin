@@ -27,7 +27,7 @@
   import Newinfo     from   './_components/Newinfo.vue' 
 
   import novelServices from 'SERVICES/novelServices' 
-  import InfoServices from 'SERVICES/InfoServices'
+  import infoServices from 'SERVICES/infoServices'
 
   export default{
     name:'IndexRouter',
@@ -94,7 +94,7 @@
                 // debugger             
                 self.newsColumn = result;
             }
-            InfoServices.getNewInfoColumn(opions);
+            infoServices.getNewInfoColumn(opions);
         }
     }
   }

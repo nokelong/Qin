@@ -37,7 +37,7 @@
         <i class="iconfont wf-arrowB c_lightgray"></i>
       </h4>
     </div>	
-	<catalog></catalog>
+	<catalog :catalog="catalog"></catalog>
 	<comment></comment>
 </div>
 </template>
@@ -45,7 +45,9 @@
     import topHeader from   'COMPONENTS/TopHeader.vue'
     import catalog   from   'COMPONENTS/Catalog.vue'  
     import comment   from   'COMPONENTS/Comment.vue' 
-    import InfoServices from 'SERVICES/InfoServices'
+    
+    import infoServices from 'SERVICES/infoServices'
+    import novelServices from 'SERVICES/novelServices'
 
     export default {
         name:'noveldetail',
@@ -55,18 +57,23 @@
            	  column:{
                 longDescription:""
               },
-              max_length:116
+              max_length:116,
+              catalog:{}
            }
         },
         mounted () {
           this.$nextTick(function(){
+            //获取栏目ID
             this.columnId = (this.$route.query.columnId)
             console.log(this.columnId);
             this.getNovelDetail()
+            this.getNovelCatalog()
           });
         },
         methods:{
+            //获取小说详情
             getNovelDetail() {
+              
               let self = this;
         	    let opions = {
         	        cid:this.columnId,
@@ -76,10 +83,30 @@
         	    opions.callback = (result)=>{        		
         		    self.column = result;              
         	    } 
-       	      InfoServices.getColumnDetail(opions); 
+
+       	      infoServices.getColumnDetail(opions); 
             },
+            //更多简介
             showMoreDes() {
               this.max_length = this.column.longDescription.length;
+            },
+            getNovelCatalog() {
+              
+              let self = this;
+              let opions = {
+                  cid:this.columnId,
+                  ctype:4,
+                  paging:{
+                    currentPageNum:1,
+                    perPageCount:10
+                  }
+              };
+            
+              opions.callback = (result)=>{           
+                self.catalog = result;              
+              }
+
+              novelServices.getNovelCatalog(opions); 
             }
         },
         computed:{           
@@ -90,6 +117,9 @@
             
               if(this.max_length < longDescription.length) des += '...'
               return des;
+            },
+            filterCataLog:function(){
+              // return catalog.slice()
             }
         },
         components:{topHeader,catalog,comment}
