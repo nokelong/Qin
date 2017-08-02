@@ -1,6 +1,6 @@
 <template>
 <div style="background:#f4f5f7;">
-   <top-header></top-header>
+   <top-header :pageName="pageName"></top-header>
    <section class="novelDetails_buy p_relative">
 		<div class="NovelShelf_List cloudPLR15 bm_none p_relative">
 			<ul>
@@ -30,15 +30,63 @@
 			<a href="javascript:;" class="lightBlue b-flex ta_c">立即阅读</a>
 		</div>   
 	</section>
-   <div class="cloudPLR15 novelCatalogBox" style="margin-bottom: 0px;">
+  <div class="cloudPLR15 novelCatalogBox" style="margin-bottom: 0px;">
       <h3>内容简介</h3>
       <p class="" style="margin-bottom:0px">{{filterDes}}</p>
       <h4 class="ta_c h_30" v-if="column.longDescription.length > max_length" @click=showMoreDes>
         <i class="iconfont wf-arrowB c_lightgray"></i>
       </h4>
-    </div>	
-	<catalog :catalog="catalog"></catalog>
-	<comment></comment>
+  </div>
+  <section class="novelCatalogBox">  
+    <div class="novelCatalog bt_d9 ">
+      <dl class="catalogListBox cloudPLR15">
+        <dt class="titleBox">目录<span class="c_darkGray">（共{{novelcatalog.paging.totalCount}}章）</span></dt>
+        <dd>
+          <div class="catalogList_first bm_d9 bt_d9">
+            <a href="javascript:;" class="d-box">
+              <i class="icon i-newTip mr_5 mt_3"></i>
+              <span class="fz_14 b-flex lightBlue text-overflow">第{{novelcatalog.newNovelChapter.chapterOrder}}章 {{novelcatalog.newNovelChapter.title}}</span>
+              <i class="iconfont wf-lock mr_5"></i>
+              <span class="c_lightgray fz_12">{{filterMdyDate}}更新</span>
+            </a>
+          </div>
+          <ul class="catalogList_other">
+	          <catalog v-for="(item,index) in filterCataLog" :item="item" :key="index"></catalog>
+          </ul>
+        </dd>
+        <!-- 查看更多 -->
+        <div class="d-box viewMoreBox mt_15" v-if="novelcatalog.items.length >10">
+          <a class="ta_av bg_white" href="javascript:;" @click="goNovelCatalog">
+            查看更多
+            <i class="iconfont wf-arrowR fz_12 ml_3"></i>
+          </a>
+        </div>
+      </dl>
+    </div>
+  </section>
+  <section class="CommentArea bg_white">
+    <div class="CommentBox c_titleblack">
+      <div class="CommentBoxTop bm_d9 d-box">
+        <h3 class="b-flex">评论</h3>
+        <h4 class="lightBlue"><i class="iconfont wf-Comment fz_16 lightBlue mr_5"></i>发表评论</h4>
+      </div>
+      <div class="CommentList" v-if="comments.length > 0">
+        <ul class="cloudPLR15 mb_15">
+	        <comment v-for="(comment,index) in filterComments" :comment="comment" :key="index"></comment>
+        </ul>
+        <div class="d-box viewMoreBox mt_15" v-if="comments.length > 3">
+            <a class="ta_av bg_white" href="javascript:;">
+              更多评论
+              <i class="iconfont wf-arrowR fz_12 ml_3"></i>
+            </a>
+          </div>
+      </div>
+      <div class="CommentNone ta_c" v-else>
+        <i class="i-CommentNone icon"></i>
+        <p class="fz_14 c_darkGray">暂无评论，快来抢沙发~</p>
+      </div>
+    </div>
+  </section>
 </div>
 </template>
 <script type="text/javascript">
@@ -51,14 +99,21 @@
 
     export default {
         name:'noveldetail',
+        components:{topHeader,catalog,comment},
         data:function(){
            return {
+              pageName:'小说详情',
            	  columnId:0,
            	  column:{
                 longDescription:""
               },
               max_length:116,
-              catalog:{}
+              novelcatalog:{
+                newNovelChapter:{},
+                items:[],
+                paging:{}
+              },
+              comments:[]
            }
         },
         mounted () {
@@ -71,7 +126,10 @@
           });
         },
         methods:{
-            //获取小说详情
+            /**
+             * [getNovelDetail 获取小说详情]
+             * @return {[type]} [description]
+             */
             getNovelDetail() {
               
               let self = this;
@@ -86,10 +144,10 @@
 
        	      infoServices.getColumnDetail(opions); 
             },
-            //更多简介
-            showMoreDes() {
-              this.max_length = this.column.longDescription.length;
-            },
+            /**
+             * [getNovelCatalog 获取目录]
+             * @return {[type]} [description]
+             */
             getNovelCatalog() {
               
               let self = this;
@@ -102,26 +160,55 @@
                   }
               };
             
-              opions.callback = (result)=>{           
-                self.catalog = result;              
+              opions.callback = (result)=>{ 
+                let {items,newNovelChapter,paging} = result;
+                // console.log(paging)
+                self.novelcatalog.items = items;
+                self.novelcatalog.newNovelChapter = newNovelChapter;
+                self.novelcatalog.paging = paging;              
               }
 
               novelServices.getNovelCatalog(opions); 
-            }
+            },
+            /**
+             * [showMoreDes 更多简介]
+             * @return {[type]} [description]
+             */
+            showMoreDes() {
+              this.max_length = this.column.longDescription.length;
+            },
+            /**
+             * [goNovelCatalog 更多目录]
+             * @return {[type]} [description]
+             */
+            goNovelCatalog() { 
+              // debugger        
+              this.$router.push({name:'novelcatalog',query:{columnId:this.columnId}})
+            }         
         },
         computed:{           
-            filterDes:function() {
-
+            filterDes: function() {
               let longDescription = this.column.longDescription;
               let des = longDescription.substring(0,this.max_length)
             
               if(this.max_length < longDescription.length) des += '...'
               return des;
             },
-            filterCataLog:function(){
-              // return catalog.slice()
+            filterMdyDate: function() {
+              let mdyDate = this.novelcatalog.newNovelChapter.modifyDate || ''
+              let today = new Date()
+              
+              if(today.toDateString() === new Date(mdyDate.replace(/-/g, '/')).toDateString()) {  //当天，显示时间
+                return mdyDate.split(' ')[1]; 
+              }
+              return mdyDate.split(' ')[0]
+            },
+            filterCataLog: function() {
+              return this.novelcatalog.items.slice(0,10)
+            },
+            filterComments: function() {
+              return this.comments.slice(0,3);
             }
-        },
-        components:{topHeader,catalog,comment}
+        }
    } 
 </script>

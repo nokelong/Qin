@@ -107,11 +107,11 @@ class NovelServices {
 				if(body && body.list){
 					list = (body.list);
 				}
-				options.callback(list);
+				options.callback(body);
 			}            
 		};
 		param.fail = (result)=>{
-            console.log('GirlsColumn fail');
+            console.log('catalog fail');
 		};
 		
 		xhr.get(param);

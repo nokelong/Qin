@@ -81,7 +81,7 @@
           str = str.replace(re, tmp);
       }
       return str;
-    }
+    } 
 }
 export default new Utils();
  

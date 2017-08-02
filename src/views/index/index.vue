@@ -1,6 +1,6 @@
 <template>
    <div>
-	<top-header></top-header>
+	<top-header :isHome="true"></top-header>
 	<Carousel></Carousel>
 	<TabMenu></TabMenu>
 	<!-- 重磅推荐 -->

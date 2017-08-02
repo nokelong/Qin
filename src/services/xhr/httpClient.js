@@ -7,7 +7,7 @@ class xhr {
         .then((response)=>{
         	let result = (response.data);
        	    let resultCode = result.resultCode;
-            
+            // debugger
        	    if(resultCode == 0 ){
                param.success(result);
        	    }else{
