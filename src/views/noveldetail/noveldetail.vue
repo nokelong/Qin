@@ -89,14 +89,14 @@
   </section>
 </div>
 </template>
-<script type="text/javascript">
+<script type="text/javascript">   
     import topHeader from   'COMPONENTS/TopHeader.vue'
     import catalog   from   'COMPONENTS/Catalog.vue'  
     import comment   from   'COMPONENTS/Comment.vue' 
     
     import infoServices from 'SERVICES/infoServices'
-    import novelServices from 'SERVICES/novelServices'
-
+    import novelServices from 'SERVICES/novelServices' 
+    
     export default {
         name:'noveldetail',
         components:{topHeader,catalog,comment},

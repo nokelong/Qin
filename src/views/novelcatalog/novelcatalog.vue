@@ -29,10 +29,10 @@
     		return {
     			pageName:'小说目录',
     			novelcatalog:{
-                   newNovelChapter:{},
-                   items:[],
-                   paging:{}
-                }
+            newNovelChapter:{},
+            items:[],
+            paging:{}
+          }
     		}
     	},
     	mounted() {
@@ -56,15 +56,20 @@
                     perPageCount:10
                   }
               };
-            
+              // 显示
+              self.$vux.loading.show()
               opions.callback = (result)=>{ 
                 let {items,newNovelChapter,paging} = result;
                 // console.log(paging)
                 self.novelcatalog.items = items;
                 self.novelcatalog.newNovelChapter = newNovelChapter;
-                self.novelcatalog.paging = paging;              
+                self.novelcatalog.paging = paging;   
+                // 隐藏
+                setTimeout(function(){
+                  self.$vux.loading.hide() 
+                },300)     
               }
-
+             
               novelServices.getNovelCatalog(opions); 
             }
     	}
