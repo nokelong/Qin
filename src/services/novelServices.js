@@ -3,9 +3,11 @@ import utils from 'UTILS/utils'
 
 class NovelServices {
 	/**
-	 * [getRecommendColumn ]
-	 * @param  {[type]} options [description]
-	 * @return {[type]}         [description]
+	 * [getRecommendColumn 获取重磅推荐小说]
+	 * @param  {[type]} options 参数对象
+	 * @param  {Function} [options.callback] [成功回调]
+	 * @param  {Function} [options.fail]     [失败回调]
+	 * @return {[type]}   [暂用axios get取json]
 	 */
 	getRecommendColumn (options) {
 		let param = {
@@ -32,9 +34,11 @@ class NovelServices {
 		xhr.get(param);
 	}
 	/**
-	 * [getBoysColumn ]
-	 * @param  {[type]} options [description]
-	 * @return {[type]}         [description]
+	 * [getBoysColumn 获取男生小说]
+	 * @param  {[type]} options 参数对象
+	 * @param  {Function} [options.callback] [成功回调]
+	 * @param  {Function} [options.fail]     [失败回调]
+	 * @return {[type]}   [暂用axios get取json]
 	 */
 	getBoysColumn (options){
 		let param = {
@@ -62,9 +66,11 @@ class NovelServices {
 		xhr.get(param);
 	}
 	/**
-	 * [getGirlsColumn ]
-	 * @param  {[type]} options [description]
-	 * @return {[type]}         [description]
+	 * [getGirlsColumn 获取女生小说]
+	 * @param  {[type]} options 参数对象
+	 * @param  {Function} [options.callback] [成功回调]
+	 * @param  {Function} [options.fail]     [失败回调]
+	 * @return {[type]}   [暂用axios get取json]
 	 */
 	getGirlsColumn (options){
 		let param = {
@@ -91,6 +97,13 @@ class NovelServices {
 		
 		xhr.get(param);
 	}
+	/**
+	 * [getGirlsColumn 获取小说目录]
+	 * @param  {[type]} options 参数对象
+	 * @param  {Function} [options.callback] [成功回调]
+	 * @param  {Function} [options.fail]     [失败回调]
+	 * @return {[type]}   [暂用axios get取json]
+	 */
 	getNovelCatalog (options){
 		let param = {
 			url:'catalog.json'

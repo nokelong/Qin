@@ -4,15 +4,16 @@
 	<Carousel></Carousel>
 	<TabMenu></TabMenu>
 	<!-- 重磅推荐 -->
-	<Layout :novelColumn="filterRecoColumn" :showMore="false">		
+	<Layout :novelColumn="filterRecoColumn" :showMore="false"
+            @changeColumn="shuffleRecoColumn()">		
 		<span class="b-flex fz_14 lightBlack" slot="novletype">重磅推荐</span>		
 	</Layout>
 	<!-- 男生小说 -->
-	<Layout :novelColumn="boysColumn">		
+	<Layout :novelColumn="filterBoysColumn" @changeColumn="shuffleBoysColumn()">	
 		<span class="b-flex fz_14 lightBlack" slot="novletype">男生小说</span>		
 	</Layout>
 	<!-- 女生小说 -->
-	<Layout :novelColumn="girlsColumn">		
+	<Layout :novelColumn="filterGirlsColumn" @changeColumn="shuffleGirlsColumn()">		
 		<span class="b-flex fz_14 lightBlack" slot="novletype">女生小说</span>		
 	</Layout>
 	<!-- 最新资讯 -->
@@ -28,12 +29,14 @@
 
   import novelServices from 'SERVICES/novelServices' 
   import infoServices from 'SERVICES/infoServices'
+  import _ from 'lodash'
 
   export default{
     name:'IndexRouter',
     components:{TopHeader, Carousel,Layout,TabMenu,Newinfo},
     data :()=>({
         limitNum:3,
+        startIndex:0,
     	recommendColumn:[],        
     	boysColumn:[],
     	limitColumn:[],
@@ -49,14 +52,24 @@
         })
     },
     computed:{
-        filterRecoColumn:function(){         
-            return [this.recommendColumn.slice(0,this.limitNum)]
+        filterRecoColumn: function() {         
+            return [this.recommendColumn.slice(this.startIndex,this.limitNum)]
         },
-        filterNewsColumn:function(){
+        filterNewsColumn: function() {
             return this.newsColumn.slice(0,5)
+        },
+        filterBoysColumn: function() {           
+            return this.boysColumn.slice(this.startIndex,2)
+        },
+        filterGirlsColumn: function() {           
+            return this.girlsColumn.slice(this.startIndex,2)
         }
     },
-    methods:{    	
+    methods:{ 
+        /**
+         * [getGirlsColumn 获取重磅推荐小说]
+         * @return {[type]} [description]
+         */   	
         getRecommendColumn(){
         	let self = this;
         	let opions = {};
@@ -66,6 +79,10 @@
         	} 
        	    novelServices.getRecommendColumn(opions);       	   
         },
+        /**
+         * [getGirlsColumn 获取男生小说]
+         * @return {[type]} [description]
+         */
         getBoysColumn(){
             let self = this;
         	let opions = {};
@@ -76,16 +93,23 @@
         	}
         	novelServices.getBoysColumn(opions);
         },
+        /**
+         * [getGirlsColumn 获取女生小说]
+         * @return {[type]} [description]
+         */
         getGirlsColumn(){
             let self = this;
         	let opions = {};
         	
-        	opions.callback = (result)=>{   
-        	    // debugger     		
+        	opions.callback = (result)=>{ 
         		self.girlsColumn = result;
         	}
         	novelServices.getGirlsColumn(opions);
         },
+        /**
+         * [getNewInfoColumn 获取新闻资讯]
+         * @return {[type]} [description]
+         */
         getNewInfoColumn(){
             let self = this;
             let opions = {};
@@ -95,6 +119,15 @@
                 self.newsColumn = result;
             }
             infoServices.getNewInfoColumn(opions);
+        },        
+        shuffleRecoColumn () {  //重磅推荐换一换
+            this.recommendColumn = _.shuffle(this.recommendColumn)
+        },
+        shuffleBoysColumn () {  //男生小说换一换
+            this.boysColumn = _.shuffle(this.boysColumn)
+        },
+        shuffleGirlsColumn () {  //女生小说换一换
+            this.girlsColumn = _.shuffle(this.girlsColumn)
         }
     }
   }

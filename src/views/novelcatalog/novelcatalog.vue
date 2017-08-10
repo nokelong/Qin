@@ -42,7 +42,7 @@
     	},
     	methods:{
     		 /**
-             * [getNovelCatalog 获取目录]
+             * [getNovelCatalog 获取小说目录]
              * @return {[type]} [description]
              */
             getNovelCatalog() {
@@ -56,15 +56,16 @@
                     perPageCount:10
                   }
               };
-              // 显示
+              // 显示loading
               self.$vux.loading.show()
               opions.callback = (result)=>{ 
-                let {items,newNovelChapter,paging} = result;
-                // console.log(paging)
+                //结构result中的对象             
+                let {items,newNovelChapter,paging} = result;  
+                
                 self.novelcatalog.items = items;
                 self.novelcatalog.newNovelChapter = newNovelChapter;
                 self.novelcatalog.paging = paging;   
-                // 隐藏
+                // 隐藏loading
                 setTimeout(function(){
                   self.$vux.loading.hide() 
                 },300)     

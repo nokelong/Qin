@@ -48,8 +48,11 @@ export default {
         goBack: function() {
             this.$router.go(-1)
         },
-        goSearch: function() {
-        	alert("未完待续，开发中...")
+        goSearch: function() {        	
+        	this.$vux.alert.show({
+        		title: '攻城狮正在抓紧开发中',
+                content: '敬请期待'
+        	})
         }
 	}
 }

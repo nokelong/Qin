@@ -3,8 +3,10 @@
 		<div class="titleBox d-box cloudPLR15">
 			<span class="blueblock mr_5 mt_13"></span>
 			<slot name="novletype"></slot>			
-			<a href="javascript:;">
-				<i class="iconfont wf-change mr_3 fz_12"></i>
+			<a href="javascript:;" @click="changeMore">
+				<transition name="bounce">
+				  <i class="iconfont wf-change mr_3 fz_12" v-if="ischange"></i>
+				</transition>
 				<span class="c_darkGray fz_12">换一换</span>
 			</a>
 		</div>
@@ -20,14 +22,16 @@
     			<i class="iconfont wf-arrowR fz_12"></i>
     		</a>
     	</div>
-	</section>
+	</section>	
 </template>
 <script>
 import Novel from 'COMPONENTS/Novel.vue'
+
 export default{
 	name: 'Layout',
 	data:()=>({
-        startIndex:0
+        startIndex:0,     
+        ischange:true    
 	}),
 	props:{
 		novelColumn:{
@@ -37,17 +41,44 @@ export default{
 	    showMore:{
 	    	type: Boolean,
             default: true
-	    },
-	    limitNum:{
-	    	Number,
-	    	default:6
 	    }
 	},
-	computed:{
-        filterColumn:function(){
-        	return [this.novelColumn.slice(this.startIndex,this.limitNum)]
-        }
+	computed:{         
 	},
+	methods:{
+		/**
+		 * [changeMore 换一换]
+		 * @return {[type]} [description]
+		 */
+        changeMore: function() {
+
+        	let self = this        	
+        	self.ischange = !self.ischange;
+        	//换一换动态效果
+        	setTimeout(function(){
+               self.ischange = !self.ischange;
+        	},0)        
+        	// 触发index.vue changeColumn事件
+        	self.$emit('changeColumn');
+        }
+	},	
 	components:{Novel}
 }
 </script>
+<style type="text/css">
+    .bounce-enter-active {
+	  animation: bounce-in .5s;
+	}
+  
+    @keyframes bounce-in {
+    0% {
+      transform: rotate(0deg);
+    }
+    50% {
+       transform: rotate(180deg);
+    }
+    100% {
+       transform: rotate(360deg);
+    }
+}
+</style>

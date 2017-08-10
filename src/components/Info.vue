@@ -39,7 +39,11 @@ export default {
   },
   methods:{
     goDetail:function(nid){
-      this.$router.push({ name: 'user', params: { nid: nid }})
+      // this.$router.push({ name: 'user', params: { nid: nid }})
+      this.$vux.alert.show({
+          title: '攻城狮正在抓紧开发中',
+          content: '敬请期待'
+      })
     }
   }
 }
