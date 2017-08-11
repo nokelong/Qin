@@ -57,6 +57,31 @@ class InfoServices {
 		
 		xhr.get(param);
 	}
+	getPositionContent(options) {
+		let param = {
+			url:'positioncontent.json'
+		};
+		param.success = (result) =>{
+            let body = {};
+            let list = [];
+
+			if(result && result.body){
+				body = result.body;
+			}
+			if(options.callback && typeof options.callback == 'function' ){
+				// debugger
+				if(body && body.list){
+					list = (body.list);
+				}
+				options.callback(list);
+			}            
+		};
+		param.fail = (result)=>{
+            console.log('positioncontent fail');
+		};
+		
+		xhr.get(param);
+	}
 }
 
 export default new InfoServices()

@@ -128,7 +128,7 @@ class NovelServices {
 		};
 		
 		xhr.get(param);
-	}
+	}	
 }
 
 export default new NovelServices()

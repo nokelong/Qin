@@ -2,7 +2,7 @@
   <li class="b-flex">
     <a href="javascript:;" @click=goNovelDetail(novel.columnId)>
       <div class="listImg p_relative">
-        <img src="../assets/images/img01.jpg" v-bind:src="novel.columnImageUrl"/>
+        <img v-bind:src="novel.columnImageUrl"/>
         <div class="Corner hide"><!-- 角标 -->
           <i class="icon "></i>
         </div>        

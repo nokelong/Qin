@@ -1,7 +1,7 @@
 <template>
    <div>
 	<top-header :isHome="true"></top-header>
-	<Carousel></Carousel>
+	<Carousel :position="position"></Carousel>
 	<TabMenu></TabMenu>
 	<!-- 重磅推荐 -->
 	<Layout :novelColumn="filterRecoColumn" :showMore="false"
@@ -35,20 +35,22 @@
     name:'IndexRouter',
     components:{TopHeader, Carousel,Layout,TabMenu,Newinfo},
     data :()=>({
-        limitNum:3,
-        startIndex:0,
+      limitNum:3,
+      startIndex:0,
     	recommendColumn:[],        
     	boysColumn:[],
     	limitColumn:[],
     	girlsColumn:[],
-    	newsColumn:[]
+    	newsColumn:[],
+      position:[]
     }),
     mounted (){
         this.$nextTick(function(){
-            this.getRecommendColumn();  
-            this.getBoysColumn();
-            this.getGirlsColumn();
-            this.getNewInfoColumn();
+            this.getRecommendColumn()
+            this.getBoysColumn()
+            this.getGirlsColumn()
+            this.getNewInfoColumn()
+            this.getPositionContent()
         })
     },
     computed:{
@@ -77,14 +79,15 @@
         	opions.callback = (result)=>{        		
         		self.recommendColumn = result;              
         	} 
-       	    novelServices.getRecommendColumn(opions);       	   
+       	  novelServices.getRecommendColumn(opions);       	   
         },
         /**
          * [getGirlsColumn 获取男生小说]
          * @return {[type]} [description]
          */
         getBoysColumn(){
-            let self = this;
+
+          let self = this;
         	let opions = {};
         	
         	opions.callback = (result)=>{   
@@ -98,7 +101,7 @@
          * @return {[type]} [description]
          */
         getGirlsColumn(){
-            let self = this;
+          let self = this;
         	let opions = {};
         	
         	opions.callback = (result)=>{ 
@@ -111,15 +114,29 @@
          * @return {[type]} [description]
          */
         getNewInfoColumn(){
-            let self = this;
-            let opions = {};
+          let self = this;
+          let opions = {};
             
-            opions.callback = (result)=>{   
-                // debugger             
-                self.newsColumn = result;
-            }
-            infoServices.getNewInfoColumn(opions);
-        },        
+          opions.callback = (result)=>{   
+            // debugger             
+            self.newsColumn = result;
+          }
+          infoServices.getNewInfoColumn(opions);
+        },
+        /**
+         * [getPositionContent 获取广告]
+         * @return {[type]} [description]
+         */
+        getPositionContent() {
+          let self = this;
+          let opions = {};
+            
+          opions.callback = (result)=>{ 
+            // debugger
+            self.position = result;          
+          }
+          infoServices.getPositionContent(opions);
+        },
         shuffleRecoColumn () {  //重磅推荐换一换
             this.recommendColumn = _.shuffle(this.recommendColumn)
         },
