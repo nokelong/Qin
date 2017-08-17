@@ -128,7 +128,41 @@ class NovelServices {
 		};
 		
 		xhr.get(param);
-	}	
+	}
+	/**
+	 * [getResultByKeys 根据关键字查询小说]
+	 * @return {[type]} [description]
+	 */
+	getResultByKeys (options) {
+		
+		let param = {
+			url:'girlsColumn.json'
+		};
+		let results = [];
+        let key = options.keys;
+
+		param.success = (result) =>{           
+            // debugger	
+            // this.getBoysColumn()
+            // this.getGirlsColumn()        
+            let list = result.body.list;
+			if(options.callback && typeof options.callback == 'function' ){
+				list.map((re,index) =>{
+					// debugger
+					if(re.columnName.includes(key) || re.longDescription.includes(key) 
+						|| re.categoryName.includes(key) ||re.author.includes(key)) {
+						results.push(re)
+					}					
+				})
+				options.callback(results);
+			}            
+		};
+		param.fail = (result)=>{
+            console.log('getResultByKeys fail');
+		};
+		
+		xhr.get(param);
+	}
 }
 
 export default new NovelServices()

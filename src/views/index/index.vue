@@ -113,15 +113,13 @@
          * [getNewInfoColumn 获取新闻资讯]
          * @return {[type]} [description]
          */
-        getNewInfoColumn(){
-          let self = this;
-          let opions = {};
-            
-          opions.callback = (result)=>{   
-            // debugger             
-            self.newsColumn = result;
-          }
-          infoServices.getNewInfoColumn(opions);
+        getNewInfoColumn(){ 
+
+          let opions = {};            
+          opions.callback = ((result)=>{  
+            this.newsColumn = result;
+          }).bind(this)
+          infoServices.getNewInfoColumn(opions);         
         },
         /**
          * [getPositionContent 获取广告]

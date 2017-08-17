@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import index from 'VIEWS/index'
-import noveldetail from 'VIEWS/noveldetail/noveldetail'
-import novelcatalog from 'VIEWS/novelcatalog/novelcatalog'
+import noveldetail from 'VIEWS/noveldetail/index'
+import novelcatalog from 'VIEWS/novelcatalog/index'
+import search       from  'VIEWS/search/index'
 
 Vue.use(Router)
 
@@ -20,6 +21,10 @@ export default new Router({
       path:'/novelcatalog',
       name:'novelcatalog',
       component:novelcatalog
+    },{
+      path:'/search',
+      name:'search',
+      component:search
     }
   ]
 })

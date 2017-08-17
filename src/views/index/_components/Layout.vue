@@ -12,8 +12,19 @@
 		</div>
 		<div class="ImgList cloudPLR15">
 		  <ul class="d-box" v-for='novlelist in novelColumn'>
-		  	<novel  v-for="(novel,index) in novlelist" :novel="novel" :key="index">
-		  	</novel>
+		  	  <li class="b-flex" v-for="(novel,index) in novlelist" :key="index">
+			    <a href="javascript:;" @click="goNovelDetail(novel.columnId)">
+			      <div class="listImg p_relative">
+			        <img v-bind:src="novel.columnImageUrl"/>
+			        <div class="Corner hide"><!-- 角标 -->
+			          <i class="icon "></i>
+			        </div>        
+			        <div class="layer_BlackFloat hide"></div>
+			      </div>
+			      <h3 class="Firtitle">{{novel.columnName}}</h3>
+			      <p class="Subtitle">{{novel.author}}</p>
+			    </a>
+			  </li>		 
 		  </ul>
 		</div>
 		<div class="d-box viewMoreBox" v-if="showMore==true">
@@ -25,45 +36,48 @@
 	</section>	
 </template>
 <script>
-import Novel from 'COMPONENTS/Novel.vue'
+// import Novel from 'COMPONENTS/Novel'
 
-export default{
-	name: 'Layout',
-	data:()=>({
-        startIndex:0,     
-        ischange:true    
-	}),
-	props:{
-		novelColumn:{
-            type:[Object,Array],
-            required: true
+   export default{
+		name: 'Layout',
+		data:()=>({
+	        startIndex:0,     
+	        ischange:true    
+		}),
+		props:{
+			novelColumn:{
+	            type:[Object,Array],
+	            required: true
+			},
+		    showMore:{
+		    	type: Boolean,
+	            default: true
+		    }
 		},
-	    showMore:{
-	    	type: Boolean,
-            default: true
-	    }
-	},
-	computed:{         
-	},
-	methods:{
-		/**
-		 * [changeMore 换一换]
-		 * @return {[type]} [description]
-		 */
-        changeMore: function() {
+		computed:{         
+		},
+		methods:{
+			/**
+			 * [changeMore 换一换]
+			 * @return {[type]} [description]
+			 */
+	        changeMore: function() {
 
-        	let self = this        	
-        	self.ischange = !self.ischange;
-        	//换一换动态效果
-        	setTimeout(function(){
-               self.ischange = !self.ischange;
-        	},0)        
-        	// 触发index.vue changeColumn事件
-        	self.$emit('changeColumn');
-        }
-	},	
-	components:{Novel}
-}
+	        	let self = this        	
+	        	self.ischange = !self.ischange;
+	        	//换一换动态效果
+	        	setTimeout(function(){
+	               self.ischange = !self.ischange;
+	        	},0)        
+	        	// 触发index.vue changeColumn事件
+	        	self.$emit('changeColumn');
+	        },
+	        goNovelDetail: function(cid) {
+	        	this.$router.push({ name: 'noveldetail', query: { columnId: cid }})
+	        }
+		},	
+		components:{}
+	}
 </script>
 <style type="text/css">
     .bounce-enter-active {

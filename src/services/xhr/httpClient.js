@@ -8,12 +8,12 @@ class xhr {
         	let result = (response.data);
        	    let resultCode = result.resultCode;
             // debugger
-       	    if(resultCode == 0 ){
+       	    // if(resultCode == 0 ){
                param.success(result);
-       	    }else{
-               param.fail(result);
-               console.log('请求失败');
-       	    }
+       	    // }else{
+            //    param.fail(result);
+            //    console.log('请求失败');
+       	    // }
         })
         .catch((error)=>{
             param.fail(error);

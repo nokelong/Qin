@@ -81,7 +81,45 @@
           str = str.replace(re, tmp);
       }
       return str;
-    }   
+    }
+    /**
+     * [htmlEncode html编码处理]
+     * @param  {[type]} str [description]
+     * @return {[type]}     [description]
+     */
+    htmlEncode(str) {
+      if (typeof str != "string")
+          return "";
+      str = str.replace(/&/g, "&amp;")
+               .replace(/</g, "&lt;")
+               .replace(/>/g, "&gt;")
+               .replace(/\"/g, "&quot;")
+               .replace(/\'/g, "&#39;")
+               .replace(/ /g, "&nbsp;")
+               .replace(/&amp;#([^\;]+);/ig, "&#$1;"); //将&#20117;转成相应的汉字“井”
+        return str;
+    }
+    /**
+     * [htmlDecode html解码处理]
+     * @param  {[type]} text [description]
+     * @return {[type]}      [description]
+     */
+    htmlDecode(text) {
+      if (typeof text != "string")
+          return "";
+      let map = {
+            '&amp;': '&',
+            '&quot;': '"',
+            '&lt;': '<',
+            '&gt;': '>',
+            "&nbsp;": " ",
+            "&#39;": "'"
+        };
+      return text.replace(/(&quot;|&lt;|&gt;|&amp;|&nbsp;|&#39;)/g, function (str, item) {
+          return map[item];
+      });
+      return text;
+    }
 }
 export default new Utils();
  
