@@ -29,6 +29,7 @@
 
   import novelServices from 'SERVICES/novelServices' 
   import infoServices from 'SERVICES/infoServices'
+  import utils from 'UTILS/utils'
   import _ from 'lodash'
 
   export default{
@@ -90,9 +91,9 @@
           let self = this;
         	let opions = {};
         	
-        	opions.callback = (result)=>{   
-        	    // debugger     		
-        		self.boysColumn = result;
+        	opions.callback = (result)=>{ 
+        	    // debugger
+            self.boysColumn = utils.rebuildData(result,3)        	
         	}
         	novelServices.getBoysColumn(opions);
         },
@@ -105,7 +106,7 @@
         	let opions = {};
         	
         	opions.callback = (result)=>{ 
-        		self.girlsColumn = result;
+        		self.girlsColumn = utils.rebuildData(result,3);
         	}
         	novelServices.getGirlsColumn(opions);
         },

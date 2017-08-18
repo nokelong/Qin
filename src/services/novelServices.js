@@ -1,5 +1,4 @@
 import xhr from './xhr/httpClient'
-import utils from 'UTILS/utils'
 
 class NovelServices {
 	/**
@@ -12,26 +11,24 @@ class NovelServices {
 	getRecommendColumn (options) {
 		let param = {
 			url:'recommendColumn.json'
-		};
-		param.success = (result) =>{
+		};		
+		
+		xhr.get(param).then((result)=>{
+            console.log('getRecommendColumn success：'+result);
             let body = {};
             let list = [];
 			if(result && result.body){
 				body = result.body;
 			}
-			if(options.callback && typeof options.callback == 'function' ){
-				
+			if(options.callback && typeof options.callback == 'function' ){				
 				if(body && body.list){
 					list = (body.list);
 				}
 				options.callback(list);
 			}            
-		};
-		param.fail = (result)=>{
-            console.log('getRecommendColumn fail');
-		};
-		
-		xhr.get(param);
+		}).catch((error) => {
+			console.log('getRecommendColumn fail' +error);
+		});
 	}
 	/**
 	 * [getBoysColumn 获取男生小说]
@@ -40,11 +37,12 @@ class NovelServices {
 	 * @param  {Function} [options.fail]     [失败回调]
 	 * @return {[type]}   [暂用axios get取json]
 	 */
-	getBoysColumn (options){
+	getBoysColumn (options) { 
 		let param = {
 			url:'boysColumn.json'
-		};
-		param.success = (result) =>{
+		};		
+		
+		xhr.get(param).then((result)=>{
             let body = {};
             let list = [];
 
@@ -54,16 +52,13 @@ class NovelServices {
 			if(options.callback && typeof options.callback == 'function' ){
 				// debugger
 				if(body && body.list){
-					list = utils.rebuildData(body.list,3);
+					list = (body.list);
 				}
 				options.callback(list);
 			}            
-		};
-		param.fail = (result)=>{
-            console.log('boysColumn fail');
-		};
-		
-		xhr.get(param);
+		}).catch((error) => {
+			console.log('getBoysColumn fail' +error);
+		});
 	}
 	/**
 	 * [getGirlsColumn 获取女生小说]
@@ -72,11 +67,12 @@ class NovelServices {
 	 * @param  {Function} [options.fail]     [失败回调]
 	 * @return {[type]}   [暂用axios get取json]
 	 */
-	getGirlsColumn (options){
+	getGirlsColumn (options) {
 		let param = {
 			url:'girlsColumn.json'
-		};
-		param.success = (result) =>{
+		};		
+		
+		xhr.get(param).then((result) => {
             let body = {};
             let list = [];
 
@@ -86,16 +82,13 @@ class NovelServices {
 			if(options.callback && typeof options.callback == 'function' ){
 				// debugger
 				if(body && body.list){
-					list = utils.rebuildData(body.list,3);
+					list = (body.list);
 				}
 				options.callback(list);
 			}            
-		};
-		param.fail = (result)=>{
-            console.log('GirlsColumn fail');
-		};
-		
-		xhr.get(param);
+		}).catch((error) => {
+			console.log('GirlsColumn fail' +error);
+		});
 	}
 	/**
 	 * [getGirlsColumn 获取小说目录]
@@ -104,7 +97,7 @@ class NovelServices {
 	 * @param  {Function} [options.fail]     [失败回调]
 	 * @return {[type]}   [暂用axios get取json]
 	 */
-	getNovelCatalog (options){
+	getNovelCatalog (options) {
 		let param = {
 			url:'catalog.json'
 		};
@@ -140,15 +133,11 @@ class NovelServices {
 		};
 		let results = [];
         let key = options.keys;
-
-		param.success = (result) =>{           
-            // debugger	
-            // this.getBoysColumn()
-            // this.getGirlsColumn()        
-            let list = result.body.list;
+		
+		xhr.get(param).then((result) => {
+           let list = result.body.list;
 			if(options.callback && typeof options.callback == 'function' ){
-				list.map((re,index) =>{
-					// debugger
+				list.map((re,index) =>{					
 					if(re.columnName.includes(key) || re.longDescription.includes(key) 
 						|| re.categoryName.includes(key) ||re.author.includes(key)) {
 						results.push(re)
@@ -156,12 +145,9 @@ class NovelServices {
 				})
 				options.callback(results);
 			}            
-		};
-		param.fail = (result)=>{
-            console.log('getResultByKeys fail');
-		};
-		
-		xhr.get(param);
+		}).catch((error) => {
+			console.log('getResultByKeys fail' +error);
+		});
 	}
 }
 

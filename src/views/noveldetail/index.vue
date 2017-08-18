@@ -25,9 +25,9 @@
 			</ul>
 		</div>
 		<div class="d-box bt_d9 h_45">
-			<a href="javascript:;" class="b-flex ta_c">购买全书</a>
+			<a href="javascript:;" class="b-flex ta_c" @click="goRead">购买全书</a>
 			<span class="c_d9d9d9">|</span>
-			<a href="javascript:;" class="lightBlue b-flex ta_c">立即阅读</a>
+			<a href="javascript:;" class="lightBlue b-flex ta_c" @click="goRead">立即阅读</a>
 		</div>   
 	</section>
   <div class="cloudPLR15 novelCatalogBox" style="margin-bottom: 0px;">
@@ -184,7 +184,13 @@
             goNovelCatalog() { 
               // debugger        
               this.$router.push({name:'novelcatalog',query:{columnId:this.columnId}})
-            }         
+            },
+            goRead() {
+              this.$vux.alert.show({
+                title:'攻城狮正在抓紧开发中',
+                content:'敬请期待'
+              })
+            }    
         },
         computed:{           
             filterDes: function() {

@@ -11,7 +11,8 @@ class InfoServices {
 		let param = {
 			url:'infoColumn.json'
 		};
-		param.success = (result) =>{
+		
+		xhr.get(param).then((result) => {
             let body = {};
             let list = [];
 
@@ -24,13 +25,10 @@ class InfoServices {
 					list = body.list;
 				}			
 				options.callback(list);
-			}            
-		};
-		param.fail = (result)=>{
-            console.log('getNewInfoColumn fail');
-		};
-		
-		xhr.get(param);
+			}     
+		}).catch((error) => {
+			console.log('getNewInfoColumn fail' +error);
+		});
 	}
 	getColumnDetail(options){
 		let param = {
@@ -41,7 +39,7 @@ class InfoServices {
            // }
 		};
 
-		param.success = (result) =>{
+		xhr.get(param).then((result) => {
             let body = {};
             
 			if(result && result.body){
@@ -49,19 +47,17 @@ class InfoServices {
 			}
 			if(options.callback && typeof options.callback == 'function' ){
 				options.callback(body);
-			}            
-		};
-		param.fail = (result)=>{
-            console.log('getColumnDetail fail');
-		};
-		
-		xhr.get(param);
+			}
+		}).catch((error) => {
+			console.log('getColumnDetail fail' +error);
+		});
 	}
 	getPositionContent(options) {
 		let param = {
 			url:'positioncontent.json'
-		};
-		param.success = (result) =>{
+		};	
+		
+		xhr.get(param).then((result) => {
             let body = {};
             let list = [];
 
@@ -75,12 +71,9 @@ class InfoServices {
 				}
 				options.callback(list);
 			}            
-		};
-		param.fail = (result)=>{
-            console.log('positioncontent fail');
-		};
-		
-		xhr.get(param);
+		}).catch((error) => {
+			console.log('positioncontent fail' +error);
+		});
 	}
 }
 

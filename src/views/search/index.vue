@@ -57,37 +57,37 @@
   	    mounted() {
   	    },
   	    methods: {
-            getResultByKeys: function( keys) {
-              
-              console.log(keys)
-              this.keyword = keys
-              keys = util.htmlEncode(keys)
-              // this.initState = false;
-              let options = {
-                  keys: keys
-              };
-              options.callback = ((results) =>{
-                  this.initState = false;
-                  this.results = results
-              }).bind(this);
-              
-              novelServices.getResultByKeys(options);
-             //  this.$vux.alert.show({
-        		   //  title: '攻城狮正在抓紧开发中',
-             //    content: '敬请期待'
-        	    // })
-            },
-            goSearch: function() {
+          /**
+           * [getResultByKeys 根据关键词查询]
+           * @param  {[type]} keys [关键词]
+           * @return {[type]}      [description]
+           */
+          getResultByKeys: function( keys) {
 
-              if(this.keyword.length >0 ) {
-                  this.getResultByKeys(this.keyword)
-              } else {
-                  this.$vux.alert.show({
-                    title:'提示',
-                    content:'请输入正确的内容'
-                  })
-              }
+            this.keyword = keys
+            keys = util.htmlEncode(keys)
+              // this.initState = false;
+            let options = {
+                keys: keys
+            };
+            options.callback = ((results) =>{
+                this.initState = false;
+                this.results = results
+            }).bind(this);
+              
+            novelServices.getResultByKeys(options);          
+          },
+          goSearch: function() {
+
+            if(this.keyword.length >0 ) {
+              this.getResultByKeys(this.keyword)
+            } else {
+              this.$vux.alert.show({
+                title:'提示',
+                content:'请输入正确的内容'
+              })
             }
+          }
   	    }
     }
 </script>

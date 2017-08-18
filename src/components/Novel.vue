@@ -1,6 +1,6 @@
 <template>
     <li>
-      <a href="javascript:;" class="d-box">
+      <a href="javascript:;" class="d-box" @click="goNovelDetail(novel.columnId)">
         <aside class="NovelShelfImg">
           <img class="" v-bind:src="novel.columnImageUrl">
           <i class="icon i-buyTip "></i>
@@ -15,11 +15,11 @@
           </div>
         </div>
       </a>
-      <div class="btn_order">
+      <div class="btn_order" @click="gotoReade(novel.columnId)">
         <a href="javascript:;" class="d-box"></a>
         <a href="javascript:;" class="lightBlue">立即阅读</a>
       </div>
-      <a href="javascript:;" class="lightBlue"></a>
+      <a href="javascript:void(0);" class="lightBlue"></a>
     </li>
 </template>
 
@@ -28,9 +28,15 @@ export default {
   name: 'Novel',
   props:['novel'],
   methods:{
-    goNovelDetail (cid){
+    goNovelDetail (cid) {
       // console.log(cid)
       this.$router.push({ name: 'noveldetail', query: { columnId: cid }})
+    },
+    gotoReade (cid) {
+      this.$vux.alert.show({
+        title:'攻城狮正在抓紧开发中',
+        content:'敬请期待'
+      })
     }
   }
 }
