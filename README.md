@@ -1,8 +1,17 @@
-# vue-qin
+# Qin
 
-> this is a fun vue project Qin
+> This is a fun vue project Qin,build with Vue 2.0 , vue-router 2.0 and used axios and vux plugin
+### Introduction
+`Qin` is the used vue 2.0 and vue-router 2.0 for [Vue.js](http://vuejs.org). It deeply integrates with Vue.js core to make building Single Page Applications with Vue.js a breeze. One point novel site Features include:
 
-## Build Setup
+- index
+- noveldetail
+- novelcatalog
+- search
+
+The story continues...
+
+### Development Setup
 
 ``` bash
 # install dependencies
@@ -23,5 +32,11 @@ npm run unit
 # run all tests
 npm test
 ```
+## Contribution
+Please make sure to read the [Contributing Guide](https://github.com/vuejs/vue/blob/dev/.github/CONTRIBUTING.md) before making a pull request.
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## License
+
+[MIT](http://opensource.org/licenses/MIT)
+
+Copyright (c) 2013-2016 Noke long
