@@ -94,8 +94,9 @@
     import catalog   from   'COMPONENTS/Catalog.vue'  
     import comment   from   'COMPONENTS/Comment.vue' 
     
-    import infoServices from 'SERVICES/infoServices'
-    import novelServices from 'SERVICES/novelServices' 
+    import infoServices  from 'SERVICES/infoServices'
+    import novelServices from 'SERVICES/novelServices'
+    import Tips       from 'UTILS/tips'
     
     export default {
         name:'noveldetail',
@@ -186,9 +187,8 @@
               this.$router.push({name:'novelcatalog',query:{columnId:this.columnId}})
             },
             goRead() {
-              this.$vux.alert.show({
-                title:'攻城狮正在抓紧开发中',
-                content:'敬请期待'
+              Tips.showTips({
+                msg:'攻城狮疯狂开发中'
               })
             }    
         },

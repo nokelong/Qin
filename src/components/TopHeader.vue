@@ -54,11 +54,7 @@ export default {
             this.$router.go(-1)
         },
         goSearch: function() {     
-            this.$router.push({name:'search'});   	
-        	// this.$vux.alert.show({
-        	// 	title: '攻城狮正在抓紧开发中',
-            //  content: '敬请期待'
-        	// })
+            this.$router.push({name:'search'});
         }
 	}
 }

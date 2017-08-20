@@ -15,7 +15,7 @@
 
   <div class="swiper-container ">
     <div class="swiper-wrapper ">
-      <div  class=" swiper-slide" v-for="( carousel,index) in position" :key="index" :style="{ backgroundImage: 'url(' + carousel.imageUrl + ')' }">    
+      <div  class=" swiper-slide" v-for="( carousel,index) in position" :key="index" :style="{ backgroundImage: 'url(' + carousel.imageUrl + ')' }" @click="openWin(carousel)">    
       </div>
     </div>
     <div class="swiper-pagination swiper-pagination-white"></div>
@@ -30,6 +30,11 @@
       position:{
         type:[Array],
         required:true
+      }
+    },
+    methods:{
+      openWin(carousel) {        
+        window.open(carousel.scriptLinkAttr)
       }
     },
     mounted() {

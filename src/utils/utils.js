@@ -1,11 +1,11 @@
-  class Utils {
-     /**
+class Utils {
+    /**
       * 格式化数据
       * @param  {[type]}   data     数据集
       * @param  {[type]}   size     分割大小
       * @param  {Function} callback 回调方法
       * @return {[type]}            [description]
-      */
+    */
     rebuildData (data,size,callback) {
           
         var fData = [];

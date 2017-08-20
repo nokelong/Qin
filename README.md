@@ -1,6 +1,6 @@
 # Qin
 
-> This is a fun vue project Qin,build with Vue 2.0 , vue-router 2.0 and used axios and vux plugin
+> This is a fun vue project Qin,build with Vue 2.0 , vue-router 2.0 , axios and vux plugin
 ### Introduction
 `Qin` is the used vue 2.0 and vue-router 2.0 for [Vue.js](http://vuejs.org). It deeply integrates with Vue.js core to make building Single Page Applications with Vue.js a breeze. One point novel site Features include:
 

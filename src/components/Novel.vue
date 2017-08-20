@@ -24,22 +24,22 @@
 </template>
 
 <script>
-export default {
-  name: 'Novel',
-  props:['novel'],
-  methods:{
-    goNovelDetail (cid) {
-      // console.log(cid)
-      this.$router.push({ name: 'noveldetail', query: { columnId: cid }})
-    },
-    gotoReade (cid) {
-      this.$vux.alert.show({
-        title:'攻城狮正在抓紧开发中',
-        content:'敬请期待'
-      })
+  import Tips       from 'UTILS/tips'
+  export default {
+    name: 'Novel',
+    props:['novel'],
+    methods:{
+      goNovelDetail (cid) {
+        // console.log(cid)
+        this.$router.push({ name: 'noveldetail', query: { columnId: cid }})
+      },
+      gotoReade (cid) {
+        Tips.showTips({
+          msg:'攻城狮疯狂开发中'
+        })
+      }
     }
   }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

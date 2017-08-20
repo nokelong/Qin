@@ -100,8 +100,9 @@ class NovelServices {
 	getNovelCatalog (options) {
 		let param = {
 			url:'catalog.json'
-		};
-		param.success = (result) =>{
+		};		
+		
+		xhr.get(param).then((result) => {
             let body = {};
             let list = [];
 
@@ -114,13 +115,10 @@ class NovelServices {
 					list = (body.list);
 				}
 				options.callback(body);
-			}            
-		};
-		param.fail = (result)=>{
+			}   
+		}).catch((error) => {            
             console.log('catalog fail');
-		};
-		
-		xhr.get(param);
+		});
 	}
 	/**
 	 * [getResultByKeys 根据关键字查询小说]

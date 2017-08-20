@@ -17,36 +17,36 @@
     </li>   
 </template>
 <script>
-export default {
-  name: 'Info',
-  props:{
-    item:{
-      type:Object,
-      required:true
-    }
-  },
-  data:()=>({
-    hasImg:false
-  }),
-  computed:{
-    classObject:function(){
-      return {
-        bg_ListGery:this.hasImg,
-        noImg :!this.hasImg,
-        'd-box':!this.hasImg
+  import Tips       from 'UTILS/tips'
+  export default {
+    name: 'Info',
+    props:{
+      item:{
+        type:Object,
+        required:true
+      }
+    },
+    data:()=>({
+      hasImg:false
+    }),
+    computed:{
+      classObject:function(){
+        return {
+          bg_ListGery:this.hasImg,
+          noImg :!this.hasImg,
+          'd-box':!this.hasImg
+        }
+      }
+    },
+    methods:{
+      goDetail:function(nid){
+        // this.$router.push({ name: 'user', params: { nid: nid }})
+        Tips.showTips({
+          msg: '攻城狮正在抓紧开发中'
+        })
       }
     }
-  },
-  methods:{
-    goDetail:function(nid){
-      // this.$router.push({ name: 'user', params: { nid: nid }})
-      this.$vux.alert.show({
-          title: '攻城狮正在抓紧开发中',
-          content: '敬请期待'
-      })
-    }
   }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

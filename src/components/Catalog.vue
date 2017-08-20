@@ -8,8 +8,9 @@
     </li>
 </template>
 <script type="text/javascript">
+  import Tips       from 'UTILS/tips'
   
-   export default{
+  export default{
    	  name: 'Catalog',
    	  props:{
    	  	item:{
@@ -18,19 +19,11 @@
    	  	}
    	  },
       methods:{
-        show() {          
-          // 显示
-          this.$vux.alert.show({
-            title: '攻城狮正在抓紧开发中',
-            content: '敬请期待',
-            onShow () {
-              console.log('Plugin: I\'m showing')
-            },
-            onHide () {
-              console.log('Plugin: I\'m hiding')
-            }
-          })
+        show() {
+          Tips.showTips({
+            msg:'攻城狮疯狂开发中'
+          }) 
         }
       }
-   }
+  }
 </script>

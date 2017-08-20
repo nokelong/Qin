@@ -34,6 +34,7 @@
     import hotWords      from  './_components/HotWords'    
     import searchResult  from  './_components/SearchResult' 
     import util          from  'UTILS/utils'
+    import Tips          from  'UTILS/tips'
     import novelServices from  'SERVICES/novelServices'
 
     export default{
@@ -82,9 +83,9 @@
             if(this.keyword.length >0 ) {
               this.getResultByKeys(this.keyword)
             } else {
-              this.$vux.alert.show({
-                title:'提示',
-                content:'请输入正确的内容'
+              Tips.showTips({          
+                msg:'请输入正确的内容',
+                type:'warn'
               })
             }
           }
