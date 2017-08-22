@@ -1,7 +1,8 @@
 
 import Vue from 'vue'
-import { ToastPlugin } from 'vux'
+import { ToastPlugin , LoadingPlugin } from 'vux'
 Vue.use(ToastPlugin)
+Vue.use(LoadingPlugin)
 
 class Tips {
 
@@ -26,6 +27,16 @@ class Tips {
         setTimeout(function () {
             Vue.$vux.toast.hide()         
         }, options.showTime || 1000);
+    }
+
+    showLoading () {
+        Vue.$vux.loading.show()
+    }
+
+    hideLoading (showTime=100) {
+        setTimeout(function () {
+            Vue.$vux.loading.hide()         
+        }, showTime);  
     }
 }
 

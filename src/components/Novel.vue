@@ -27,16 +27,18 @@
   import Tips       from 'UTILS/tips'
   export default {
     name: 'Novel',
-    props:['novel'],
+    props: {
+        novel: {
+            required:true
+        }
+    },
     methods:{
       goNovelDetail (cid) {
-        // console.log(cid)
-        this.$router.push({ name: 'noveldetail', query: { columnId: cid }})
+          // console.log(cid)
+          this.$router.push({ name: 'noveldetail', query: { columnId: cid }})
       },
       gotoReade (cid) {
-        Tips.showTips({
-          msg:'攻城狮疯狂开发中'
-        })
+          this.$router.push({name: 'reader',query: {columnId:cid}});
       }
     }
   }

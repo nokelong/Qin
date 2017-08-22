@@ -1,6 +1,6 @@
 <template>
 <div style="background:#f4f5f7;">
-   <top-header :pageName="pageName"></top-header>
+   <top-header :pageName="column.columnName"></top-header>
    <section class="novelDetails_buy p_relative">
 		<div class="NovelShelf_List cloudPLR15 bm_none p_relative">
 			<ul>
@@ -25,7 +25,7 @@
 			</ul>
 		</div>
 		<div class="d-box bt_d9 h_45">
-			<a href="javascript:;" class="b-flex ta_c" @click="goRead">购买全书</a>
+			<a href="javascript:;" class="b-flex ta_c" @click="goBuy">购买全书</a>
 			<span class="c_d9d9d9">|</span>
 			<a href="javascript:;" class="lightBlue b-flex ta_c" @click="goRead">立即阅读</a>
 		</div>   
@@ -92,9 +92,7 @@
 <script type="text/javascript">   
     import topHeader from   'COMPONENTS/TopHeader.vue'
     import catalog   from   'COMPONENTS/Catalog.vue'  
-    import comment   from   'COMPONENTS/Comment.vue' 
-    
-    import infoServices  from 'SERVICES/infoServices'
+    import comment   from   'COMPONENTS/Comment.vue'    
     import novelServices from 'SERVICES/novelServices'
     import Tips       from 'UTILS/tips'
     
@@ -105,6 +103,7 @@
            return {
               pageName:'小说详情',
            	  columnId:0,
+              type: 0,
            	  column:{
                 longDescription:""
               },
@@ -121,7 +120,7 @@
           this.$nextTick(function(){
             //获取栏目ID
             this.columnId = (this.$route.query.columnId)
-            console.log(this.columnId);
+            this.type     =  this.$route.query.type           
             this.getNovelDetail()
             this.getNovelCatalog()
           });
@@ -132,18 +131,16 @@
              * @return {[type]} [description]
              */
             getNovelDetail() {
-              
-              let self = this;
-        	    let opions = {
-        	        cid:this.columnId,
-        	    	  ctype:4
-        	    };
+               
+        	      let opions = {
+        	          cid:this.columnId,
+        	    	    type:this.type
+        	      };
         	  
-        	    opions.callback = (result)=>{        		
-        		    self.column = result;              
-        	    } 
-
-       	      infoServices.getColumnDetail(opions); 
+        	      opions.callback = ((result)=>{
+        		        this.column = result;              
+        	      }).bind(this)
+       	        novelServices.getNovelDetail(opions); 
             },
             /**
              * [getNovelCatalog 获取目录]
@@ -151,46 +148,48 @@
              */
             getNovelCatalog() {
               
-              let self = this;
-              let opions = {
-                  cid:this.columnId,
-                  ctype:4,
-                  paging:{
-                    currentPageNum:1,
-                    perPageCount:10
-                  }
-              };
+                let self = this;
+                let opions = {
+                    cid: this.columnId,
+                    type: this.type,
+                    paging: {
+                      currentPageNum:1,
+                      perPageCount:10
+                    }
+                };
             
-              opions.callback = (result)=>{ 
-                let {items,newNovelChapter,paging} = result;
-                // console.log(paging)
-                self.novelcatalog.items = items;
-                self.novelcatalog.newNovelChapter = newNovelChapter;
-                self.novelcatalog.paging = paging;              
-              }
-
-              novelServices.getNovelCatalog(opions); 
+                opions.callback = (result)=>{ 
+                    let {items,newNovelChapter,paging} = result;
+                    // console.log(paging)
+                    self.novelcatalog.items = items;
+                    self.novelcatalog.newNovelChapter = newNovelChapter;
+                    self.novelcatalog.paging = paging;              
+                }
+                novelServices.getNovelCatalog(opions); 
             },
             /**
              * [showMoreDes 更多简介]
              * @return {[type]} [description]
              */
             showMoreDes() {
-              this.max_length = this.column.longDescription.length;
+                this.max_length = this.column.longDescription.length;
             },
             /**
              * [goNovelCatalog 更多目录]
              * @return {[type]} [description]
              */
             goNovelCatalog() { 
-              // debugger        
-              this.$router.push({name:'novelcatalog',query:{columnId:this.columnId}})
+                // debugger        
+                this.$router.push({name:'novelcatalog',query:{columnId:this.columnId}})
             },
             goRead() {
-              Tips.showTips({
-                msg:'攻城狮疯狂开发中'
-              })
-            }    
+                this.$router.push({name: 'reader',query: {columnId:this.columnId}});
+            },
+            goBuy() {
+                Tips.showTips({
+                  msg:'攻城狮疯狂开发中'
+                })
+            } 
         },
         computed:{           
             filterDes: function() {

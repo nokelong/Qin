@@ -17,7 +17,7 @@
 		<span class="b-flex fz_14 lightBlack" slot="novletype">女生小说</span>		
 	</Layout>
 	<!-- 最新资讯 -->
-	<Newinfo :wordlists="filterNewsColumn"></Newinfo>
+	<!-- <Newinfo :wordlists="filterNewsColumn"></Newinfo> -->
    </div>   	
 </template>
 <script>
@@ -74,12 +74,13 @@
          * @return {[type]} [description]
          */   	
         getRecommendColumn(){
-        	let self = this;
-        	let opions = {};
         	
-        	opions.callback = (result)=>{        		
-        		self.recommendColumn = result;              
-        	} 
+          let opions = {};
+        	
+          opions.callback = ((result)=>{        		
+        		this.recommendColumn = _.shuffle(result).slice(0,9);                    
+        	}).bind(this);
+
        	  novelServices.getRecommendColumn(opions);       	   
         },
         /**
@@ -87,14 +88,12 @@
          * @return {[type]} [description]
          */
         getBoysColumn(){
-
-          let self = this;
+          
         	let opions = {};
         	
-        	opions.callback = (result)=>{ 
-        	    // debugger
-            self.boysColumn = utils.rebuildData(result,3)        	
-        	}
+        	opions.callback = ((result)=>{         	 
+            this.boysColumn = utils.rebuildData(result,3)        	
+        	}).bind(this);
         	novelServices.getBoysColumn(opions);
         },
         /**
@@ -102,12 +101,12 @@
          * @return {[type]} [description]
          */
         getGirlsColumn(){
-          let self = this;
+        
         	let opions = {};
         	
-        	opions.callback = (result)=>{ 
-        		self.girlsColumn = utils.rebuildData(result,3);
-        	}
+        	opions.callback = ((result)=>{ 
+        		this.girlsColumn = utils.rebuildData(result,3);
+        	}).bind(this);
         	novelServices.getGirlsColumn(opions);
         },
         /**
@@ -116,7 +115,8 @@
          */
         getNewInfoColumn(){ 
 
-          let opions = {};            
+          let opions = {};
+                  
           opions.callback = ((result)=>{  
             this.newsColumn = result;
           }).bind(this)
@@ -127,13 +127,12 @@
          * @return {[type]} [description]
          */
         getPositionContent() {
-          let self = this;
+      
           let opions = {};
             
-          opions.callback = (result)=>{ 
-            // debugger
-            self.position = result;          
-          }
+          opions.callback = ((result)=>{           
+            this.position = result;          
+          }).bind(this)
           infoServices.getPositionContent(opions);
         },
         shuffleRecoColumn () {  //重磅推荐换一换

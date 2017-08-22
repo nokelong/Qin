@@ -21,6 +21,7 @@
     import topHeader from   'COMPONENTS/TopHeader.vue'
     import catalog   from   'COMPONENTS/Catalog.vue'  
     import novelServices from 'SERVICES/novelServices'
+    import Tips      from     'UTILS/tips' 
 
     export default {
     	name:'novelcatalog',    	
@@ -57,7 +58,7 @@
                   }
               };
               // 显示loading
-              self.$vux.loading.show()
+              Tips.showLoading()
               opions.callback = (result)=>{ 
                 //结构result中的对象             
                 let {items,newNovelChapter,paging} = result;  
@@ -66,11 +67,8 @@
                 self.novelcatalog.newNovelChapter = newNovelChapter;
                 self.novelcatalog.paging = paging;   
                 // 隐藏loading
-                setTimeout(function(){
-                  self.$vux.loading.hide() 
-                },300)     
+                Tips.hideLoading();
               }
-             
               novelServices.getNovelCatalog(opions); 
             }
     	}
