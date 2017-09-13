@@ -5,7 +5,14 @@ Vue.use(ToastPlugin)
 Vue.use(LoadingPlugin)
 
 class Tips {
-
+    /**
+     * [showTips 提示]
+     * @param  {[type]} options [参数对象]
+     * @param  {[type]} options.type [提示类型 text cancel warn success 默认text]    
+     * @param  {[type]} options.msg [提示语]
+     * @param  {[type]} options.showTime [提示显示时间  默认1秒]
+     * @return {[type]}         [description]
+     */
     showTips (options) {     
         this.tip(options,options.type)
     }
