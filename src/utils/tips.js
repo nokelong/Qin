@@ -1,6 +1,6 @@
-
 import Vue from 'vue'
 import { ToastPlugin , LoadingPlugin } from 'vux'
+
 Vue.use(ToastPlugin)
 Vue.use(LoadingPlugin)
 

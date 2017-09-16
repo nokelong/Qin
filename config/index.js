@@ -33,6 +33,10 @@ module.exports = {
     // (https://github.com/webpack/css-loader#sourcemaps)
     // In our experience, they generally work as expected,
     // just be aware of this issue when enabling this option.
-    cssSourceMap: false
+    cssSourceMap: false,
+    cookieSecret: 'qin', //用于cookie加密
+    db:'qindb',      //数据库名
+    host: 'http://127.0.0.1'//服务器地址 
+   
   }
 }
