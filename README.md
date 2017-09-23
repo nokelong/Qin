@@ -17,6 +17,9 @@ The story continues...
 # install dependencies
 npm install
 
+# start mongodb server [mongodb install in D:\mongodb]
+mongod --dbpath=D:\mongodb\data\db
+
 # serve with hot reload at localhost:8080
 npm run dev
 

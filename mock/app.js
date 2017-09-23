@@ -17,7 +17,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser('qin'));
-// app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(flash());
 app.use(session({
     secret: settings.cookieSecret,
@@ -71,6 +71,6 @@ app.use(function(err, req, res, next) {
   });
 });
 
-var server = app.listen(3000);
-console.log('exxpress server listening on port %d in %s mode', server.address().port, app.settings.env)
+// var server = app.listen(3000);
+// console.log('exxpress server listening on port %d in %s mode', server.address().port, app.settings.env)
 module.exports = app;

@@ -25,6 +25,14 @@ var proxyTable = config.dev.proxyTable
 var app = express()
 var compiler = webpack(webpackConfig)
 
+
+//Mock server
+var ROOT = path.join(__dirname, '..', 'mock')
+var mockPath = path.join(ROOT.toString(), 'app');
+var mockServer = require(mockPath);
+mockServer.listen(3000)
+console.log('Mock Server start')
+
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
   publicPath: webpackConfig.output.publicPath,
   quiet: true
