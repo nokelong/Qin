@@ -10,9 +10,10 @@ class NovelServices {
 	 */
 	getRecommendColumn (options) {
 		let param = {
-			url:'boysColumn.json'
+			url: '/getRecommendColumn',
+			data: {}
 		};		
-		
+		debugger
 		xhr.get(param).then((result)=>{
             
             let body = {};
@@ -38,11 +39,15 @@ class NovelServices {
 	 * @return {[type]}   [暂用axios get取json]
 	 */
 	getBoysColumn (options) { 
-		let param = {
-			url:'boysColumn.json'
-		};		
 		
-		xhr.get(param).then((result)=>{
+		let param = {
+			url: '/getBoysColumn',
+			data: {
+				recId: 100
+			}
+		};
+		debugger
+		xhr.post(param).then((result)=>{
             let body = {};
             let list = [];
 
@@ -69,10 +74,13 @@ class NovelServices {
 	 */
 	getGirlsColumn (options) {
 		let param = {
-			url:'girlsColumn.json'
+			url:'/getGirlsColumn',
+			data: {
+			    recId: 101
+			}
 		};		
 		
-		xhr.get(param).then((result) => {
+		xhr.post(param).then((result) => {
             let body = {};
             let list = [];
 
@@ -99,7 +107,7 @@ class NovelServices {
 	 */
 	getNovelCatalog (options) {
 		let param = {
-			url:'catalog.json'
+			url:'/getNovelCatalog'
 		};		
 		
 		xhr.get(param).then((result) => {
@@ -127,7 +135,7 @@ class NovelServices {
 	getResultByKeys (options) {
 		
 		let param = {
-			url:'girlsColumn.json'
+			url:'/getNovelByKeys'
 		};
 		let results = [];
         let key = options.keys;

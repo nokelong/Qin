@@ -9,7 +9,8 @@ class InfoServices {
 	 */
 	getNewInfoColumn (options) {
 		let param = {
-			url:'infoColumn.json'
+			url:'infoColumn.json',
+			data: ''
 		};
 		
 		xhr.get(param).then((result) => {
@@ -54,13 +55,13 @@ class InfoServices {
 	}
 	getPositionContent(options) {
 		let param = {
-			url:'positioncontent.json'
+			url:'/getPositionContent'
 		};	
 		
 		xhr.get(param).then((result) => {
             let body = {};
             let list = [];
-
+           
 			if(result && result.body){
 				body = result.body;
 			}

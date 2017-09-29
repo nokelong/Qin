@@ -8,8 +8,9 @@ var flash = require('connect-flash');
 var settings = require('../config')
 var session    = require('express-session');
 var MongoStore = require('connect-mongo')(session);
-
-var index = require('./routes/index');
+var indexR = require('./routes/index');
+var novelR = require('./routes/novel');
+var ajaxReturn = require('./middlewares/ajaxReturn');
 
 var app = express();
 
@@ -17,7 +18,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser('qin'));
-
+app.use(ajaxReturn);
 app.use(flash());
 app.use(session({
     secret: settings.cookieSecret,
@@ -39,7 +40,8 @@ app.use(function(req, res, next){
   res.locals.success = success.length ? success : null;
   next();
 });
-app.use('/', index);
+app.use('/', indexR);
+app.use('/novel', novelR);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -53,22 +55,14 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
+    res.status(err.status || 500);   
   });
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+  res.status(err.status || 500); 
 });
 
 // var server = app.listen(3000);

@@ -1,17 +1,18 @@
 import utils from '../../utils/utils'
+import qs     from 'qs'
 
 export default {
   //请求的接口，在请求的时候，如axios.get(url,config);这里的url会覆盖掉config中的url
-  url: '/',
+  url: '/api',
 
   // 请求方法同上
-  method: 'post', // default
+  method: 'post', // 
   // 基础url前缀
-  baseURL: 'http://localhost:3000/',　　
+  baseURL: '/api',　　
 　　　　
   transformRequest: [function (data) {
     // 这里可以在发送请求之前对请求数据做处理，比如form-data格式化等，这里可以使用开头引入的Qs（这个模块在安装axios的时候就已经安装了，不需要另外安装）
-　　data = JSON.stringify({});
+　　data = qs.stringify({});
     return data;
   }],
 
@@ -21,7 +22,7 @@ export default {
   }],
 
   // 请求头信息
-  headers: {"Content-Type" : 'text/plain'},
+  headers: {"Content-Type" : 'application/x-www-form-urlencoded'},
 
   //parameter参数
   params: {

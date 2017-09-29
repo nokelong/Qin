@@ -47,10 +47,10 @@
     }),
     mounted (){
         this.$nextTick(function(){
-            this.getRecommendColumn()
-            this.getBoysColumn()
-            this.getGirlsColumn()
-            this.getNewInfoColumn()
+            // this.getRecommendColumn()
+            // this.getBoysColumn()
+            // this.getGirlsColumn()
+            // this.getNewInfoColumn()
             this.getPositionContent()
         })
     },

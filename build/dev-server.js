@@ -49,15 +49,23 @@ compiler.plugin('compilation', function (compilation) {
   })
 })
 
-// proxy api requests
 Object.keys(proxyTable).forEach(function (context) {
   var options = proxyTable[context]
+  console.log(options);
+  debugger
   if (typeof options === 'string') {
     options = { target: options }
   }
   app.use(proxyMiddleware(options.filter || context, options))
 })
-
+// app.use('/api', proxyMiddleware({
+//   target: 'http://127.0.0.1:3000',
+//   changeOrigin: true,
+//   pathRewrite: {
+//     // 重写 URL：[Dev Server]/api/xxx <=> [Mock Server]/xxx
+//     '^/api': ''
+//   }
+// }));
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')())
 

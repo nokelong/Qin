@@ -4,10 +4,17 @@
 ### Introduction
 `Qin` is the used vue 2.0 and vue-router 2.0 for [Vue.js](http://vuejs.org). It deeply integrates with Vue.js core to make building Single Page Applications with Vue.js a breeze. One point novel site Features include:
 
+src/views structure
 - index
+- login
 - noveldetail
 - novelcatalog
 - search
+- reader
+- regist
+- usercenter
+
+
 
 The story continues...
 
@@ -19,6 +26,9 @@ npm install
 
 # start mongodb server [mongodb install in D:\mongodb]
 mongod --dbpath=D:\mongodb\data\db
+
+# init mongodb database [qindb]
+node mock/db/initDB.js
 
 # serve with hot reload at localhost:8080
 npm run dev

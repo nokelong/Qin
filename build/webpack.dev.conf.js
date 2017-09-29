@@ -33,7 +33,7 @@ module.exports = merge(baseWebpackConfig, {
     }),
     new FriendlyErrorsPlugin(),
     new CopyWebpackPlugin([
-      { from: 'src/mock/*.json', to: 'mock' }      
+      { from: 'src/static/db/*.json', to: config.build.assetsRoot}   
     ])
   ]
 })
