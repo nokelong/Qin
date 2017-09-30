@@ -4,17 +4,41 @@ var novelCtr = require('../controllers/novelCtr');
 
 //获取男生栏目
 router.post('/getBoysColumn', function(req, res) {
-	console.log('getBoysColumn is post cccc')
-    novelCtr.getBoysColumn((result) =>{
-    	ajaxReturn(result);
+	
+    var recId = req.body['recId'];
+    var params = {
+        recId: recId == '100' ? recId: '100'
+    };
+    
+    novelCtr.getColumns(params, (result) =>{
+    	ajaxReturn(res, result);        
     })
+
 });
 //获取女生栏目
 router.post('/getGirlsColumn', function(req, res) {
-    novelCtr.getGirlsColumn((result) =>{
-    	ajaxReturn(result);
+
+    var recId = req.body['recId'];
+    var params = {
+        recId: recId == '101' ? recId: '101'
+    };
+
+    novelCtr.getColumns(params, (result) =>{
+    	ajaxReturn(res, result);
     })
 });
+//获取推荐栏目
+router.post('/getRecommendColumn', function(req, res) {
+    
+    var params = {
+        recId: '101'
+    };
+
+    novelCtr.getColumns(params, function (result) {        
+        ajaxReturn(res, result)
+    });
+});
+
 //获取目录
 router.post('/catalog', function(req, res) {
     
@@ -23,12 +47,6 @@ router.post('/catalog', function(req, res) {
 router.post('/columnDetail', function(req, res) {
 
 });
-//获取推荐栏目
-router.post('/getRecommendColumn', function(req, res) {
-    var name = req.body['name'];
-    novelCtr.getRecommendColumn(name, function (result) {        
-        ajaxReturn({ description: 'node server is start', resultCode: 0, body: null})
-    });
-});
+
 
 module.exports = router;

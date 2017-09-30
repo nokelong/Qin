@@ -13,8 +13,8 @@ class NovelServices {
 			url: '/getRecommendColumn',
 			data: {}
 		};		
-		debugger
-		xhr.get(param).then((result)=>{
+	
+		xhr.post(param).then((result)=>{
             
             let body = {};
             let list = [];
@@ -43,10 +43,10 @@ class NovelServices {
 		let param = {
 			url: '/getBoysColumn',
 			data: {
-				recId: 100
+			    recId: 100
 			}
 		};
-		debugger
+	
 		xhr.post(param).then((result)=>{
             let body = {};
             let list = [];

@@ -53,12 +53,12 @@ Ads.get  = function(callback) {
             if (error) {
                 return callback(error);
             }
-            var ads = [];            
+            var ads = [];          
             docs.forEach(function(doc, index) {               
                 var ad = new Ads(doc);             
                 ads.push(ad);
-            });
-            callback(null, ads);
+            });                    
+            return callback(null, ads);
         });
 	});
 }

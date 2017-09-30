@@ -58,7 +58,7 @@ class InfoServices {
 			url:'/getPositionContent'
 		};	
 		
-		xhr.get(param).then((result) => {
+		xhr.post(param).then((result) => {
             let body = {};
             let list = [];
            

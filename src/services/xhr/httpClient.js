@@ -24,30 +24,24 @@ class xhr {
     return promise;
 	}
 
-	post(param){     
-      axios.post(param.url, qs.stringify({recId:100}), config).then(function(response) {
-          alert(response.data);
-      }).catch(function(error) {
-          alert(error);
+	post(param){  
+
+      const promise = axios.post(param.url, param.data, config).then((response) =>{
+          let result = (response.data);
+     	    let resultCode = result.resultCode;
+
+       	  if(resultCode == 0 ){
+              return Promise.resolve(result)
+       	  } else {
+              console.log('请求失败');
+              return Promise.reject(result);              
+       	  }
+      }).catch((error)=>{
+          console.log(error);
+          return Promise.reject(error)
       });
 
-      // axios.post(param.url, qs.stringify(param.data), config)
-      // .then((response) =>{
-      //     let result = (response.data);
-     	//     let resultCode = result.resultCode;
-
-      //  	  if(resultCode == 0 ){
-      //         return Promise.resolve(result)
-      //  	  } else {
-      //         console.log('请求失败');
-      //         return Promise.reject(result);              
-      //  	  }
-      // }).catch((error)=>{
-      //     console.log(error);
-      //     return Promise.reject(error)
-      // });
-
-      // return promise;
+      return promise;
 	}
 }
 

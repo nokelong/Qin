@@ -66,12 +66,12 @@ Novel.get = function(param, callback) {
         }
         db.collection('novels').find(query).toArray(function(error, docs) {
                        
-            assert.equal(null, error);
-            assert.equal(3, docs.length);
+            // assert.equal(null, error);
+            // assert.equal(3, docs.length);
             db.close();
 
             if (error) {
-                return callback(error, null);
+                return callback(error);
             }
             
             var novels = [];
@@ -79,7 +79,7 @@ Novel.get = function(param, callback) {
                 var novel = new Novel(doc);
                 novels.push(novel);
             });
-            callback(null, novels);
+            return callback(null, novels);
         });
     });
 };

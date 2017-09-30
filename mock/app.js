@@ -30,7 +30,7 @@ app.use(session({
 
 //定义本地变量
 app.use(function(req, res, next){
-  console.log("app.usr local");
+ 
   res.locals.user = req.session.user;
   res.locals.post = req.session.post;
   var error = req.flash('error');
@@ -41,7 +41,7 @@ app.use(function(req, res, next){
   next();
 });
 app.use('/', indexR);
-app.use('/novel', novelR);
+app.use('/', novelR);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

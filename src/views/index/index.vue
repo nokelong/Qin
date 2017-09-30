@@ -47,9 +47,9 @@
     }),
     mounted (){
         this.$nextTick(function(){
-            // this.getRecommendColumn()
-            // this.getBoysColumn()
-            // this.getGirlsColumn()
+            this.getRecommendColumn()
+            this.getBoysColumn()
+            this.getGirlsColumn()
             // this.getNewInfoColumn()
             this.getPositionContent()
         })
@@ -78,7 +78,7 @@
           let opions = {};
         	
           opions.callback = ((result)=>{        		
-        		this.recommendColumn = _.shuffle(result).slice(0,9);                    
+        		  this.recommendColumn = _.shuffle(result).slice(0,9);                    
         	}).bind(this);
 
        	  novelServices.getRecommendColumn(opions);       	   
@@ -92,7 +92,7 @@
         	let opions = {};
         	
         	opions.callback = ((result)=>{         	 
-            this.boysColumn = utils.rebuildData(result,3)        	
+              this.boysColumn = utils.rebuildData(result,3)        	
         	}).bind(this);
         	novelServices.getBoysColumn(opions);
         },
