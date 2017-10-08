@@ -2,12 +2,9 @@
 var novel = require('../model/novel');
 
 const NovelCtr = {
-    getColumns: function(params, callback) {
-    	var param = {
-    		recId: params.recId
-    	};
+    getColumns: function(params, callback) {   	
         
-        novel.get(param, (error, novels) => {
+        novel.get(params, (error, novels) => {
 
         	var results = {
         		description: "",

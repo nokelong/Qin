@@ -122,7 +122,7 @@
             this.columnId = (this.$route.query.columnId)
             this.type     =  this.$route.query.type           
             this.getNovelDetail()
-            this.getNovelCatalog()
+            // this.getNovelCatalog()
           });
         },
         methods:{
@@ -133,7 +133,7 @@
             getNovelDetail() {
                
         	      let opions = {
-        	          cid:this.columnId,
+        	          columnId:this.columnId,
         	    	    type:this.type
         	      };
         	  

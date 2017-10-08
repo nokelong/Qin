@@ -70,7 +70,7 @@
     },
     methods:{ 
         /**
-         * [getGirlsColumn 获取重磅推荐小说]
+         * [getRecommendColumn 获取重磅推荐小说]
          * @return {[type]} [description]
          */   	
         getRecommendColumn(){
@@ -84,7 +84,7 @@
        	  novelServices.getRecommendColumn(opions);       	   
         },
         /**
-         * [getGirlsColumn 获取男生小说]
+         * [getBoysColumn 获取男生小说]
          * @return {[type]} [description]
          */
         getBoysColumn(){

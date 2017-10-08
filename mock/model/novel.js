@@ -64,6 +64,7 @@ Novel.get = function(param, callback) {
         if (param) {
             query = param;
         }
+        console.log('model/novel get query param:' + JSON.stringify(query))
         db.collection('novels').find(query).toArray(function(error, docs) {
                        
             // assert.equal(null, error);
@@ -75,6 +76,7 @@ Novel.get = function(param, callback) {
             }
             
             var novels = [];
+            console.log('model/novel get :' + docs +',query ---- '+query)
             docs.forEach(function(doc, index) {                
                 var novel = new Novel(doc);
                 novels.push(novel);

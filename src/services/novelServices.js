@@ -158,25 +158,27 @@ class NovelServices {
     
     getNovelDetail (options) {
 
-    	let param = {} , result = "";
+    	let param = {
+    		url: '/getNovelDetail',
+    		data: {
+    			columnId: options.columnId
+    		}
+    	};        
+        // debugger
+		xhr.post(param).then((result) => {
+            // let list = results.body.list;
+			// list.map((re,index) =>{	
+			// 	if(re.columnId == options.cid){	
+			// 	   result = re;
+			// 	}				
+			// })
 
-        options.reGet = options.reGet?options.reGet:false;
-        param.url = options.type == 1 ? 'girlsColumn.json' : 'boysColumn.json';
-
-		xhr.get(param).then((results) => {
-            let list = results.body.list;
-			list.map((re,index) =>{	
-				if(re.columnId == options.cid){	
-				   result = re;
-				}				
-			})
-
-			if(!result && !options.reGet) { //空 则继续查询另外一个json文件
-			   options.type = options.type == 1 ? 0 : 1;
-			   options.reGet = true;  //
-               this.getNovelDetail(options) 
-               return
-			}
+			// if(!result && !options.reGet) { //空 则继续查询另外一个json文件
+			//    options.type = options.type == 1 ? 0 : 1;
+			//    options.reGet = true;  //
+            //    this.getNovelDetail(options) 
+            //    return
+			// }
 			if(options.callback && typeof options.callback == 'function' ){
 				options.callback(result);
 			} 

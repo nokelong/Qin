@@ -26,6 +26,8 @@ npm install
 
 # start mongodb server [mongodb install in D:\mongodb]
 mongod --dbpath=D:\mongodb\data\db
+# or win 32bit system
+mongod --dbpath=D:\mongodb\data\db --journal
 
 # init mongodb database [qindb]
 node mock/db/initDB.js

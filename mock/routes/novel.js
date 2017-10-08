@@ -35,13 +35,22 @@ router.post('/getRecommendColumn', function(req, res) {
     };
 
     novelCtr.getColumns(params, function (result) {        
-        ajaxReturn(res, result)
+        ajaxReturn(res, result);
     });
 });
 
-//获取目录
-router.post('/catalog', function(req, res) {
+//获取小说详情
+router.post('/getNovelDetail', function(req, res) {
     
+    var cid = req.body['columnId'];
+    console.log("getNovelDetail: "+ cid);
+    var params = {
+        columnId: cid
+    };
+    // console.log(JSON.stringify(params))
+    novelCtr.getColumns(params, (result) => {        
+        ajaxReturn(res, result);
+    });
 });
 //获取栏目详情
 router.post('/columnDetail', function(req, res) {

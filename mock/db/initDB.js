@@ -1,11 +1,11 @@
 //初始化数据库
 //初始化novels, ads db
 var fs = require('fs');
-var Novel = require('./novel');
-var Ads = require('./ads');
+var Novel = require('../model/novel');
+var Ads = require('../model/ads');
 
 //存入男生小说数据
-fs.readFile('../db/boysColumn.json', function(error,data) {
+fs.readFile('./boysColumn.json', function(error,data) {
     
     if(error) return console.error(error);
 
@@ -20,7 +20,7 @@ fs.readFile('../db/boysColumn.json', function(error,data) {
     });
 });
 //存入女生小说数据
-fs.readFile('../db/girlsColumn.json', function(error,data) {
+fs.readFile('./girlsColumn.json', function(error,data) {
     
     if(error) return console.error(error);
 
@@ -35,7 +35,7 @@ fs.readFile('../db/girlsColumn.json', function(error,data) {
 });
 
 //存入广告数据
-fs.readFile('../db/positioncontent.json', function(error,data) {
+fs.readFile('./positioncontent.json', function(error,data) {
     
     if(error) return console.error(error);
 
