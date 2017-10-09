@@ -2,7 +2,10 @@ var express = require('express');
 var router  = express.Router();
 var novelCtr = require('../controllers/novelCtr');
 
-//获取男生栏目
+/**
+ * [获取男生栏目]
+ * @return {[type]}        [description]
+ */
 router.post('/getBoysColumn', function(req, res) {
 	
     var recId = req.body['recId'];
@@ -15,7 +18,10 @@ router.post('/getBoysColumn', function(req, res) {
     })
 
 });
-//获取女生栏目
+/**
+ * 获取女生栏目
+ * @return {[type]}        [description]
+ */
 router.post('/getGirlsColumn', function(req, res) {
 
     var recId = req.body['recId'];
@@ -27,7 +33,10 @@ router.post('/getGirlsColumn', function(req, res) {
     	ajaxReturn(res, result);
     })
 });
-//获取推荐栏目
+/**
+ * 获取推荐栏目
+ * @return {[type]}      [description]
+ */
 router.post('/getRecommendColumn', function(req, res) {
     
     var params = {
@@ -39,22 +48,35 @@ router.post('/getRecommendColumn', function(req, res) {
     });
 });
 
-//获取小说详情
+/**
+ * 获取小说详情
+ * @return {[type]}        [description]
+ */
 router.post('/getNovelDetail', function(req, res) {
     
-    var cid = req.body['columnId'];
-    console.log("getNovelDetail: "+ cid);
-    var params = {
-        columnId: cid
-    };
-    // console.log(JSON.stringify(params))
+    let columnId = req.body['columnId'];
+    let params = {
+        columnId: Number(columnId)
+    }; 
+
+    console.log("getNovelDetail: "+ columnId);
     novelCtr.getColumns(params, (result) => {        
         ajaxReturn(res, result);
     });
 });
-//获取栏目详情
-router.post('/columnDetail', function(req, res) {
-
+/**
+ * [根据关键字查找小说]
+ * @return {[type]}      [description]
+ */
+router.post('/getNovelByKeys', function(req, res) {
+    let key = req.body['key'];
+    let params = {
+        key: key
+    };
+    console.log("getNovelDetail key: "+ key);
+    novelCtr.getBykeys(params, (result) => {
+        ajaxReturn(res, result);
+    });
 });
 
 

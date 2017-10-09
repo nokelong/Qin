@@ -47,10 +47,9 @@
                 results:[],
                 keyword: '',
                 hotwords:[
-                  {name:'平凡的世界'},
-                  {name:'世界的轨迹'},
-                  {name:'战争与和平'},
-                  {name:'丑陋的中国人'},
+                  {name:'玄幻仙侠'},
+                  {name:'现代言情'},
+                  {name:'极品校园高手'},                  
                   {name:'都市生活'}
                 ]
   	   	    }
@@ -65,28 +64,28 @@
            */
           getResultByKeys: function( keys) {
 
-            this.keyword = keys
-            keys = util.htmlEncode(keys)
-              // this.initState = false;
-            let options = {
-                keys: keys
-            };
-            options.callback = ((results) =>{
-                this.initState = false;
-                this.results = results
-            }).bind(this);
+              this.keyword = keys
+              keys = util.htmlEncode(keys)
+                // this.initState = false;
+              let options = {
+                  keys: keys
+              };
+              options.callback = ((results) =>{
+                  this.initState = false;
+                  this.results = results
+              }).bind(this);
               
             novelServices.getResultByKeys(options);          
           },
           goSearch: function() {
 
             if(this.keyword.length >0 ) {
-              this.getResultByKeys(this.keyword)
+                this.getResultByKeys(this.keyword)
             } else {
-              Tips.showTips({          
-                msg:'请输入正确的内容',
-                type:'warn'
-              })
+                Tips.showTips({          
+                  msg:'请输入正确的内容',
+                  type:'warn'
+                })
             }
           }
   	    }

@@ -8,7 +8,10 @@ function Novel(novel) {
     this.columnId = novel.columnId;
     this.columnName = novel.columnName;
     this.description = novel.description;
+    this.longDescription = novel.longDescription;
     this.isEnd = novel.isEnd;
+    this.subprice = novel.subprice;
+    this.categoryName = novel.categoryName;
     this.columnImageUrl = novel.columnImageUrl;
 }
 Novel.prototype.save = function(callback) {
@@ -63,20 +66,16 @@ Novel.get = function(param, callback) {
         var query = {};
         if (param) {
             query = param;
-        }
-        console.log('model/novel get query param:' + JSON.stringify(query))
-        db.collection('novels').find(query).toArray(function(error, docs) {
-                       
-            // assert.equal(null, error);
-            // assert.equal(3, docs.length);
+        }        
+        db.collection('novels').find(query).toArray(function(error, docs) {                       
+          
             db.close();
-
             if (error) {
                 return callback(error);
             }
             
             var novels = [];
-            console.log('model/novel get :' + docs +',query ---- '+query)
+            console.log('model/novel get :' + docs)
             docs.forEach(function(doc, index) {                
                 var novel = new Novel(doc);
                 novels.push(novel);
@@ -84,6 +83,42 @@ Novel.get = function(param, callback) {
             return callback(null, novels);
         });
     });
+};
+
+Novel.getByKey = function(param, callback) {
+
+    MongoClient.connect(config.url, function(error, db) {
+        if(error) {
+            return callback(error);
+        }
+         
+        let dbConnection = db.collection('novels');
+        let query = {};
+        if (param) {
+            query = { $text:{$search: param.key}};
+        }
+        dbConnection.createIndex( {  //建立索引
+            columnName: "text", 
+            longDescription: "text", 
+            author: "text", 
+            categoryName: 'text' 
+        } );
+        console.log('getByKey: '+ JSON.stringify(query))
+        dbConnection.find(query).toArray(function(error, docs) {
+            db.close();
+            if (error) {
+                return callback(error);
+            }
+            
+            let novels = [];
+            console.log('getByKey docs:' +docs) ;     
+            docs.forEach(function(doc, index) {                
+                let novel = new Novel(doc);
+                novels.push(novel);
+            });
+            return callback(null, novels);
+        });
+    }); 
 };
 
 module.exports = Novel;

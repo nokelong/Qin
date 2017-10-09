@@ -23,5 +23,24 @@ const NovelCtr = {
         	return callback(results);            
         });
     },
+    getBykeys: function(params, callback) {
+        novel.getByKey(params, (error, novels) => {
+            var results = {
+                description: "",
+                resultCode: 999,
+                body:null
+            };
+
+            if(error) {
+                results.description = error;
+            } else {
+                results.resultCode = 0;
+                results.body = {
+                    list: novels
+                }         
+            }
+            return callback(results);  
+        });
+    }
 }
 module.exports = NovelCtr;

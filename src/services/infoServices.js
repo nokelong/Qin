@@ -31,28 +31,7 @@ class InfoServices {
 			console.log('getNewInfoColumn fail' +error);
 		});
 	}
-	getColumnDetail(options){
-		let param = {
-           url:'columnDetail.json'
-           // data:{
-           //    columnId:opions.cid,
-           //    contentType:opions.ctype
-           // }
-		};
-
-		xhr.get(param).then((result) => {
-            let body = {};
-            
-			if(result && result.body){
-				body = result.body;
-			}
-			if(options.callback && typeof options.callback == 'function' ){
-				options.callback(body);
-			}
-		}).catch((error) => {
-			console.log('getColumnDetail fail' +error);
-		});
-	}
+	
 	getPositionContent(options) {
 		let param = {
 			url:'/getPositionContent'

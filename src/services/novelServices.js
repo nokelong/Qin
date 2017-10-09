@@ -135,21 +135,17 @@ class NovelServices {
 	getResultByKeys (options) {
 		
 		let param = {
-			url:'/getNovelByKeys'
+			url:'/getNovelByKeys',
+			data: {
+				key: options.keys
+			}
 		};
 		let results = [];
-        let key = options.keys;
 		
-		xhr.get(param).then((result) => {
+		xhr.post(param).then((result) => {
             let list = result.body.list;
-			if(options.callback && typeof options.callback == 'function' ){
-				list.map((re,index) =>{					
-					if(re.columnName.includes(key) || re.longDescription.includes(key) 
-						|| re.categoryName.includes(key) ||re.author.includes(key)) {
-						results.push(re)
-					}					
-				})
-				options.callback(results);
+			if(options.callback && typeof options.callback == 'function' ){				
+				options.callback(list);
 			}            
 		}).catch((error) => {
 			console.log('getResultByKeys fail' +error);
@@ -165,20 +161,11 @@ class NovelServices {
     		}
     	};        
         // debugger
-		xhr.post(param).then((result) => {
-            // let list = results.body.list;
-			// list.map((re,index) =>{	
-			// 	if(re.columnId == options.cid){	
-			// 	   result = re;
-			// 	}				
-			// })
+		xhr.post(param).then((results) => {
 
-			// if(!result && !options.reGet) { //空 则继续查询另外一个json文件
-			//    options.type = options.type == 1 ? 0 : 1;
-			//    options.reGet = true;  //
-            //    this.getNovelDetail(options) 
-            //    return
-			// }
+            let list = results.body.list;
+            let result = list.length > 0 ? list[0]: {};			
+			
 			if(options.callback && typeof options.callback == 'function' ){
 				options.callback(result);
 			} 

@@ -1,3 +1,4 @@
+var user = require('../model/user');
 
 const AuthCtr = {
     login: function(req, res, next) {
@@ -14,8 +15,10 @@ const AuthCtr = {
         req.session.user = null;
         next()
     },
-    checkLogin: function() {
-        
+    checkLogin: function(callback) {
+        if(req.session.user) {
+            callback(req.session.user)
+        }
     }
 }
 

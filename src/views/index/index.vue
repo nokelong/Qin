@@ -29,6 +29,7 @@
 
   import novelServices from 'SERVICES/novelServices' 
   import infoServices from 'SERVICES/infoServices'
+  import authServices  from  'SERVICES/authServices'
   import utils from 'UTILS/utils'
   import _ from 'lodash'
 
@@ -43,10 +44,12 @@
     	limitColumn:[],
     	girlsColumn:[],
     	newsColumn:[],
-      position:[]
+      position:[],
+      isLogin: false
     }),
     mounted (){
         this.$nextTick(function(){
+            this.checkLogin();
             this.getRecommendColumn()
             this.getBoysColumn()
             this.getGirlsColumn()
@@ -128,12 +131,23 @@
          */
         getPositionContent() {
       
-          let opions = {};
+            let opions = {};
+              
+            opions.callback = ((result)=>{           
+              this.position = result;          
+            }).bind(this)
+            infoServices.getPositionContent(opions);
+        },
+        checkLogin() {
+            let opions = {};
             
-          opions.callback = ((result)=>{           
-            this.position = result;          
-          }).bind(this)
-          infoServices.getPositionContent(opions);
+            opions.callback = ((user) => {
+                if(user) {
+                    this.isLogin = true;
+                }
+                // this.isLogin 
+            }).bind(this);
+            authServices.checkLogin(opions);
         },
         shuffleRecoColumn () {  //重磅推荐换一换
             this.recommendColumn = _.shuffle(this.recommendColumn)

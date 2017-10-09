@@ -29,33 +29,43 @@
 <style>
 </style>
 <script>
-import utils from 'UTILS/utils'
+    import utils       from 'UTILS/utils'
 
-export default {
-	name:'topheader',
-	props:{
-		isHome:{
-			type:Boolean,
-			default:false
+	export default {
+		name:'topheader',
+		props:{
+			isHome:{
+				type:Boolean,
+				default:false
+			},
+			pageName:{
+				type:String
+			},
+			isSearch:{
+				type:Boolean,
+				default:false
+			}
 		},
-		pageName:{
-			type:String
+		data: ()=> ({
+           isLogin:false
+		}),
+		mounted (){
+	        this.$nextTick(function() {
+	            // authService.checkLogin((isLogin) => {
+	            // 	this.isLogin = isLogin;
+	            // })
+	        });
 		},
-		isSearch:{
-			type:Boolean,
-			default:false
+		methods:{
+			goHome: function() {
+				this.$router.push({name:'index'})			
+			},
+	        goBack: function() {
+	            this.$router.go(-1)
+	        },
+	        goSearch: function() {     
+	            this.$router.push({name:'search'});
+	        }
 		}
-	},
-	methods:{
-		goHome: function() {
-			this.$router.push({name:'index'})			
-		},
-        goBack: function() {
-            this.$router.go(-1)
-        },
-        goSearch: function() {     
-            this.$router.push({name:'search'});
-        }
 	}
-}
 </script>

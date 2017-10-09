@@ -137,9 +137,9 @@
         	    	    type:this.type
         	      };
         	  
-        	      opions.callback = ((result)=>{
+        	      opions.callback = ((result)=>{                    
         		        this.column = result;              
-        	      }).bind(this)
+        	      }).bind(this);
        	        novelServices.getNovelDetail(opions); 
             },
             /**
@@ -159,8 +159,7 @@
                 };
             
                 opions.callback = (result)=>{ 
-                    let {items,newNovelChapter,paging} = result;
-                    // console.log(paging)
+                    let {items,newNovelChapter,paging} = result;                 
                     self.novelcatalog.items = items;
                     self.novelcatalog.newNovelChapter = newNovelChapter;
                     self.novelcatalog.paging = paging;              
