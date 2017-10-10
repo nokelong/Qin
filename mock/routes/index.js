@@ -13,10 +13,16 @@ router.post('/getPositionContent', function(req, res){
     });
 });
 
-router.post('/checkLogin' ,function(req, res) {
-    authCtr.get((results) =>{
+router.post('/checkLogin', function(req, res) {
+    authCtr.checkLogin(req, (results) =>{
     	ajaxReturn(res, results);
     })
+});
+
+router.post('/login', function(req, res) {
+    authCtr.login(req, (results)=>{
+        ajaxReturn(res, results);
+    });
 });
 
 module.exports = router;

@@ -147,7 +147,7 @@ a,span{ display:inline-block; _zoom:1;_display:inline;}
 .bt_d9{border-top: 1px solid #d9d9d9;}/*灰色上边框*/
 .bm_d9{border-bottom: 1px solid #d9d9d9;}/*灰色下边框*/
 .bm_f0{border-bottom: 10px solid #f0f1f5;}/*灰色下边框*/
-.bm_blue{border: 1px solid #218eed;}/*蓝色边框*/
+.bm_blue{border: 1px solid #21edbf;}/*蓝色边框*/
 .bAll_red{border: 1px solid #e63951 !important;}/*红色边框*/
 /*删除线*/
 .textThrough{text-decoration:line-through}
@@ -155,7 +155,7 @@ a,span{ display:inline-block; _zoom:1;_display:inline;}
 /* 文本颜色 */
 .linkColor{color:#2592f8;} /*全局连接色*/
 .lightBlack{color:#383f49;} /*全局淡黑色*/
-.lightBlue{color:#218eed !important;}/*全局浅蓝色*/
+.lightBlue{color:#21edbf !important;}/*全局浅蓝色*/
 .c_d9d9d9{color:#d9d9d9;}/*全局淡灰色*/
 .c_999{color:#999;}
 .c_666{color:#666;}/*浅灰色*/
@@ -173,9 +173,9 @@ a,span{ display:inline-block; _zoom:1;_display:inline;}
 .c_titleblack{color:#1d242e}/*标题黑色*/
 .c_d9d9d9{color:#d9d9d9;}
 /* 背景颜色 */
-.blueblock{width:2px;height:14px;display:block;background-color:#218eed;}/*蓝色背景块*/
+.blueblock{width:2px;height:14px;display:block;background-color:#21edbf;}/*蓝色背景块*/
 .bg_lightgray{background-color:#858c96 ;}/*灰色*/
-.bg_blue{background-color:#218eed !important;}/*蓝色*/
+.bg_blue{background-color:#21edbf !important;}/*蓝色*/
 .bg_red{background-color:#e63951  !important;}/*红色*/
 .bg_fdb62d{background-color:#fdb62d  !important;}/*橙色*/
 .bg_gray{background-color:#f4f5f7;}/*浅灰*/
@@ -316,8 +316,8 @@ a,span{ display:inline-block; _zoom:1;_display:inline;}
 /* ================================================ 按钮 ================================================ */
 
 .btn{text-align:center;-webkit-border-radius:3px;border-radius:3px;}/*圆角按钮*/
-.btnBlueH{border:1px solid #218eed;color:#218eed;padding:5px 15px;}/*蓝色空心按钮*/
-.btnBlue{background:#218eed;color:#ffffff;} /*蓝色按钮*/
+.btnBlueH{border:1px solid #21edbf;color:#21edbf;padding:5px 15px;}/*蓝色空心按钮*/
+.btnBlue{background:#21edbf;color:#ffffff;} /*蓝色按钮*/
 .btnBlueG{background:#c7dcef;color:#ffffff;} /*蓝灰色按钮*/
 .btnGaryH{border:1px solid #858c96;color:#858c96;padding:5px 15px;} /*蓝灰色按钮*/
 .btn_login{display:block;height:40px;line-height:40px;}
@@ -399,7 +399,7 @@ animation-iteration-count:1;
 .headBar section .headBar-title{color: #1d232c;}
 .headBarLogo{padding-top:6px;}
 .headBarLogo img{height:26px;}
-.headBar .TxtBtn{display: inline-block;width:29px;height: 28px;font-size: 14px;text-align:center;padding-top: 7px;color: #218eed;}
+.headBar .TxtBtn{display: inline-block;width:29px;height: 28px;font-size: 14px;text-align:center;padding-top: 7px;color: #21edbf;}
 .HomeheadBar{border-bottom:none;}
 .HomeheadBar .wf-bookshelf,.headBar .wf-search{color:#ffffff}
 .HomeheadBar .pr_15 .btnBox{width:40px;height:44px;line-height:44px;text-align:center;display:block;}
@@ -507,7 +507,7 @@ animation-iteration-count:1;
 .searchCenter{}
 .searchCatList{overflow:hidden;}
 .searchCatList ul li{float:left;}
-.searchCatList ul li a{color:#218eed;border:1px solid #218eed;text-align:center;border-radius:4px;-webkit-border-radius:4px;display:block;margin:7px;padding:5px 10px;font-size:12px;}
+.searchCatList ul li a{color:#21edbf;border:1px solid #21edbf;text-align:center;border-radius:4px;-webkit-border-radius:4px;display:block;margin:7px;padding:5px 10px;font-size:12px;}
 .searchResult .information_area .ListCenter{margin:0px;width:100%;}
 .searchCatBox .top_columnNameImg img{width: 60px;height: 60px; border: 1px solid #ffffff;border-radius: 5px;}
 /*===轮播图===*/
@@ -523,10 +523,10 @@ animation-iteration-count:1;
 
 /*===查看更多===*/
 .viewMoreBox {padding:0px 15px 15px 15px;}
-.viewMoreBox a,.viewMoreBox .viewMore{border:1px solid #218eed;background: #fff;font-size:12px;color:#218eed;text-align:center;-webkit-border-radius:3px;border-radius:3px;padding:7px 10px;margin: auto;
+.viewMoreBox a,.viewMoreBox .viewMore{border:1px solid #21edbf;background: #fff;font-size:12px;color:#21edbf;text-align:center;-webkit-border-radius:3px;border-radius:3px;padding:7px 10px;margin: auto;
 }
 .viewMoreBox a:active{}
-.viewMoreBox a .iconfont ,.viewMoreBox .viewMore .iconfont{color:#218eed;}
+.viewMoreBox a .iconfont ,.viewMoreBox .viewMore .iconfont{color:#21edbf;}
 .viewMoreBox a{width:70px;}
 .viewMoreBox .viewMore{width:98px !important;}
 
@@ -611,7 +611,7 @@ animation-iteration-count:1;
 .infoCatBox ul {overflow:hidden;padding:7px 30px;}
 .infoCatBox ul li{float:left;width:25%;}
 .infoCatBox ul li a{text-align:center;color:#858c96;border:1px solid #d9d9d9;border-radius:4px;-webkit-border-radius:4px;display:block;margin:7px auto;padding:5px 0px;font-size:12px;width:80%;}
-.infoCatBox ul .blue a{color:#218eed;border:1px solid #218eed;}
+.infoCatBox ul .blue a{color:#21edbf;border:1px solid #21edbf;}
 /*===个人中心===*/
 .PersonalCenter_top{height: 70px;line-height: 70px;background-color: #ffffff;}
 .PersonalList{background-color:#ffffff;}
@@ -671,7 +671,7 @@ animation-iteration-count:1;
 .novelRecom_Warp dt{height:35px;line-height:35px;} 
 .novelRecom_Warp .catalogList_other li{border-bottom: 1px solid #d9d9d9;}
 .novelRecom_Warp .catalogList_other li div.b-flex{font-size:16px;}
-.FwBlue div.b-flex{font-weight:bold;color:#218eed;}
+.FwBlue div.b-flex{font-weight:bold;color:#21edbf;}
 .novelRecom_Warp .catalogList_other li:active{background-color:#eee;}
 /*===阅读器===*/
 /*框架*/
@@ -699,14 +699,14 @@ animation-iteration-count:1;
 .FontBstyleBox{width:100%;position: absolute;top:-103px;left:0px;}
 .FontBstyle{height:95px;background-color:#ffffff;border-radius:4px;-webkit-border-radius:4px;margin:0px 10px;padding:10px;box-sizing:border-box;}
 .FontBstyleIcon{position:absolute;top: 76px;left: 57.3%;}
-.FontBstyle .Font .btnBlueH .iconfont{color:#218eed;font-size:16px;}
+.FontBstyle .Font .btnBlueH .iconfont{color:#21edbf;font-size:16px;}
 .FontBstyleBox .Font .btnBlueH{width:55px;height:26px;line-height:26px;box-sizing:border-box;padding:0px;}
 .FontBstyle h3{margin-right:58px;}
 .FontBstyle .Background,.FontBstyle .Font{height:37px;line-height:28px;box-sizing:border-box;}
 .FontBstyle .Background .btn{width:50px;height:28px;line-height:28px;color:#ffffff;position: relative;}
 .FontBstyle .Background .i-bRight{position: absolute;top:0px;right:0px;}
 .FontBstyle .Background .bm_blue{box-sizing:border-box;}
-.FontBstyle .BgWf{background:#218eed;}
+.FontBstyle .BgWf{background:#21edbf;}
 .FontBstyle .BgWf i{color:#ffffff !important;}
 .popBox .AddBook{width: 94px;margin-left: 5px;position:relative;}
 .popBox .AddBook i{position: absolute;top:-2px;left: 0px;}
@@ -796,7 +796,7 @@ animation-iteration-count:1;
 .titleBox a,.PersonalCenter_top .lightBlue,.novelM_Imglist .titleBox .c_lightgray,.titleBox #sexRecomMore
 {position: absolute;top: 0px;right: 15px;}
 /*首页收藏提示*/
-.AndroidR{position:fixed;bottom:0px;left:0;height:50px;background-color:#218eed;padding:5px 0px 5px 10px;box-sizing: border-box;}
+.AndroidR{position:fixed;bottom:0px;left:0;height:50px;background-color:#21edbf;padding:5px 0px 5px 10px;box-sizing: border-box;}
 .AndroidR .txt{color:#ffffff;margin:1px 5px;font-size:12px;}
 .AndroidR .close{padding:10px;}
 

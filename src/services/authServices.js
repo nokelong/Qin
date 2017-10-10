@@ -23,7 +23,7 @@ class AuthServices {
     	}
 
     	xhr.post(param).then((result) => {
-
+            
     	});
     	console.log('login')
     }

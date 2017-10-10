@@ -10,7 +10,7 @@ function Novel(novel) {
     this.description = novel.description;
     this.longDescription = novel.longDescription;
     this.isEnd = novel.isEnd;
-    this.subprice = novel.subprice;
+    this.subPrice = novel.subPrice;
     this.categoryName = novel.categoryName;
     this.columnImageUrl = novel.columnImageUrl;
 }
@@ -75,7 +75,7 @@ Novel.get = function(param, callback) {
             }
             
             var novels = [];
-            console.log('model/novel get :' + docs)
+            // console.log('model/novel get :' + docs)
             docs.forEach(function(doc, index) {                
                 var novel = new Novel(doc);
                 novels.push(novel);

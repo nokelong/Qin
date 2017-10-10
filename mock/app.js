@@ -31,38 +31,38 @@ app.use(session({
 //定义本地变量
 app.use(function(req, res, next){
  
-  res.locals.user = req.session.user;
-  res.locals.post = req.session.post;
-  var error = req.flash('error');
-  res.locals.error = error.length ? error : null;
- 
-  var success = req.flash('success');
-  res.locals.success = success.length ? success : null;
-  next();
+    res.locals.user = req.session.user;
+    res.locals.post = req.session.post;
+    var error = req.flash('error');
+    res.locals.error = error.length ? error : null;
+   
+    var success = req.flash('success');
+    res.locals.success = success.length ? success : null;
+    next();
 });
 app.use('/', indexR);
 app.use('/', novelR);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // error handlers
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);   
-  });
+    app.use(function(err, req, res, next) {
+      res.status(err.status || 500);   
+    });
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-  res.status(err.status || 500); 
+    res.status(err.status || 500); 
 });
 
 // var server = app.listen(3000);

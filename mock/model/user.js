@@ -33,19 +33,15 @@ User.prototype.get = function (username, callback) {
         if (username) {
             query.name = username;
         }
-        db.collection('users').find(query).to(function(error, docs) {
-            db.close();
-            if(error) {
-                return callback(error);
-            }          
+        db.collection('users').findOne(query, function(error, doc) {
+            db.close();            
             
-            let users = {};
-            console.log('User docs:' +docs) ;     
-            docs.forEach(function(doc, index) {                
+            if(doc) {
                 let user = new User(doc);
-                users.push(user);
-            });
-            return callback(null, users);
+                return callback(null, user);
+            } else{
+                return callback(error);
+            }
         });
     });   
 };

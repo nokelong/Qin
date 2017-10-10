@@ -7,29 +7,21 @@ var novelCtr = require('../controllers/novelCtr');
  * @return {[type]}        [description]
  */
 router.post('/getBoysColumn', function(req, res) {
-	
-    var recId = req.body['recId'];
-    var params = {
-        recId: recId == '100' ? recId: '100'
-    };
-    
-    novelCtr.getColumns(params, (result) =>{
-    	ajaxReturn(res, result);        
-    })
-
+	      
+    novelCtr.getBoysColumn(req, (result) =>{
+        ajaxReturn(res, result);
+    });
+    // novelCtr.getColumns(params, (result) =>{
+    // 	ajaxReturn(res, result);        
+    // })
 });
 /**
  * 获取女生栏目
  * @return {[type]}        [description]
  */
 router.post('/getGirlsColumn', function(req, res) {
-
-    var recId = req.body['recId'];
-    var params = {
-        recId: recId == '101' ? recId: '101'
-    };
-
-    novelCtr.getColumns(params, (result) =>{
+   
+    novelCtr.getGirlsColumn(req, (result) =>{
     	ajaxReturn(res, result);
     })
 });
@@ -39,11 +31,7 @@ router.post('/getGirlsColumn', function(req, res) {
  */
 router.post('/getRecommendColumn', function(req, res) {
     
-    var params = {
-        recId: '101'
-    };
-
-    novelCtr.getColumns(params, function (result) {        
+    novelCtr.getRecommendColumn(req, function (result) {        
         ajaxReturn(res, result);
     });
 });
@@ -54,13 +42,7 @@ router.post('/getRecommendColumn', function(req, res) {
  */
 router.post('/getNovelDetail', function(req, res) {
     
-    let columnId = req.body['columnId'];
-    let params = {
-        columnId: Number(columnId)
-    }; 
-
-    console.log("getNovelDetail: "+ columnId);
-    novelCtr.getColumns(params, (result) => {        
+    novelCtr.getNovelDetail(req, (result) => {        
         ajaxReturn(res, result);
     });
 });
@@ -69,12 +51,8 @@ router.post('/getNovelDetail', function(req, res) {
  * @return {[type]}      [description]
  */
 router.post('/getNovelByKeys', function(req, res) {
-    let key = req.body['key'];
-    let params = {
-        key: key
-    };
-    console.log("getNovelDetail key: "+ key);
-    novelCtr.getBykeys(params, (result) => {
+    
+    novelCtr.getBykeys(req, (result) => {
         ajaxReturn(res, result);
     });
 });
