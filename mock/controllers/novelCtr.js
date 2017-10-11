@@ -1,5 +1,5 @@
 
-var novel = require('../model/novel');
+var Novel = require('../model/novel');
 
 const NovelCtr = {
     getBoysColumn: function(req, callback) {
@@ -35,7 +35,7 @@ const NovelCtr = {
     },
     _getColumns: function(params, callback) {   	
         
-        novel.get(params, (error, novels) => {
+        Novel.get(params, (error, novels) => {
 
         	var results = {
         		description: "",
@@ -61,7 +61,7 @@ const NovelCtr = {
         };
 
         console.log("getNovelByKeys key: "+ key);
-        novel.getByKey(params, (error, novels) => {
+        Novel.getByKey(params, (error, novels) => {
             var results = {
                 description: "",
                 resultCode: 999,

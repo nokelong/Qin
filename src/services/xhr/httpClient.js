@@ -8,14 +8,14 @@ class xhr {
         .then((response)=>{
             let result = (response.data);
      	      let resultCode = result.resultCode;
-     	      if(resultCode == 0 ){
+     	      // if(resultCode == 0 ){
               // param.success(result);
                 return Promise.resolve(result)
-     	      }else{
-              // param.fail(result);
-                console.log('请求失败');
-                return Promise.reject(result)              
-     	      }
+     	      // }else{
+            //   // param.fail(result);
+            //     console.log('请求失败');
+            //     return Promise.reject(result)              
+     	      // }
         }).catch((error)=>{
             console.log(error);            
             return Promise.reject(error)            
@@ -28,14 +28,14 @@ class xhr {
 
       const promise = axios.post(param.url, param.data, config).then((response) =>{
           let result = (response.data);
-     	    let resultCode = result.resultCode;
+     	    // let resultCode = result.resultCode;
 
-       	  if(resultCode == 0 ){
+       	  // if(resultCode == 0 ){
               return Promise.resolve(result)
-       	  } else {
-              console.log('请求失败');
-              return Promise.reject(result);              
-       	  }
+       	  // } else {
+          //     console.log('请求失败');
+          //     return Promise.reject(result);              
+       	  // }
       }).catch((error)=>{
           console.log(error);
           return Promise.reject(error)

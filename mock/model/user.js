@@ -1,5 +1,6 @@
-var MongoClient = require('mongodb').MongoClient;
 var config = require('./db');
+var MongoClient = require('mongodb').MongoClient;
+var assert = require('assert');
 
 function User(user) {
     this.name = user.name;
@@ -12,7 +13,7 @@ User.prototype.save = function (callback) {
     	name : this.name,
     	password : this.password
     }    
-    MongoClient.connect(config, function(error, db) {
+    MongoClient.connect(config.url, function(error, db) {
         if(error) {
             return callback(error);
         }
@@ -23,9 +24,10 @@ User.prototype.save = function (callback) {
         });
     });    
 };
-User.prototype.get = function (username, callback) {
+User.get = function (username, callback) {
+    
+    MongoClient.connect(config.url, function(error, db) {
 
-    MongoClient.connect(config, function(error, db) {
         if(error) {
             return callback(error);
         }
@@ -33,14 +35,16 @@ User.prototype.get = function (username, callback) {
         if (username) {
             query.name = username;
         }
+        console.log('user get query:'+ JSON.stringify(query))
         db.collection('users').findOne(query, function(error, doc) {
             db.close();            
             
+            console.log('user get doc:'+ doc)
             if(doc) {
                 let user = new User(doc);
                 return callback(null, user);
             } else{
-                return callback(error);
+                return callback(error, null);
             }
         });
     });   

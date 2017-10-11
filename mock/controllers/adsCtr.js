@@ -1,9 +1,9 @@
-var ads = require('../model/ads');
+var Ads = require('../model/ads');
 
 const AdsCtr = {
     get: function(callback) {
         
-        ads.get((error, ads)=>{
+        Ads.get((error, ads)=>{
             var results = {
                 description: "",
                 resultCode: 999,

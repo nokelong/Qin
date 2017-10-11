@@ -23,7 +23,7 @@
 						</div>
 					</a>
 				</li>
-				<li class="d-box h_45 bm_d9">
+				<!-- <li class="d-box h_45 bm_d9">
 					<a href="javascript:;" class="d-box">
 						<aside class="mr_10 top_columnNameImg b-flex d-box">
 							<span class="wf-infBox"><i class="iconfont wf-inf" style="margin-top: 0px;">
@@ -35,18 +35,8 @@
 							<i class="iconfont wf-enter"></i>
 						</div>
 					</a>
-				</li>
-				<li class="d-box h_45 bm_d9">
-					<a href="javascript:;" class="d-box">
-						<aside class="mr_10 top_columnNameImg b-flex d-box">
-							<span class="wf-infBox bg_pink"><i class="iconfont wf-MyMonth" style="margin-top: -22px;"></i></span>
-							<span class="b-flex">我的精品包月</span>
-						</aside>
-    					<div class="bt_Subscribe">
-							<i class="iconfont wf-enter"></i>
-						</div>
-					</a>
-				</li>
+				</li> -->
+				
 				<li class="d-box h_45 bm_d9 bm_none">
 					<a href="javascript:;" class="d-box">
 						<aside class="mr_10 top_columnNameImg b-flex d-box">
@@ -63,19 +53,46 @@
 	</section>
 	<section>
     	<div class="ta_c SignOut">
-    	    <a href="javascript:;" class="c_red">退出登录</a>
+    	    <a href="javascript:;" class="c_red" @click="logout">退出登录</a>
     	</div>
     </section>
 	</div>
 </template>
 <script type="text/javascript">
+
     import topHeader from   'COMPONENTS/TopHeader.vue'
+    import authServices from 'SERVICES/authServices'
+    import Tips      from   'UTILS/tips'
 
     export default {
         name: 'usercenter',
         components: {topHeader},
         data: ()=>({
         	pageName: '用户中心'
-        })
+        }),
+        methods: {
+            logout: function() {
+                
+                let options = {                    
+                };
+                options.callback = ((result)=>{
+                    if(result.resultCode == 0) {
+                        Tips.showTips({
+                            type: 'success',
+                            msg: '退出登录成功，3秒后自动跳转...'
+                        })
+                        setTimeout(()=>{
+                            this.$router.push({name: 'index'})
+                        },3000)
+                    } else {
+                        Tips.showTips({
+                            type: 'warn',
+                            msg: result.description
+                        });
+                    }
+                }).bind(this);
+                authServices.logout(options);
+            }
+        }
     }
 </script>

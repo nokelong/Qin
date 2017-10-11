@@ -1,10 +1,9 @@
 <template>	
- 	<header class="d-box headBar p_fixed " v-bind:class="{bg_blue:isHome,HomeheadBar:isHome}">
+ 	<header class="d-box headBar p_fixed" v-bind:class="{bg_blue:isHome,HomeheadBar:isHome}">
 		<aside class="pl_15 ta_avC " :class="{'b-flex': isHome}">
 			<a class="btnBox headBarLogo" href="javascript:void(0);" @click="goBack">
 				<span class="fz_16 c_fff" v-if="isHome">
-					<p style="font-size:22px">壹点小说</p>
-					<!-- <img src="../assets/images/logo.png"> -->
+					<p style="font-size:22px">壹点小说</p>					
 				</span>
 				<i class="iconfont wf-arrowL lightBlue" v-else></i> 
 			</a>
@@ -17,7 +16,7 @@
 				<i class="iconfont wf-search fz_18" :class="{lightBlue:!isHome}"></i>
 			</a>
 			<a class="btnBox" href="javascript:void(0);" v-if="isHome">
-				<i class="icon  i-userSign mt_10" v-if="isLogin"></i><!-- 已登录状态 -->
+				<i class="icon  i-userSign mt_10" v-if="isLogin" @click="goUcenter"></i><!-- 已登录状态 -->
 				<i class="icon  i-user mt_10" v-else @click="goLogin"></i><!-- 未登录状态 -->
 			</a>
 			<a class="btnBox" href="javascript:void(0);" v-else @click="goHome">
@@ -66,6 +65,9 @@
 	        },
 	        goLogin: function() {
 	        	this.$router.push({name: 'login'})
+	        },
+	        goUcenter: function() {
+	        	this.$router.push({name: 'usercenter'})
 	        }
 		}
 	}

@@ -1,7 +1,7 @@
 import xhr from './xhr/httpClient'
 
 class AuthServices {
-    checkLogin (callback) {
+    checkLogin (opions) {
     	let param = {
 			url: '/checkLogin',
 			data: {}
@@ -9,8 +9,8 @@ class AuthServices {
 		console.log('checkLogin')
 
     	xhr.post(param).then((result) => {
-    		let user = result.body.user; 
-            callback(user);
+    		// let user = result.body.user; 
+            opions.callback(result);
     	}).catch((error) =>{
     		console.log('checkLogin fail ' + error);
     	});
@@ -21,21 +21,54 @@ class AuthServices {
     		url: '/login',
     		data: options.data
     	}
-
+     
     	xhr.post(param).then((result) => {
-            
-    	});
-    	console.log('login')
+            // let body = {};
+            // let username = '';
+            // if(result && result.body){
+            //     body = result.body;
+            // }
+            if(options.callback && typeof options.callback == 'function' ){             
+                // if(body && body.username){
+                //     username = body.username;
+                // }
+                options.callback(result);
+            }
+    	}).catch((error) => {
+            console.log('login fail ' + error);
+        });
+    	
     }
+
     logout (options) {
-    	let param = {
+    	
+        let param = {
     		url: '/logout',
-    		data: options.data
+    		data: {}
     	}
 
-    	xhr.pos(param).then((result) => {
+    	xhr.post(param).then((result) => {
+            if(options.callback && typeof options.callback == 'function' ){ 
+                options.callback(result);
+            }
+    	}).catch((error) => {
+            console.log('logout fail ' + error);
+        });
+    }
 
-    	});
+    regist(options) {
+        let param = {
+            url: '/regist',
+            data: options.data
+        }
+        
+        xhr.post(param).then((result)=>{
+            if(options.callback && typeof options.callback == 'function') {
+                options.callback(result);
+            }
+        }).catch((error)=>{
+            console.log('regist fail ' + error);
+        });
     }
 }
 export default new AuthServices();

@@ -25,4 +25,15 @@ router.post('/login', function(req, res) {
     });
 });
 
+router.post('/regist', function(req, res) {
+    authCtr.regist(req, (results)=>{
+        ajaxReturn(res, results);
+    });
+});
+
+router.post('/logout', function(req, res) {
+     authCtr.logout(req, (results)=>{
+        ajaxReturn(res, results);
+    });
+});
 module.exports = router;

@@ -36,8 +36,9 @@ class Tips {
         }, options.showTime || 1000);
     }
 
-    showLoading () {
-        Vue.$vux.loading.show()
+    showLoading (showTime=6000) {
+        Vue.$vux.loading.show();
+        this.hideLoading(showTime);
     }
 
     hideLoading (showTime=100) {

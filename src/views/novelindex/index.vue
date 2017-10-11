@@ -57,14 +57,13 @@
     	},
         methods:{
             getNovelByType (type) {
-           	    
+           	        
            	    let self = this;
-        	    let opions = {};
+        	      let opions = {};
         	
-        	    opions.callback = (result)=>{ 
-        	       // debugger
-                   self.novelColumn = result; 	
-        	    }
+          	    opions.callback = (result)=>{ 
+                    self.novelColumn = result; 	
+          	    }
            	    if (type == 0) {        //boys
            	    	this.pageName = '男生小说'
                     novelServices.getBoysColumn(opions);

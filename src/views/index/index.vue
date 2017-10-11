@@ -1,6 +1,6 @@
 <template>
    <div>
-	<top-header :isHome="true"></top-header>
+	<top-header :isHome="true" :isLogin="isLogin"></top-header>
 	<Carousel :position="position"></Carousel>
 	<TabMenu></TabMenu>
 	<!-- 重磅推荐 -->
@@ -141,10 +141,11 @@
         checkLogin() {
             let opions = {};
             
-            opions.callback = ((user) => {
-                if(user) {
+            opions.callback = ((result) => {
+                if(result.resultCode == 0) {
                     this.isLogin = true;
                 }
+                
                 // this.isLogin 
             }).bind(this);
             authServices.checkLogin(opions);

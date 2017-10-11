@@ -87,17 +87,21 @@
                 	}
                 }
                 
-                options.callback = ((results) => {
-                    if(results) {
+                options.callback = ((result) => {
+                    var resultCode = result.resultCode;
+                    if(resultCode == 0) {
                         this.$router.replace({name: 'usercenter'}); //进入用户中心
                     } else {
+                        // var msg = '登录失败';
+                        // msg = result.description;
                         Tips.showTips({
-                           type: 'warn',
-                           msg: '登录失败'
+                            type: 'warn',
+                            msg: result.description
                         });
                     }
+                    
                 }).bind(this);
-                authServices.login(param);
+                authServices.login(options);
             },
             handlerPassInput: function() {
 
