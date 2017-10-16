@@ -1,6 +1,6 @@
-var config = require('./db');
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
+var config = require('../db/dbconfig');
 
 function Novel(novel) {
     this.author = novel.author;

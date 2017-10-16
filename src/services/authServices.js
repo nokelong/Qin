@@ -22,16 +22,8 @@ class AuthServices {
     		data: options.data
     	}
      
-    	xhr.post(param).then((result) => {
-            // let body = {};
-            // let username = '';
-            // if(result && result.body){
-            //     body = result.body;
-            // }
-            if(options.callback && typeof options.callback == 'function' ){             
-                // if(body && body.username){
-                //     username = body.username;
-                // }
+    	xhr.post(param).then((result) => {         
+            if(options.callback && typeof options.callback == 'function' ){  
                 options.callback(result);
             }
     	}).catch((error) => {

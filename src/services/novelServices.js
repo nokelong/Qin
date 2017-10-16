@@ -16,16 +16,9 @@ class NovelServices {
 	
 		xhr.post(param).then((result)=>{
             
-            let body = {};
-            let list = [];
-			if(result && result.body){
-				body = result.body;
-			}
-			if(options.callback && typeof options.callback == 'function' ){				
-				if(body && body.list){
-					list = (body.list);
-				}
-				options.callback(list);
+            
+			if(options.callback && typeof options.callback == 'function' ){	
+				options.callback(result);
 			}            
 		}).catch((error) => {
 			console.log('getRecommendColumn fail' +error);
@@ -48,18 +41,9 @@ class NovelServices {
 		};
 	
 		xhr.post(param).then((result)=>{
-            let body = {};
-            let list = [];
-
-			if(result && result.body){
-				body = result.body;
-			}
-			if(options.callback && typeof options.callback == 'function' ){
-				// debugger
-				if(body && body.list){
-					list = (body.list);
-				}
-				options.callback(list);
+            
+			if(options.callback && typeof options.callback == 'function' ){				
+				options.callback(result);
 			}            
 		}).catch((error) => {
 			console.log('getBoysColumn fail' +error);
@@ -80,19 +64,9 @@ class NovelServices {
 			}
 		};		
 		
-		xhr.post(param).then((result) => {
-            let body = {};
-            let list = [];
-
-			if(result && result.body){
-				body = result.body;
-			}
-			if(options.callback && typeof options.callback == 'function' ){
-				// debugger
-				if(body && body.list){
-					list = (body.list);
-				}
-				options.callback(list);
+		xhr.post(param).then((result) => {            
+			if(options.callback && typeof options.callback == 'function' ){			
+				options.callback(result);
 			}            
 		}).catch((error) => {
 			console.log('GirlsColumn fail' +error);
@@ -107,23 +81,16 @@ class NovelServices {
 	 */
 	getNovelCatalog (options) {
 		let param = {
-			url:'/getNovelCatalog'
+			url: '/getNovelCatalog',
+			data: {
+				columnId : 40901 // options.cid
+			} 
 		};		
 		
-		xhr.get(param).then((result) => {
-            let body = {};
-            let list = [];
-
-			if(result && result.body){
-				body = result.body;
+		xhr.post(param).then((result) => {           
+			if(options.callback && typeof options.callback == 'function' ){				
+				options.callback(result);
 			}
-			if(options.callback && typeof options.callback == 'function' ){
-				// debugger
-				if(body && body.list){
-					list = (body.list);
-				}
-				options.callback(body);
-			}   
 		}).catch((error) => {            
             console.log('catalog fail');
 		});

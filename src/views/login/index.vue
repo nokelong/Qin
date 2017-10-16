@@ -16,7 +16,7 @@
 	                <div class="LoginList d-box mt_5">
 	                    <i class="iconfont wf-Password"></i>
 	                    <div class="b-flex pl_5">
-	                        <input type="password" placeholder="密码（8~16位，区分大小写）" class="txtBox" style="width:100%;" v-model="password" @input="handlerPassInput">
+	                        <input type="password" placeholder="密码（6~12位，区分大小写）" class="txtBox" style="width:100%;" v-model="password" @input="handlerPassInput">
 	                    </div>
 	                </div>
 	                <p class="errorLine" v-if="upassEFlag"><i class="iconfont wf-error"></i>{{errorMsg}}</p>
@@ -48,6 +48,7 @@
     import topHeader    from   'COMPONENTS/TopHeader.vue'
     import authServices from 'SERVICES/authServices'
     import Tips         from  'UTILS/tips'
+    import  md5         from  'js-md5'
 
     export default {
     	name:'login',
@@ -83,7 +84,7 @@
                 let options = {
                 	data: {
                 	    username: this.username,
-                	    password: this.password
+                	    password: md5(this.password)
                 	}
                 }
                 

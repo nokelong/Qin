@@ -1,4 +1,4 @@
-var config = require('./db');
+var config = require('../db/dbconfig');
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 
@@ -20,6 +20,8 @@ User.prototype.save = function (callback) {
 
         db.collection('users').insertOne(user, {w:1}, function(error, result) {
             db.close();
+            // console.log('uesr save insertOne result' + result)  
+            // result {"ok": 1, "n": 1}
             return callback(error, result);
         });
     });    

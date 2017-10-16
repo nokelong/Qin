@@ -28,10 +28,11 @@
   import Newinfo     from   './_components/Newinfo.vue' 
 
   import novelServices from 'SERVICES/novelServices' 
-  import infoServices from 'SERVICES/infoServices'
+  import infoServices  from 'SERVICES/infoServices'
   import authServices  from  'SERVICES/authServices'
-  import utils from 'UTILS/utils'
-  import _ from 'lodash'
+  import utils         from 'UTILS/utils'
+  import Tips          from 'UTILS/tips'
+  import _             from 'lodash'
 
   export default{
     name:'IndexRouter',
@@ -80,10 +81,20 @@
         	
           let opions = {};
         	
-          opions.callback = ((result)=>{        		
-        		  this.recommendColumn = _.shuffle(result).slice(0,9);                    
+          opions.callback = ((results)=>{
+              if(results.resultCode == 0) {
+                  let list = []
+                  if(results.body && results.body.list) {
+                      list = results.body.list;
+                      this.recommendColumn = _.shuffle(list).slice(0,9);
+                  }
+              } else {
+                  Tips.showTips({
+                      type: 'warn',
+                      msg: results.description
+                  })
+              }               
         	}).bind(this);
-
        	  novelServices.getRecommendColumn(opions);       	   
         },
         /**
@@ -94,8 +105,21 @@
           
         	let opions = {};
         	
-        	opions.callback = ((result)=>{         	 
-              this.boysColumn = utils.rebuildData(result,3)        	
+        	opions.callback = ((results)=>{             
+              if(results.resultCode == 0) {
+                  let list = []
+
+                  if(results.body && results.body.list) {
+                      list = results.body.list;
+                      this.boysColumn = utils.rebuildData(list,3) 
+                  }
+              } else {
+                  Tips.showTips({
+                      type: 'warn',
+                      msg: results.description
+                  })
+              }       	 
+                     	
         	}).bind(this);
         	novelServices.getBoysColumn(opions);
         },
@@ -107,8 +131,20 @@
         
         	let opions = {};
         	
-        	opions.callback = ((result)=>{ 
-        		this.girlsColumn = utils.rebuildData(result,3);
+        	opions.callback = ((results)=>{ 
+              if(results.resultCode == 0) {
+                  let list = []
+
+                  if(results.body && results.body.list) {
+                      list = results.body.list;
+                      this.girlsColumn = utils.rebuildData(list,3) 
+                  }
+              } else {
+                  Tips.showTips({
+                      type: 'warn',
+                      msg: results.description
+                  })
+              }
         	}).bind(this);
         	novelServices.getGirlsColumn(opions);
         },
@@ -133,8 +169,20 @@
       
             let opions = {};
               
-            opions.callback = ((result)=>{           
-              this.position = result;          
+            opions.callback = ((results)=>{
+                
+                if(results.resultCode == 0) {
+                    let list = []
+                    if(results.body && results.body.list) {
+                        this.position = results.body.list;
+                    }
+                } else {
+                    Tips.showTips({
+                        type: 'warn',
+                        msg: result.description
+                    });
+                }
+                       
             }).bind(this)
             infoServices.getPositionContent(opions);
         },
@@ -145,8 +193,6 @@
                 if(result.resultCode == 0) {
                     this.isLogin = true;
                 }
-                
-                // this.isLogin 
             }).bind(this);
             authServices.checkLogin(opions);
         },

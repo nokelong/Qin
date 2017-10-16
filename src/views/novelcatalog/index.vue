@@ -59,15 +59,25 @@
               };
               // 显示loading
               Tips.showLoading()
-              opions.callback = (result)=>{ 
-                //结构result中的对象             
-                let {items,newNovelChapter,paging} = result;  
+              opions.callback = (results)=>{
+                  if(results.resultCode == 0) {
+                      
+                      if(results.body) {
+                          //结构result中的对象             
+                          let {items,newNovelChapter,paging} = results.body; 
+                          self.novelcatalog.items = items;
+                          self.novelcatalog.newNovelChapter = newNovelChapter;
+                          self.novelcatalog.paging = paging;   
+                          // 隐藏loading
+                          Tips.hideLoading();
+                      }
+                  } else {
+                      Tips.showTips({
+                          type: 'warn',
+                          msg: results.description
+                      })
+                  }
                 
-                self.novelcatalog.items = items;
-                self.novelcatalog.newNovelChapter = newNovelChapter;
-                self.novelcatalog.paging = paging;   
-                // 隐藏loading
-                Tips.hideLoading();
               }
               novelServices.getNovelCatalog(opions); 
             }

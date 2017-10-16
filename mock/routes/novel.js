@@ -57,5 +57,11 @@ router.post('/getNovelByKeys', function(req, res) {
     });
 });
 
+router.post('/getNovelCatalog', function(req, res) {
+    
+    novelCtr.getCatalog(req, (result) => {
+        ajaxReturn(res, result);
+    });
+});
 
 module.exports = router;

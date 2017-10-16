@@ -79,11 +79,11 @@
                     if(result.resultCode == 0) {
                         Tips.showTips({
                             type: 'success',
-                            msg: '退出登录成功，3秒后自动跳转...'
+                            msg: '退出登录成功，1秒后自动跳转...'
                         })
                         setTimeout(()=>{
                             this.$router.push({name: 'index'})
-                        },3000)
+                        },1000)
                     } else {
                         Tips.showTips({
                             type: 'warn',

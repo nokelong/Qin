@@ -14,14 +14,14 @@
                     <div class="LoginList d-box mt_5">
                         <i class="iconfont wf-Password"></i>
                         <div class="b-flex pl_5">
-                            <input type="password" placeholder="设置密码（8~16位，区分大小写）" class="txtBox" style="width:100%;" v-model="password">
+                            <input type="password" placeholder="设置密码（6~12位，区分大小写）" class="txtBox" style="width:100%;" v-model="password">
                         </div>                     
                         <i class="icon i-rightBlue mt_10"></i>
                     </div>
                     <div class="LoginList d-box mt_5">
                         <i class="iconfont wf-right"></i>
                         <div class="b-flex pl_5">
-                            <input type="password" placeholder="确认密码（8~16位，区分大小写）" class="txtBox" style="width:100%;" v-model="confirmPass">
+                            <input type="password" placeholder="确认密码（6~12位，区分大小写）" class="txtBox" style="width:100%;" v-model="confirmPass">
                         </div>
                         <i class="icon i-rightBlue mt_10"></i>
                     </div>
@@ -52,10 +52,11 @@
 </div>
 </template>
 <script >
-    import topHeader from   'COMPONENTS/TopHeader.vue'
+    import topHeader    from   'COMPONENTS/TopHeader.vue'
     import authServices from 'SERVICES/authServices'
-    import Tips      from   'UTILS/tips'
-    
+    import Tips         from   'UTILS/tips'
+    import  md5         from  'js-md5'
+
     export default {
         name: 'regist',
         components: {topHeader},
@@ -70,8 +71,9 @@
         }),
         methods:{
             goRegist: function() {
-                //check
-                if(!this.username) {
+                // check
+                let username = this.username;
+                if(!username) {
                     this.unameEFlag = true;
                     return;
                 }
@@ -92,8 +94,8 @@
                 let options = {
                     data: {
                         username: this.username,
-                        password: this.password,
-                        confirmPass: this.confirmPass
+                        password: md5(this.password),
+                        confirmPass: md5(this.confirmPass)
                     }
                 };
                 options.callback = ((result)=>{

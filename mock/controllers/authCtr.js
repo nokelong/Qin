@@ -111,6 +111,7 @@ const AuthCtr = {
                 } else {
                     results.description = '注册成功';
                     results.resultCode = 0;
+                    req.session.user = newUser;
                 }
                 return callback(results);
             });            

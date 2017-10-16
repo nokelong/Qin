@@ -1,13 +1,13 @@
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
-var config = require('./db');
+var config = require('../db/dbconfig');
 
 function Ads(ads) {
     this.showWords = ads.showWords;
     this.tipsWords = ads.tipsWords;
     this.advertId = ads.advertId;
     this.imageUrl = ads.imageUrl;
-    this.scriptLink = ads.scriptLink;
+    this.scriptLinkAttr = ads.scriptLinkAttr;
     this.showOrder = ads.showOrder;
 }
 
@@ -17,7 +17,7 @@ Ads.prototype.save = function() {
         tipsWords: this.tipsWords,
         advertId: this.advertId,
         imageUrl: this.imageUrl ,
-        scriptLink: this.scriptLink ,
+        scriptLinkAttr: this.scriptLinkAttr ,
         showOrder: this.showOrder 
     }
    
