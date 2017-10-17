@@ -68,19 +68,13 @@
         <div class="CommentBox c_titleblack">
           <div class="CommentBoxTop bm_d9 d-box">
             <h3 class="b-flex">评论</h3>
-            <h4 class="lightBlue"><i class="iconfont wf-Comment fz_16 lightBlue mr_5"></i>发表评论</h4>
+            <h4 class="lightBlue" @click="publishComment"><i class="iconfont wf-Comment fz_16 lightBlue mr_5"></i>发表评论</h4>
           </div>
           <div class="CommentList" v-if="comments.length > 0">
             <ul class="cloudPLR15 mb_15">
     	        <comment v-for="(comment,index) in filterComments" :comment="comment" :key="index">
               </comment>
             </ul>
-            <div class="d-box viewMoreBox mt_15" v-if="comments.length > 3">
-                <a class="ta_av bg_white" href="javascript:;">
-                  更多评论
-                  <i class="iconfont wf-arrowR fz_12 ml_3"></i>
-                </a>
-              </div>
           </div>
           <div class="CommentNone ta_c" v-else>
             <i class="i-CommentNone icon"></i>
@@ -97,7 +91,8 @@
     import comment   from   'COMPONENTS/Comment.vue'    
     import novelServices from 'SERVICES/novelServices'
     import infoServices  from 'SERVICES/infoServices'
-    import Tips       from 'UTILS/tips'
+    import authService   from  'SERVICES/authServices'
+    import Tips          from 'UTILS/tips'
     
     export default {
         name:'noveldetail',
@@ -193,12 +188,12 @@
                 };
 
                 options.callback = ((results)=> {
-                    if(result.resultCode == 0) {
+                    if(results.resultCode == 0) {
                         this.comments = results.body.list;
                     } else {
                         Tips.showTips({
                             type: 'warn',
-                            msg: result.description
+                            msg: results.description
                         });
                     }
                 }).bind(this);
@@ -226,7 +221,18 @@
                 Tips.showTips({
                   msg:'攻城狮疯狂开发中'
                 })
-            } 
+            },
+            publishComment() {
+                let options = {};
+                options.callback = (result)=>{
+                    if(result.resultCode == 0) {  //已登录
+                        this.$router.push({name: 'publishComment', query: {columnId: this.columnId}})
+                    } else {
+                        this.$router.push({name: 'login',params: {columnId: this.columnId}});
+                    }
+                };
+                authService.checkLogin(options);
+            }
         },
         computed:{           
             filterDes: function() {

@@ -120,6 +120,39 @@ class Utils {
       });
       return text;
     }
+    
+    /**
+     * [formatDate 格式化日期函数]
+     * @param  {[type]} format [description]
+     * @param  {[type]} date   [description]
+     * @return {[type]}        [description]
+     */
+    formatDate(format, date) {
+          if (!date)
+              return "";
+          if (typeof date == "number")
+              date = new Date(date * 1000);
+          var o = {
+              "M+": date.getMonth() + 1,
+              "d+": date.getDate(),
+              "h+": date.getHours(),
+              "m+": date.getMinutes(),
+              "s+": date.getSeconds(),
+              "q+": Math.floor((date.getMonth() + 3) / 3),
+              "S": date.getMilliseconds(),
+              "w": "日一二三四五六".charAt(date.getDay())
+          };
+          format = format.replace(/y{4}/, date.getFullYear())
+              .replace(/y{2}/, date.getFullYear().toString().substring(2));
+          for (var k in o) {
+              var reg = new RegExp(k);
+              format = format.replace(reg, match);
+          }
+          function match(m) {
+              return m.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length);
+          }
+          return format;
+      }
 }
 export default new Utils();
  

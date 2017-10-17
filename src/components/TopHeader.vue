@@ -12,7 +12,7 @@
 			<h2 class="headBar-title c_darkblack">{{pageName}}</h2>
 		</section>
 		<aside class="pr_15 ta_avC" :class="{NovelNavD: !isHome}">		
-			<a class="btnBox" href="javascript:void(0);" @click="goSearch" v-if="!isSearch">
+			<a class="btnBox" href="javascript:void(0);" @click="goSearch" v-if="showSearch">
 				<i class="iconfont wf-search fz_18" :class="{lightBlue:!isHome}"></i>
 			</a>
 			<a class="btnBox" href="javascript:void(0);" v-if="isHome">
@@ -40,9 +40,9 @@
 			pageName:{
 				type:String
 			},
-			isSearch:{
+			showSearch:{
 				type:Boolean,
-				default:false
+				default:true
 			},
 			isLogin: {
 				type: Boolean,

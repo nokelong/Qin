@@ -1,6 +1,6 @@
 <template>
 <div>
-    <top-header :pageName="pageName" :isSearch='true'></top-header>
+    <top-header :pageName="pageName" :showSearch='false'></top-header>
     <section class="loginForm mt_20">
         <form >
             <div class="switchLoginBox">                   

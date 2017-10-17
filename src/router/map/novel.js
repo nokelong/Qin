@@ -3,6 +3,7 @@ import novelcatalog from 'VIEWS/novelcatalog'
 import search       from 'VIEWS/search'
 import novelindex   from 'VIEWS/novelindex' 
 import reader       from 'VIEWS/reader' 
+import publishComment from 'VIEWS/publishComment'
 
 const novelRoutes = [
     {
@@ -25,6 +26,10 @@ const novelRoutes = [
         path: '/reader',
         name: 'reader',
         component: reader
+    },{
+        path: '/publishComment',
+        name: 'publishComment',
+        component: publishComment
     }
 ];
 export default novelRoutes;

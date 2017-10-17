@@ -59,6 +59,19 @@ class InfoServices {
 			console.log('positioncontent fail' +error);
 		});
 	}
+	postComment(options) {
+		let param = {
+			url: '/postComments',
+			data: options.data
+		}
+        xhr.post(param).then((result) => {           		
+			if(options.callback && typeof options.callback == 'function' ){				
+				options.callback(result);
+			}            
+		}).catch((error) => {
+			console.log('positioncontent fail' +error);
+		});
+	}
 }
 
 export default new InfoServices()

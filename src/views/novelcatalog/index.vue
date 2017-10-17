@@ -1,6 +1,6 @@
 <template>
 <div style="background:#f4f5f7;">
-    <top-header :pageName="pageName"></top-header>
+    <top-header :pageName="pageName" :showSearch="false"></top-header>
     <section class="novelRecom_Warp cloudPLR15">  
         <dl class="catalogListBox  pt_10">
     		<dt class="d-box bm_d9">

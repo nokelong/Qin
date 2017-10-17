@@ -14,7 +14,16 @@ src/views structure
 - regist
 - usercenter
 
+## Component List
 
+> If you need a new component, don't hesitate to raise an issue.
+
+> The diagram is made with [coggle](https://coggle.it/)
+
+<p align="center">
+	<img src="https://github.com/nokelong/Qin/blob/master/src/assets/images/Qin.png" width="980">
+	
+</p>
 
 The story continues...
 

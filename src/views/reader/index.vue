@@ -1,6 +1,6 @@
 <template>
 	<div>
-    <top-header :pageName="pageName" :isSearch='true'></top-header>
+    <top-header :pageName="pageName" :showSearch='false'></top-header>
 	<section class="readerBox  p_relative cloudPall15" :class="['readerPf_'+this.fontSize,bgClass]">
 		<header>
 			<span class="readerBox_title">001 酒会背后的阴影</span>

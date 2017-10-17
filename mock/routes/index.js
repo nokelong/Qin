@@ -39,7 +39,7 @@ router.post('/logout', function(req, res) {
 });
 
 //发表评论
-router.post('/postComment', function(req, res) {
+router.post('/postComments', function(req, res) {
 
     authCtr.checkLogin(req, (results) =>{
         if(results.resultCode != 0) {

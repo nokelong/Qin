@@ -68,7 +68,7 @@ const AuthCtr = {
         };
         console.log("checkLogin session.user :" + req.session.user);
         if(req.session.user) {
-            results.body = req.session.user;
+            results.body = req.session.user.name;
             results.resultCode = 0;
             results.description = '用户已登录';
         } 
