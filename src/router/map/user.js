@@ -10,7 +10,8 @@ const userRoutes = [
     },{
         name: 'usercenter',
         path: '/usercenter',
-        component: usercenter
+        component: usercenter,
+        meta: { requiresAuth: true }
     },{
     	name: 'regist',
         path: '/regist',

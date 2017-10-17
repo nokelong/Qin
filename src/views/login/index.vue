@@ -91,6 +91,7 @@
                 options.callback = ((result) => {
                     var resultCode = result.resultCode;
                     if(resultCode == 0) {
+                        this.$root.userData = result.body.username // “写 session”
                         this.$router.replace({name: 'usercenter'}); //进入用户中心
                     } else {
                         // var msg = '登录失败';
