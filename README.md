@@ -2,19 +2,52 @@
 
 > This is a fun vue project Qin,build with Vue 2.0 , vue-router 2.0 , axios and vux plugin
 ### Introduction
-`Qin` is the used vue 2.0 and vue-router 2.0 for [Vue.js](http://vuejs.org). It deeply integrates with Vue.js core to make building Single Page Applications with Vue.js a breeze. One point novel site Features include:
+`Qin` is the use vue 2.0 and vue-router 2.0 for [Vue.js](http://vuejs.org). It deeply integrates with Vue.js core to make building Single Page Applications with Vue.js a breeze. One point novel site Features include:
 
-src/views structure
-- index
-- login
-- noveldetail
-- novelcatalog
-- search
-- reader
-- regist
-- usercenter
-
-## Project structure
+## Project structure tree
+```
+├─build
+├─config
+├─mock
+│  ├─controllers
+│  ├─db
+│  │  └─data
+│  ├─middlewares
+│  ├─model
+│  └─routes
+├─src
+│  ├─assets
+│  │  ├─css
+│  │  ├─images
+│  │  └─webfont
+│  ├─components
+│  ├─router
+│  │  ├─hooks
+│  │  │  └─beforeEach
+│  │  └─map
+│  ├─services
+│  │  └─xhr
+│  ├─utils
+│  └─views
+│      ├─index
+│      │  └─_components
+│      ├─login
+│      ├─novelcatalog
+│      ├─noveldetail
+│      ├─novelindex
+│      ├─publishComment
+│      ├─reader
+│      ├─regist
+│      ├─search
+│      │  └─_components
+│      └─usercenter
+├─static
+│  └─plugin
+└─test
+    └─unit
+        └─specs
+```
+## Project structure map
 
 > If you need a new component, don't hesitate to raise an issue.
 
@@ -29,6 +62,9 @@ The story continues...
 ### Development Setup
 
 ``` bash
+# clone the project 
+git clone git@github.com:nokelong/Qin.git
+
 # install dependencies
 npm install
 
