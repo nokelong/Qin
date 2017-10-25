@@ -19,7 +19,7 @@
                         <i class="icon i-rightBlue mt_10"></i>
                     </div>
                     <div class="LoginList d-box mt_5">
-                        <i class="iconfont wf-right"></i>
+                        <i class="iconfont wf-Password"></i>
                         <div class="b-flex pl_5">
                             <input type="password" placeholder="确认密码（6~12位，区分大小写）" class="txtBox" style="width:100%;" v-model="confirmPass">
                         </div>

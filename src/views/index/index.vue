@@ -10,11 +10,11 @@
 	</Layout>
 	<!-- 男生小说 -->
 	<Layout :novelColumn="filterBoysColumn" @changeColumn="shuffleBoysColumn()">	
-		<span class="b-flex fz_14 lightBlack" slot="novletype">男生小说</span>		
+		<span class="b-flex fz_14 lightBlack" slot="novletype">男性小说</span>		
 	</Layout>
 	<!-- 女生小说 -->
 	<Layout :novelColumn="filterGirlsColumn" @changeColumn="shuffleGirlsColumn()">		
-		<span class="b-flex fz_14 lightBlack" slot="novletype">女生小说</span>		
+		<span class="b-flex fz_14 lightBlack" slot="novletype">女性小说</span>		
 	</Layout>
 	<!-- 最新资讯 -->
 	<!-- <Newinfo :wordlists="filterNewsColumn"></Newinfo> -->
@@ -103,7 +103,9 @@
          */
         getBoysColumn(){
           
-        	let opions = {};
+        	let opions = {
+              recId: 101
+          };
         	
         	opions.callback = ((results)=>{             
               if(results.resultCode == 0) {
@@ -121,7 +123,7 @@
               }       	 
                      	
         	}).bind(this);
-        	novelServices.getBoysColumn(opions);
+        	novelServices.getColumns(opions);
         },
         /**
          * [getGirlsColumn 获取女生小说]
@@ -129,7 +131,9 @@
          */
         getGirlsColumn(){
         
-        	let opions = {};
+        	let opions = {
+              recId: 101
+          };
         	
         	opions.callback = ((results)=>{ 
               if(results.resultCode == 0) {
@@ -146,7 +150,7 @@
                   })
               }
         	}).bind(this);
-        	novelServices.getGirlsColumn(opions);
+        	novelServices.getColumns(opions);
         },
         /**
          * [getNewInfoColumn 获取新闻资讯]

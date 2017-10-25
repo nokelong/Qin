@@ -4,21 +4,15 @@
 			<li class="b-flex ta_c">
 				<a class="" href="javascript:;" @click="goNovel(0)">
 					<img src="../../../assets/images/i-tabBoy.png" alt="">
-					<span>男生小说</span>
+					<span>男性小说</span>
 				</a>
 			</li>
 			<li class="b-flex ta_c">
 				<a class="" href="javascript:;" @click="goNovel(1)">
 					<img src="../../../assets/images/i-tabGril.png" alt="">
-					<span>女生小说</span>
+					<span>女性小说</span>
 				</a>
-			</li>
-			<li class="b-flex ta_c">
-				<a class="" href="javascript:;">
-					<img src="../../../assets/images/i-tabMess.png" alt="">
-					<span>最新资讯</span>
-				</a>
-			</li>	
+			</li>			
 		</ul>
 	</section>
 </template>

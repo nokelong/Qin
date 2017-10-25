@@ -11,7 +11,7 @@
           </p>
         </div>
         <aside v-if="hasImg==true">
-          <img class="WordList-img" src="../assets/images/img_01.jpg">
+          <img class="WordList-img" src="">
         </aside>
       </a>
     </li>   

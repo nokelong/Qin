@@ -12,7 +12,7 @@
 		</div>
 		<div class="ImgList cloudPLR15">
 		  <ul class="d-box" v-for='novlelist in novelColumn'>
-		  	  <li class="b-flex" v-for="(novel,index) in novlelist" :key="index">
+		  	  <li class="b-flex" v-for="(novel,index) in novlelist" :key="novel.columnId">
 			    <a href="javascript:;" @click="goNovelDetail(novel.columnId)">
 			      <div class="listImg p_relative">
 			        <img v-bind:src="novel.columnImageUrl"/>
@@ -36,7 +36,6 @@
 	</section>	
 </template>
 <script>
-// import Novel from 'COMPONENTS/Novel'
 
    export default{
 		name: 'Layout',

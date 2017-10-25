@@ -583,7 +583,7 @@ animation-iteration-count:1;
 .loginFormDiv{padding-bottom:40px;}
 /*===首页===*/
 .tabMenuList{clear:both;margin-left:-10px;}
-.tabMenuList li{margin-left:10px;width:25%;}
+.tabMenuList li{margin:0 30px;width:36%;}
 .tabMenuList li a{display:block;position:relative;margin-top:3px;}
 .tabMenuList li img{width:100%;}
 .tabMenuList .icon{position:absolute;top:50%;left:50%;margin-left:-35px;}

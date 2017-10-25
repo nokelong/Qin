@@ -3,22 +3,16 @@ var Novel = require('../model/novel');
 var Catalog = require('../model/catalog');
 
 const NovelCtr = {
-    getBoysColumn: function(req, callback) {
+    getColumns: function(req, callback) {
         var recId = req.body['recId'];
-        var params = {
-            recId: recId == '100' ? recId: '100'
-        };
+        var categoryId = req.body['categoryId'];
 
-        this._getColumns(params, callback);
-    },
-    getGirlsColumn: function(req, callback) {
-        var recId = req.body['recId'];
         var params = {
-            recId: recId == '101' ? recId: '101'
-        };        
-        
+            recId: recId
+        };
+        if(categoryId) params.categoryId = categoryId
         this._getColumns(params, callback);
-    },
+    },    
     getNovelDetail: function(req, callback) {
         var columnId = req.body['columnId'];
         var params = {
@@ -33,6 +27,33 @@ const NovelCtr = {
         };
     
         this._getColumns(params, callback);
+    },    
+    getCategoryInfo: function(req, callback) {
+
+        var type = req.body['type'];
+        var params = {
+            recId: type == '0' ? '100': '101'
+        }
+
+        this._getColumns(params, (results)=>{
+            
+            var catelist = [],
+                templArr = [];  
+            var novels = results.body.list;
+
+            novels.forEach((novel, index) => {
+                let catid = novel.categoryId;
+                if(!templArr.includes(catid)) {
+                    catelist.push({
+                        categoryId: catid,
+                        categoryName: novel.categoryName
+                    });
+                    templArr.push(catid);
+                }
+            });
+            results.body.list = catelist;
+            return callback(results);   
+        });
     },
     _getColumns: function(params, callback) {   	
         
@@ -56,6 +77,7 @@ const NovelCtr = {
         });
     },
     getBykeys: function(req, callback) {
+        
         var key = req.body['key'];
         var params = {
             key: key

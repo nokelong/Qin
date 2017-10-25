@@ -131,15 +131,25 @@
              */
             getNovelDetail() {
                
-        	      let opions = {
+        	      let options = {
         	          columnId:this.columnId,
         	    	    type:this.type
         	      };
         	  
-        	      opions.callback = ((result)=>{                    
-        		        this.column = result;              
-        	      }).bind(this);
-       	        novelServices.getNovelDetail(opions); 
+        	      options.callback = (results)=>{ 
+                    if(results.resultCode == 0) {
+                        if(results.body && results.body.list) {
+                            var list = results.body.list;
+                            this.column = list.length >0 ? list[0] : {} ;
+                        }                        
+                    } else {
+                        Tips.showTips({
+                            type: 'warn',
+                            msg: results.description
+                        })
+                    }          
+        	      };
+       	        novelServices.getNovelDetail(options); 
             },
             /**
              * [getNovelCatalog 获取目录]
@@ -156,7 +166,7 @@
                     }
                 };
             
-                opions.callback = ((results)=>{ 
+                opions.callback = (results)=>{ 
                     if(results.resultCode == 0) {                        
                         if(results.body ) {
                             //结构result中的对象             
@@ -172,7 +182,7 @@
                         })
                     }
                                 
-                }).bind(this);
+                };
                 novelServices.getNovelCatalog(opions); 
             },
             /**

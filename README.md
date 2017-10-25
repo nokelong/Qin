@@ -74,7 +74,7 @@ mongod --dbpath=D:\mongodb\data\db
 mongod --dbpath=D:\mongodb\data\db --journal
 
 # init mongodb database [qindb]
-node mock/db/initDB.js
+node mock/db/initDatabase.js
 
 # serve with hot reload at localhost:8080
 npm run dev

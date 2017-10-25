@@ -5,8 +5,7 @@ class NovelServices {
 	 * [getRecommendColumn 获取重磅推荐小说]
 	 * @param  {[type]} options 参数对象
 	 * @param  {Function} [options.callback] [成功回调]
-	 * @param  {Function} [options.fail]     [失败回调]
-	 * @return {[type]}   [暂用axios get取json]
+	 * @param  {Function} [options.fail]     [失败回调]	
 	 */
 	getRecommendColumn (options) {
 		let param = {
@@ -25,18 +24,18 @@ class NovelServices {
 		});
 	}
 	/**
-	 * [getBoysColumn 获取男生小说]
+	 * [getBoysColumn 获取小说栏目信息]
 	 * @param  {[type]} options 参数对象
 	 * @param  {Function} [options.callback] [成功回调]
 	 * @param  {Function} [options.fail]     [失败回调]
-	 * @return {[type]}   [暂用axios get取json]
 	 */
-	getBoysColumn (options) { 
+	getColumns (options) { 
 		
 		let param = {
-			url: '/getBoysColumn',
+			url: '/getColumns',
 			data: {
-			    recId: 100
+			    recId: options.recId,
+			    categoryId: options.cateId
 			}
 		};
 	
@@ -46,38 +45,15 @@ class NovelServices {
 				options.callback(result);
 			}            
 		}).catch((error) => {
-			console.log('getBoysColumn fail' +error);
+			console.log('getColumns fail' +error);
 		});
 	}
+	
 	/**
-	 * [getGirlsColumn 获取女生小说]
+	 * [getNovelCatalog 获取小说目录]
 	 * @param  {[type]} options 参数对象
 	 * @param  {Function} [options.callback] [成功回调]
-	 * @param  {Function} [options.fail]     [失败回调]
-	 * @return {[type]}   [暂用axios get取json]
-	 */
-	getGirlsColumn (options) {
-		let param = {
-			url:'/getGirlsColumn',
-			data: {
-			    recId: 101
-			}
-		};		
-		
-		xhr.post(param).then((result) => {            
-			if(options.callback && typeof options.callback == 'function' ){			
-				options.callback(result);
-			}            
-		}).catch((error) => {
-			console.log('GirlsColumn fail' +error);
-		});
-	}
-	/**
-	 * [getGirlsColumn 获取小说目录]
-	 * @param  {[type]} options 参数对象
-	 * @param  {Function} [options.callback] [成功回调]
-	 * @param  {Function} [options.fail]     [失败回调]
-	 * @return {[type]}   [暂用axios get取json]
+	 * @param  {Function} [options.fail]     [失败回调]	
 	 */
 	getNovelCatalog (options) {
 		let param = {
@@ -118,7 +94,10 @@ class NovelServices {
 			console.log('getResultByKeys fail' +error);
 		});
 	}
-    
+    /**
+	 * [getResultByKeys 根据关键字查询小说]
+	 * @return {[type]} [description]
+	 */
     getNovelDetail (options) {
 
     	let param = {
@@ -129,16 +108,30 @@ class NovelServices {
     	};        
         // debugger
 		xhr.post(param).then((results) => {
-
-            let list = results.body.list;
-            let result = list.length > 0 ? list[0]: {};			
-			
 			if(options.callback && typeof options.callback == 'function' ){
-				options.callback(result);
+				options.callback(results);
 			} 
 		}).catch((error) => {
 			console.log('getNovelDetail fail' +error);
 		});
     }
+
+    getCategoryInfo (options) {
+        let param = {
+        	url: '/getCategoryInfo',
+        	data: {
+        		type: options.type
+        	}
+        }
+
+        xhr.post(param).then((results)=>{
+            if(options.callback && typeof options.callback == 'function' ){
+				options.callback(results);
+			}
+        }).catch((error)=>{
+        	console.log('getCategoryInfo error:' + error)
+        });
+    }
+    
 }
 export default new NovelServices()

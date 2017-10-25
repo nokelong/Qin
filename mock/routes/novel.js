@@ -3,28 +3,15 @@ var router  = express.Router();
 var novelCtr = require('../controllers/novelCtr');
 
 /**
- * [获取男生栏目]
+ * [获取栏目列表信息]
  * @return {[type]}        [description]
  */
-router.post('/getBoysColumn', function(req, res) {
-	      
-    novelCtr.getBoysColumn(req, (result) =>{
-        ajaxReturn(res, result);
-    });
-    // novelCtr.getColumns(params, (result) =>{
-    // 	ajaxReturn(res, result);        
-    // })
-});
-/**
- * 获取女生栏目
- * @return {[type]}        [description]
- */
-router.post('/getGirlsColumn', function(req, res) {
-   
-    novelCtr.getGirlsColumn(req, (result) =>{
-    	ajaxReturn(res, result);
+router.post('/getColumns', function(req, res) {
+    novelCtr.getColumns(req, (result) =>{
+     ajaxReturn(res, result);        
     })
 });
+
 /**
  * 获取推荐栏目
  * @return {[type]}      [description]
@@ -56,12 +43,24 @@ router.post('/getNovelByKeys', function(req, res) {
         ajaxReturn(res, result);
     });
 });
-
+/**
+ * [查找小说目录]
+ * @return {[type]}      [description]
+ */
 router.post('/getNovelCatalog', function(req, res) {
     
     novelCtr.getCatalog(req, (result) => {
         ajaxReturn(res, result);
     });
 });
+/**
+ * [查找小说分类]
+ * @return {[type]}      [description]
+ */
+router.post('/getCategoryInfo',function(req, res) {
+    novelCtr.getCategoryInfo(req, (result) => {
+        ajaxReturn(res, result);
+    });
+})
 
 module.exports = router;
