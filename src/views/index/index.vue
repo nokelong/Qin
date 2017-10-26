@@ -6,7 +6,7 @@
 	<!-- 重磅推荐 -->
 	<Layout :novelColumn="filterRecoColumn" :showMore="false"
             @changeColumn="shuffleRecoColumn()">		
-		<span class="b-flex fz_14 lightBlack" slot="novletype">重磅推荐</span>		
+		<span class="b-flex fz_14 lightBlack" slot="novletype">壹点推荐</span>		
 	</Layout>
 	<!-- 男生小说 -->
 	<Layout :novelColumn="filterBoysColumn" @changeColumn="shuffleBoysColumn()">	

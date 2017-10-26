@@ -1,10 +1,11 @@
-# Qin
+# Qin Novel Site Project 
 
-> This is a fun vue project Qin,build with Vue 2.0 , vue-router 2.0 , axios and vux plugin
+> This is a novel site project build with Vue 2.0 , vue-router 2.0 , axios and vux plugin.
+
 ### Introduction
-`Qin` is the use vue 2.0 and vue-router 2.0 for [Vue.js](http://vuejs.org). It deeply integrates with Vue.js core to make building Single Page Applications with Vue.js a breeze. One point novel site Features include:
+`Qin` is the use vue 2.0 and vue-router 2.0 for [Vue.js](http://vuejs.org). It deeply integrates with Vue.js core to make building Single Page Applications with Vue.js a breeze. One Point Novel Site Features include:
 
-## Project structure tree
+## Project Structure Tree
 ```
 ├─build
 ├─config
@@ -47,7 +48,7 @@
     └─unit
         └─specs
 ```
-## Project structure map
+## Project Structure Map
 
 > If you need a new component, don't hesitate to raise an issue.
 
@@ -56,8 +57,8 @@
 <p align="center">
 	<img src="https://github.com/nokelong/Qin/blob/master/src/assets/images/Qin.png" width="980">
 </p>
-
-The story continues...
+   
+The Story continues...
 
 ### Development Setup
 

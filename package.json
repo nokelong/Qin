@@ -1,7 +1,7 @@
 {
   "name": "vue-qin",
   "version": "1.0.0",
-  "description": "this is a fun vue project Qin",
+  "description": "This is a vue development of the novel site project",
   "author": "nokelong",
   "private": true,
   "scripts": {
