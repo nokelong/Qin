@@ -118,7 +118,6 @@
           this.$nextTick(function(){
               //获取栏目ID
               this.columnId = (this.$route.query.columnId)
-              this.type     =  this.$route.query.type           
               this.getNovelDetail()
               this.getNovelCatalog()
               this.getComments();
@@ -157,7 +156,7 @@
              */
             getNovelCatalog() {
                               
-                let opions = {
+                let options = {
                     cid: this.columnId,
                     type: this.type,
                     paging: {
@@ -166,7 +165,7 @@
                     }
                 };
             
-                opions.callback = (results)=>{ 
+                options.callback = (results)=>{ 
                     if(results.resultCode == 0) {                        
                         if(results.body ) {
                             //结构result中的对象             
@@ -183,7 +182,7 @@
                     }
                                 
                 };
-                novelServices.getNovelCatalog(opions); 
+                novelServices.getNovelCatalog(options); 
             },
             /**
              * [getComments 获取小说评论]
