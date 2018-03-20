@@ -78,25 +78,8 @@
 |   |   |       main.css
 |   |   |       
 |   |   +---images
-|   |   |       banner01.jpg
-|   |   |       i-tab1.png
-|   |   |       i-tab2.png
-|   |   |       i-tab3.png
-|   |   |       i-tab4.png
-|   |   |       i-tabBoy.png
-|   |   |       i-tabGril.png
-|   |   |       i-tabMan.png
-|   |   |       loading.gif
-|   |   |       Qin.png
-|   |   |       Qin时序图.png
-|   |   |       userC.png
-|   |   |       wap_cloudmail24.png
 |   |   |       
-|   |   \---webfont
-|   |           iconfont.eot
-|   |           iconfont.svg
-|   |           iconfont.ttf
-|   |           iconfont.woff
+|   |   \---webfont        
 |   |           
 |   +---components
 |   |       Catalog.vue
