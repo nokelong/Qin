@@ -7,46 +7,184 @@
 
 ## Project Structure Tree
 ```
-├─build
-├─config
-├─mock
-│  ├─controllers
-│  ├─db
-│  │  └─data
-│  ├─middlewares
-│  ├─model
-│  └─routes
-├─src
-│  ├─assets
-│  │  ├─css
-│  │  ├─images
-│  │  └─webfont
-│  ├─components
-│  ├─router
-│  │  ├─hooks
-│  │  │  └─beforeEach
-│  │  └─map
-│  ├─services
-│  │  └─xhr
-│  ├─utils
-│  └─views
-│      ├─index
-│      │  └─_components
-│      ├─login
-│      ├─novelcatalog
-│      ├─noveldetail
-│      ├─novelindex
-│      ├─publishComment
-│      ├─reader
-│      ├─regist
-│      ├─search
-│      │  └─_components
-│      └─usercenter
-├─static
-│  └─plugin
-└─test
-    └─unit
-        └─specs
+|   .babelrc
+|   .editorconfig
+|   .gitignore
+|   .postcssrc.js
+|   index.html
+|   package.json
+|   README.md
+|   
++---build
+|       build.js
+|       check-versions.js
+|       dev-client.js
+|       dev-server.js
+|       utils.js
+|       vue-loader.conf.js
+|       vux-config.js
+|       webpack.base.conf.js
+|       webpack.dev.conf.js
+|       webpack.prod.conf.js
+|       webpack.test.conf.js
+|       
++---config
+|       dev.env.js
+|       index.js
+|       prod.env.js
+|       test.env.js
+|       
++---mock
+|   |   app.js
+|   |   
+|   +---controllers
+|   |       adsCtr.js
+|   |       authCtr.js
+|   |       commentCtr.js
+|   |       novelCtr.js
+|   |       
+|   +---db
+|   |   |   dbconfig.js
+|   |   |   initDatabase.js
+|   |   |   
+|   |   \---data
+|   |           boysColumn.json
+|   |           catalog.json
+|   |           columnDetail.json
+|   |           girlsColumn.json
+|   |           infoColumn.json
+|   |           positioncontent.json
+|   |           
+|   +---middlewares
+|   |       ajaxReturn.js
+|   |       
+|   +---model
+|   |       ads.js
+|   |       catalog.js
+|   |       comment.js
+|   |       novel.js
+|   |       user.js
+|   |       
+|   \---routes
+|           index.js
+|           novel.js
+|           
++---src
+|   |   App.vue
+|   |   main.js
+|   |   
+|   +---assets
+|   |   +---css
+|   |   |       main.css
+|   |   |       
+|   |   +---images
+|   |   |       banner01.jpg
+|   |   |       i-tab1.png
+|   |   |       i-tab2.png
+|   |   |       i-tab3.png
+|   |   |       i-tab4.png
+|   |   |       i-tabBoy.png
+|   |   |       i-tabGril.png
+|   |   |       i-tabMan.png
+|   |   |       loading.gif
+|   |   |       Qin.png
+|   |   |       Qin时序图.png
+|   |   |       userC.png
+|   |   |       wap_cloudmail24.png
+|   |   |       
+|   |   \---webfont
+|   |           iconfont.eot
+|   |           iconfont.svg
+|   |           iconfont.ttf
+|   |           iconfont.woff
+|   |           
+|   +---components
+|   |       Catalog.vue
+|   |       Comment.vue
+|   |       Info.vue
+|   |       Novel.vue
+|   |       TopHeader.vue
+|   |       
+|   +---router
+|   |   |   index.js
+|   |   |   
+|   |   +---hooks
+|   |   |   |   index.js
+|   |   |   |   
+|   |   |   \---beforeEach
+|   |   |           authInterceptor.js
+|   |   |           
+|   |   \---map
+|   |           index.js
+|   |           novel.js
+|   |           user.js
+|   |           
+|   +---services
+|   |   |   authServices.js
+|   |   |   infoServices.js
+|   |   |   novelServices.js
+|   |   |   
+|   |   \---xhr
+|   |           config.js
+|   |           httpClient.js
+|   |           
+|   +---utils
+|   |       cookie.js
+|   |       Slide.js
+|   |       tips.js
+|   |       utils.js
+|   |       
+|   \---views
+|       |   index.vue
+|       |   
+|       +---index
+|       |   |   index.vue
+|       |   |   
+|       |   \---_components
+|       |           Carousel.vue
+|       |           Layout.vue
+|       |           Newinfo.vue
+|       |           TabMenu.vue
+|       |           
+|       +---login
+|       |       index.vue
+|       |       
+|       +---novelcatalog
+|       |       index.vue
+|       |       
+|       +---noveldetail
+|       |       index.vue
+|       |       
+|       +---novelindex
+|       |       index.vue
+|       |       
+|       +---publishComment
+|       |       index.vue
+|       |       
+|       +---reader
+|       |       index.vue
+|       |       
+|       +---regist
+|       |       index.vue
+|       |       
+|       +---search
+|       |   |   index.vue
+|       |   |   
+|       |   \---_components
+|       |           HotWords.vue
+|       |           SearchResult.vue
+|       |           
+|       \---usercenter
+|               index.vue
+|               
+\---test
+    \---unit
+        |   .eslintrc
+        |   index.js
+        |   karma.conf.js
+        |   
+        \---specs
+                Hello.spec.js
 ```
 ## Project Structure Map
 
